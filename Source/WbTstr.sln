@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WbTstr", "WbTstr\WbTstr.csproj", "{4E7E864B-CB6B-4449-B632-89CD13546E7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Automated Tests", "Automated Tests", "{589E51E4-ED4D-4571-9BF2-A771ECD3FEC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WbTstr.UnitTests", "WbTstr.UnitTests\WbTstr.UnitTests.csproj", "{51ABAAF0-0A01-4ECD-A7D0-CBE142A0F453}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WbTstr.IntegrationTests", "WbTstr.IntegrationTests\WbTstr.IntegrationTests.csproj", "{993EF0F8-6E4A-4127-BEB9-D936EA4695EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E7E864B-CB6B-4449-B632-89CD13546E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E7E864B-CB6B-4449-B632-89CD13546E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E7E864B-CB6B-4449-B632-89CD13546E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E7E864B-CB6B-4449-B632-89CD13546E7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51ABAAF0-0A01-4ECD-A7D0-CBE142A0F453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51ABAAF0-0A01-4ECD-A7D0-CBE142A0F453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51ABAAF0-0A01-4ECD-A7D0-CBE142A0F453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51ABAAF0-0A01-4ECD-A7D0-CBE142A0F453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{993EF0F8-6E4A-4127-BEB9-D936EA4695EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{993EF0F8-6E4A-4127-BEB9-D936EA4695EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{993EF0F8-6E4A-4127-BEB9-D936EA4695EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{993EF0F8-6E4A-4127-BEB9-D936EA4695EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{51ABAAF0-0A01-4ECD-A7D0-CBE142A0F453} = {589E51E4-ED4D-4571-9BF2-A771ECD3FEC1}
+		{993EF0F8-6E4A-4127-BEB9-D936EA4695EE} = {589E51E4-ED4D-4571-9BF2-A771ECD3FEC1}
+	EndGlobalSection
+EndGlobal
