@@ -15,6 +15,8 @@ namespace WbTstr.UnitTests.Fixtures
         public void test()
         {
             var derived = new DerivedFromWbTstrFixture();
+            derived.TestMethod();
+            derived.Dispose();
         }
     }
 }
