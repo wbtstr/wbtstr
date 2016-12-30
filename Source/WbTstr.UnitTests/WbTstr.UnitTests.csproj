@@ -54,10 +54,18 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Fixtures\Auxiliaries\DerivedFromWbTstrFixture.cs" />
+    <Compile Include="Fixtures\WbTstrFixtureTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WbTstr\WbTstr.csproj">
+      <Project>{4e7e864b-cb6b-4449-b632-89cd13546e7c}</Project>
+      <Name>WbTstr</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
