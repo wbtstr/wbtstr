@@ -49,16 +49,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Interfaces\ICommand.cs" />
+    <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Configuration\WebDrivers\ChromeWebDriverConfig.cs" />
+    <Compile Include="Configuration\WebDrivers\Constants\WebDriverType.cs" />
     <Compile Include="Configuration\WebDrivers\Interfaces\IWebDriverConfig.cs" />
     <Compile Include="Configuration\WebDrivers\WebDriverConfigs.cs" />
     <Compile Include="Fixtures\Attributes\WebDriverConfigAttribute.cs" />
     <Compile Include="Fixtures\WbTstrFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Session\Runners\Interfaces\ISessionRunner.cs" />
-    <Compile Include="Session\Runners\SequentialSessionRunner.cs" />
+    <Compile Include="Session\Recorders\Interfaces\ISessionRecorder.cs" />
+    <Compile Include="Session\Recorders\SimpleSessionRecorder.cs" />
+    <Compile Include="Session\Performers\Interfaces\ISessionPerformer.cs" />
+    <Compile Include="Session\Performers\SequentialSessionPerformer.cs" />
     <Compile Include="Session\Trackers\SimpleSessionTracker.cs" />
     <Compile Include="Session\Trackers\Interfaces\ISessionTracker.cs" />
+    <Compile Include="WebDrivers\WebDriverFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages.config" />

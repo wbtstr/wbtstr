@@ -11,7 +11,7 @@ namespace WbTstr.Session.Trackers
     {
         public ISessionTracker Initialize()
         {
-            throw new NotImplementedException();
+            return this;
         }
     }
 }

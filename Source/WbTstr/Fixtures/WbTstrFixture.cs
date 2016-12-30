@@ -6,24 +6,27 @@ using System.Threading.Tasks;
 using WbTstr.Configuration.WebDrivers;
 using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.Fixtures.Attributes;
-using WbTstr.Session.Runners.Interfaces;
+using WbTstr.Session.Recorders.Interfaces;
+using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Trackers.Interfaces;
 
 namespace WbTstr.Fixtures
 {
-    public abstract class WbTstrFixture<R, T> 
-        where R: ISessionRunner, new()
-        where T: ISessionTracker, new()
+    public abstract class WbTstrFixture<R, P, T> : IDisposable
+        where R: class, ISessionRecorder, new()
+        where P: class, ISessionPerformer, new()
+        where T: class, ISessionTracker, new()
     {
-        private readonly ISessionRunner _runner;
+        private readonly ISessionPerformer _performer;
         private readonly ISessionTracker _tracker;
         private IWebDriverConfig _webDriverConfig;
 
-
         protected WbTstrFixture()
         {
-            _runner = new R().Initialize(WebDriverConfig);
+            _performer = new P().Initialize(WebDriverConfig);
             _tracker = new T().Initialize();
+
+            I = new R().Initialize(_performer) as R;
         } 
 
         /* Properties -------------------------------------------------------*/
@@ -42,6 +45,8 @@ namespace WbTstr.Fixtures
             }
         }
 
+        protected R I { get; }
+
         /* Methods ----------------------------------------------------------*/
 
         protected void Retry(Action expression, int times = 3, int delay = 15)
@@ -57,6 +62,21 @@ namespace WbTstr.Fixtures
         protected void WaitUntilFalse(Func<bool> expression)
         {
             throw new NotImplementedException();
+        }
+
+        /* Finalizer --------------------------------------------------------*/
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing || _performer == null) return;
+
+            _performer.Dispose();
         }
     }
 }

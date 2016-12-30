@@ -11,12 +11,12 @@ namespace WbTstr.Configuration.WebDrivers
     {
         public static IWebDriverConfig GetDefault()
         {
-            throw new NotImplementedException();
+            return new ChromeWebDriverConfig();
         }
 
         public static IWebDriverConfig GetFromConfig(string name)
         {
-            throw new NotImplementedException();
+            return GetDefault();
         }
     }
 }
