@@ -12,7 +12,7 @@ using WbTstr.Session.Trackers;
 namespace WbTstr.UnitTests.Fixtures.Auxiliaries
 {
     [WebDriverConfig("Chrome")]
-    public class DerivedFromWbTstrFixture : WbTstrFixture<SimpleSessionRecorder, SequentialSessionPerformer, SimpleSessionTracker>
+    public class DerivedFromSimpleFixture : SimpleFixture<SequentialSessionPerformer>
     {
         public void TestMethod()
         {
