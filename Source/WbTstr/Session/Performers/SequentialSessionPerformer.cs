@@ -17,7 +17,7 @@ namespace WbTstr.Session.Performers
     public class SequentialSessionPerformer : ISessionPerformer
     {
         private readonly Queue<ICommand> _commands;
-        private IWebDriver _webDriver;
+        private Lazy<IWebDriver> _webDriver;
         private bool _initialized;
 
         public SequentialSessionPerformer()
@@ -32,7 +32,7 @@ namespace WbTstr.Session.Performers
                 throw new InvalidOperationException($"{nameof(SequentialSessionPerformer)} can be initialized only once.");
             }
 
-            _webDriver = WebDriverFactory.CreateFromConfig(webDriverConfig);
+            _webDriver = new Lazy<IWebDriver>(() => WebDriverFactory.CreateFromConfig(webDriverConfig));
 
             _initialized = true;
             return this;
@@ -41,6 +41,8 @@ namespace WbTstr.Session.Performers
         /* Properties -------------------------------------------------------*/
 
         public bool DirectPlay { get; set; } = true;
+
+        protected IWebDriver WebDriver => _webDriver?.Value;
 
         /* Methods ----------------------------------------------------------*/
 
@@ -52,7 +54,7 @@ namespace WbTstr.Session.Performers
                 return;
             }
 
-            command.Execute(_webDriver);
+            command.Execute(WebDriver);
         }
 
         public void Play()
@@ -60,7 +62,7 @@ namespace WbTstr.Session.Performers
             while (_commands.Count != 0)
             {
                 var command = _commands.Dequeue();
-                command.Execute(_webDriver);
+                command.Execute(WebDriver);
             }
         }
 
@@ -74,10 +76,10 @@ namespace WbTstr.Session.Performers
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposing || _webDriver == null) return;
+            if (!disposing || !_webDriver.IsValueCreated) return;
 
-            _webDriver.Quit();
-            _webDriver.Dispose();
+            WebDriver?.Quit();
+            WebDriver?.Dispose();
         }
     }
 }
