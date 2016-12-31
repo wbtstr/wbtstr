@@ -9,12 +9,12 @@ using WbTstr.UnitTests.Fixtures.Auxiliaries;
 namespace WbTstr.UnitTests.Fixtures
 {
     [TestFixture]
-    public class WbTstrFixtureTests
+    public class SimpleFixtureTests
     {
         [Test]
         public void test()
         {
-            var derived = new DerivedFromWbTstrFixture();
+            var derived = new DerivedFromSimpleFixture();
             derived.TestMethod();
             derived.Dispose();
         }

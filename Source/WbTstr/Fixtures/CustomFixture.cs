@@ -12,7 +12,7 @@ using WbTstr.Session.Trackers.Interfaces;
 
 namespace WbTstr.Fixtures
 {
-    public abstract class WbTstrFixture<R, P, T> : IDisposable
+    public abstract class CustomFixture<R, P, T> : IDisposable
         where R: class, ISessionRecorder, new()
         where P: class, ISessionPerformer, new()
         where T: class, ISessionTracker, new()
@@ -21,7 +21,7 @@ namespace WbTstr.Fixtures
         private readonly ISessionTracker _tracker;
         private IWebDriverConfig _webDriverConfig;
 
-        protected WbTstrFixture()
+        protected CustomFixture()
         {
             _performer = new P().Initialize(WebDriverConfig);
             _tracker = new T().Initialize();
