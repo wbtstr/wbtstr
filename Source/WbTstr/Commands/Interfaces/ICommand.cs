@@ -9,5 +9,7 @@ namespace WbTstr.Commands.Interfaces
     public interface ICommand
     {
         void Execute(object webDriver);
+
+        string ToString();
     }
 }

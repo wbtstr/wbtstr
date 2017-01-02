@@ -24,5 +24,10 @@ namespace WbTstr.Commands
             var webDriver = webDriverObj as IWebDriver;
             webDriver?.Navigate().GoToUrl(_url);
         }
+
+        public override string ToString()
+        {
+            return $"Navigate to {_url}";
+        }
     }
 }
