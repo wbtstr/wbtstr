@@ -56,8 +56,6 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Fixtures\Auxiliaries\DerivedFromSimpleFixture.cs" />
-    <Compile Include="Fixtures\SimpleFixtureTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

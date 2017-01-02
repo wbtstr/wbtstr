@@ -9,7 +9,7 @@ using WbTstr.Session.Performers;
 using WbTstr.Session.Recorders;
 using WbTstr.Session.Trackers;
 
-namespace WbTstr.UnitTests.Fixtures.Auxiliaries
+namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
 {
     [WebDriverConfig("Chrome")]
     public class DerivedFromSimpleFixture : SimpleFixture<SequentialSessionPerformer>
