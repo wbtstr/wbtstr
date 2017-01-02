@@ -16,7 +16,10 @@ namespace WbTstr.UnitTests.Fixtures.Auxiliaries
     {
         public void TestMethod()
         {
-            I.NavigateTo("http://www.google.com");
+            // Act
+            I.NavigateTo("http://www.google.com")
+                .ClickOn(".gb_P")
+                .CheckThat(url: "https://www.google.com/gmail/about/");
         }
     }
 }

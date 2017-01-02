@@ -12,6 +12,7 @@ using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Trackers.Interfaces;
 using WbTstr.WebDrivers;
+using WbTstr.WebDrivers.Exceptions;
 
 namespace WbTstr.Session.Performers
 {
@@ -71,11 +72,20 @@ namespace WbTstr.Session.Performers
 
         private void Execute(ICommand command)
         {
-            _tracker.MarkExecutionBegin(command);
+            try
+            {
+                _tracker.MarkExecutionBegin(command);
 
-            command.Execute(WebDriver);
+                command.Execute(WebDriver);
 
-            _tracker.MarkExecutionEnd(command);
+                _tracker.MarkExecutionEnd(command);
+            }
+            catch (UnexpectedWebDriverState)
+            {
+                Dispose();
+                throw;
+            }
+
         }
 
         /* Finalizer --------------------------------------------------------*/
