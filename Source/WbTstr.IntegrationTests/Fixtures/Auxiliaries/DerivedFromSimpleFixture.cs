@@ -8,6 +8,7 @@ using WbTstr.Fixtures.Attributes;
 using WbTstr.Session.Performers;
 using WbTstr.Session.Recorders;
 using WbTstr.Session.Trackers;
+using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
 {
@@ -17,7 +18,8 @@ namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
         public void TestMethod()
         {
             // Arrange
-            const string firstResultUrl = "https://www.mirabeau.nl/";
+            const string mirabeauUrl = "https://www.mirabeau.nl/";
+            const string mirabeauTitle = "Mirabeau - digital agency | AHEAD IN A DIGITAL WORLD";
 
             // Act
             I.NavigateTo("http://www.google.com")
@@ -26,7 +28,10 @@ namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
                 .ClickOn(".r > a");
 
             // Assert
-            I.CheckThat(url: firstResultUrl);
+            I.CheckThat(
+                title: mirabeauTitle,
+                url: mirabeauUrl
+            );
         }
     }
 }

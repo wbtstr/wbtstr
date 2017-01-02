@@ -34,6 +34,13 @@ namespace WbTstr.Commands
                     throw new UnexpectedWebDriverState($"Url is not {_value}");
                 }
             }
+            if (_key == PropertyKey.Title)
+            {
+                if (webDriver?.Title != _value)
+                {
+                    throw new UnexpectedWebDriverState($"Title is not {_value}");
+                }
+            }
         }
 
         public override string ToString()
