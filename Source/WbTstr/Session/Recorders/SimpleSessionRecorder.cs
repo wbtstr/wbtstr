@@ -46,11 +46,17 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder CheckThat(string url = null)
+        public SimpleSessionRecorder CheckThat(string url = null, string title = null)
         {
             if (!string.IsNullOrEmpty(url))
             {
                 var command = new AssertCommand(PropertyKey.Url, url);
+                _performer.Perform(command);
+            }
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                var command = new AssertCommand(PropertyKey.Title, title);
                 _performer.Perform(command);
             }
 
