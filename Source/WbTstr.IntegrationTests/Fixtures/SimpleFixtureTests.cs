@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using WbTstr.UnitTests.Fixtures.Auxiliaries;
+using WbTstr.IntegrationTests.Fixtures.Auxiliaries;
 
-namespace WbTstr.UnitTests.Fixtures
+namespace WbTstr.IntegrationTests.Fixtures
 {
     [TestFixture]
     public class SimpleFixtureTests
