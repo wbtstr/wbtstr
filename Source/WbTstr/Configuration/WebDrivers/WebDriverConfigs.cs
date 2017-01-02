@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WbTstr.Configuration.WebDrivers.Interfaces;
+using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.Configuration.WebDrivers
 {
@@ -14,9 +15,20 @@ namespace WbTstr.Configuration.WebDrivers
             return new ChromeWebDriverConfig();
         }
 
-        public static IWebDriverConfig GetFromConfig(string name)
+        public static IWebDriverConfig GetFromConfig(WebDriverName name)
         {
-            return GetDefault();
+            IWebDriverConfig webDriverConfig;
+            switch (name)
+            {
+                case WebDriverName.Chrome:
+                    webDriverConfig = new ChromeWebDriverConfig();
+                    break;
+                default:
+                    webDriverConfig = GetDefault();
+                    break;
+            }
+
+            return webDriverConfig;
         }
     }
 }
