@@ -16,10 +16,17 @@ namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
     {
         public void TestMethod()
         {
+            // Arrange
+            const string firstResultUrl = "https://www.mirabeau.nl/";
+
             // Act
             I.NavigateTo("http://www.google.com")
-                .ClickOn(".gb_P")
-                .CheckThat(url: "https://www.google.com/gmail/about/");
+                .Type("mirabeau")
+                .Wait(seconds: 3)
+                .ClickOn(".r > a");
+
+            // Assert
+            I.CheckThat(url: firstResultUrl);
         }
     }
 }
