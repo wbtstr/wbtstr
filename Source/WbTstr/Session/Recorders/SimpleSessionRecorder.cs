@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using WbTstr.Commands;
 using WbTstr.Session.Performers.Interfaces;
@@ -54,6 +53,22 @@ namespace WbTstr.Session.Recorders
                 var command = new AssertCommand(PropertyKey.Url, url);
                 _performer.Perform(command);
             }
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Type(string text, string selector = "body")
+        {
+            var command = new TypeCommand(text, selector);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Wait(int miliseconds = 0, int seconds = 0, int minutes = 0)
+        {
+            var command = new WaitCommand(miliseconds, seconds, minutes);
+            _performer.Perform(command);
 
             return this;
         }

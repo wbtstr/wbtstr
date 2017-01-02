@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ClickCommand.cs" />
+    <Compile Include="Commands\TypeCommand.cs" />
+    <Compile Include="Commands\WaitCommand.cs" />
     <Compile Include="WebDrivers\Constants\PropertyKey.cs" />
     <Compile Include="Commands\Interfaces\ICommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
