@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using WbTstr.Configuration.WebDrivers.Constants;
 using WbTstr.Configuration.WebDrivers.Interfaces;
+using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.WebDrivers
 {
@@ -18,11 +18,11 @@ namespace WbTstr.WebDrivers
 
             switch (config.Type)
             {
-                case WebDriverType.Chrome:
+                case WebDriverName.Chrome:
                     webDriver = CreateChromeWebDriver(config);
                     break;
                 default:
-                    throw new ArgumentException($"WebDriver type not supported: {Enum.GetName(typeof(WebDriverType), config.Type)}");
+                    throw new ArgumentException($"WebDriver type not supported: {Enum.GetName(typeof(WebDriverName), config.Type)}");
             }
 
             return webDriver;

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WbTstr.Configuration.WebDrivers.Constants
+namespace WbTstr.WebDrivers.Constants
 {
-    public enum WebDriverType
+    public enum WebDriverName
     {
         Chrome
     }

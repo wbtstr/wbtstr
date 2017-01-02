@@ -57,7 +57,6 @@
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\AssertCommand.cs" />
     <Compile Include="Configuration\WebDrivers\ChromeWebDriverConfig.cs" />
-    <Compile Include="Configuration\WebDrivers\Constants\WebDriverType.cs" />
     <Compile Include="Configuration\WebDrivers\Interfaces\IWebDriverConfig.cs" />
     <Compile Include="Configuration\WebDrivers\WebDriverConfigs.cs" />
     <Compile Include="Fixtures\Attributes\WebDriverConfigAttribute.cs" />
@@ -70,6 +69,7 @@
     <Compile Include="Session\Performers\SequentialSessionPerformer.cs" />
     <Compile Include="Session\Trackers\SimpleSessionTracker.cs" />
     <Compile Include="Session\Trackers\Interfaces\ISessionTracker.cs" />
+    <Compile Include="WebDrivers\Constants\WebDriverName.cs" />
     <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverState.cs" />
     <Compile Include="WebDrivers\Exceptions\WebDriverException.cs" />
     <Compile Include="WebDrivers\WebDriverFactory.cs" />
