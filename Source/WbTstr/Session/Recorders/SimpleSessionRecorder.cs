@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 using WbTstr.Commands;
 using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Recorders.Interfaces;
-using WbTstr.Session.Trackers.Interfaces;
+using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.Session.Recorders
 {
@@ -35,6 +35,25 @@ namespace WbTstr.Session.Recorders
         {
             var command = new NavigateCommand(url);
             _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder ClickOn(string selector)
+        {
+            var command = new ClickCommand(selector);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder CheckThat(string url = null)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                var command = new AssertCommand(PropertyKey.Url, url);
+                _performer.Perform(command);
+            }
 
             return this;
         }
