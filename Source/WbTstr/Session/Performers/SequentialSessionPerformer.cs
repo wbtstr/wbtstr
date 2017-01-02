@@ -10,6 +10,7 @@ using OpenQA.Selenium.Chrome;
 using WbTstr.Commands.Interfaces;
 using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.Session.Performers.Interfaces;
+using WbTstr.Session.Trackers.Interfaces;
 using WbTstr.WebDrivers;
 
 namespace WbTstr.Session.Performers
@@ -18,6 +19,7 @@ namespace WbTstr.Session.Performers
     {
         private readonly Queue<ICommand> _commands;
         private Lazy<IWebDriver> _webDriver;
+        private ISessionTracker _tracker;
         private bool _initialized;
 
         public SequentialSessionPerformer()
@@ -25,7 +27,7 @@ namespace WbTstr.Session.Performers
             _commands = new Queue<ICommand>();
         }
 
-        public ISessionPerformer Initialize(IWebDriverConfig webDriverConfig)
+        public ISessionPerformer Initialize(IWebDriverConfig webDriverConfig, ISessionTracker tracker)
         {
             if (_initialized)
             {
@@ -33,6 +35,7 @@ namespace WbTstr.Session.Performers
             }
 
             _webDriver = new Lazy<IWebDriver>(() => WebDriverFactory.CreateFromConfig(webDriverConfig));
+            _tracker = tracker;
 
             _initialized = true;
             return this;
@@ -54,7 +57,7 @@ namespace WbTstr.Session.Performers
                 return;
             }
 
-            command.Execute(WebDriver);
+            Execute(command);
         }
 
         public void Play()
@@ -62,8 +65,17 @@ namespace WbTstr.Session.Performers
             while (_commands.Count != 0)
             {
                 var command = _commands.Dequeue();
-                command.Execute(WebDriver);
+                Execute(command);
             }
+        }
+
+        private void Execute(ICommand command)
+        {
+            _tracker.MarkExecutionBegin(command);
+
+            command.Execute(WebDriver);
+
+            _tracker.MarkExecutionEnd(command);
         }
 
         /* Finalizer --------------------------------------------------------*/

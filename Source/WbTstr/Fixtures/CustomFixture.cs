@@ -23,8 +23,8 @@ namespace WbTstr.Fixtures
 
         protected CustomFixture()
         {
-            _performer = new P().Initialize(WebDriverConfig);
             _tracker = new T().Initialize();
+            _performer = new P().Initialize(WebDriverConfig, _tracker);
 
             I = new R().Initialize(_performer) as R;
         } 
