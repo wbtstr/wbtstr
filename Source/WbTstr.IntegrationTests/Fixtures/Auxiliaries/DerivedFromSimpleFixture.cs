@@ -25,7 +25,8 @@ namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
             I.NavigateTo("http://www.google.com")
                 .Type("mirabeau")
                 .Wait(seconds: 3)
-                .ClickOn(".r > a");
+                .ClickOn(".r > a")
+                .TakeScreenshot();
 
             // Assert
             I.CheckThat(

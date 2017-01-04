@@ -78,5 +78,13 @@ namespace WbTstr.Session.Recorders
 
             return this;
         }
+
+        public SimpleSessionRecorder TakeScreenshot(string fileName = "screenshot.png", string fileDirectory = null)
+        {
+            var command = new ScreenshotCommand(fileName, fileDirectory);
+            _performer.Perform(command);
+
+            return this;
+        }
     }
 }
