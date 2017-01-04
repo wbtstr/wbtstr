@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using OpenQA.Selenium;
 using WbTstr.Commands;
 using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Recorders.Interfaces;
+using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.Session.Recorders
@@ -50,15 +52,23 @@ namespace WbTstr.Session.Recorders
         {
             if (!string.IsNullOrEmpty(url))
             {
-                var command = new AssertCommand(PropertyKey.Url, url);
+                var command = new AssertStateCommand(PropertyKey.Url, url);
                 _performer.Perform(command);
             }
 
             if (!string.IsNullOrEmpty(title))
             {
-                var command = new AssertCommand(PropertyKey.Title, title);
+                var command = new AssertStateCommand(PropertyKey.Title, title);
                 _performer.Perform(command);
             }
+
+            return this;
+        }
+
+        public SimpleSessionRecorder CheckThat(Expression<Func<WebDriverState, bool>> expression)
+        {
+            var command = new AssertStateExpCommand(expression);
+            _performer.Perform(command);
 
             return this;
         }

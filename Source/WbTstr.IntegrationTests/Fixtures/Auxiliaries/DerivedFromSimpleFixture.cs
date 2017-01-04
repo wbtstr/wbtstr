@@ -33,6 +33,9 @@ namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
                 title: mirabeauTitle,
                 url: mirabeauUrl
             );
+
+            I.CheckThat(state => state.Title == mirabeauTitle);
+            I.CheckThat(state => state.Url == mirabeauUrl);
         }
     }
 }

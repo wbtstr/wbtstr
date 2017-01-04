@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AssertStateExpCommand.cs" />
     <Compile Include="Commands\ClickCommand.cs" />
     <Compile Include="Commands\ScreenshotCommand.cs" />
     <Compile Include="Commands\TypeCommand.cs" />
@@ -56,7 +57,7 @@
     <Compile Include="WebDrivers\Constants\PropertyKey.cs" />
     <Compile Include="Commands\Interfaces\ICommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
-    <Compile Include="Commands\AssertCommand.cs" />
+    <Compile Include="Commands\AssertStateCommand.cs" />
     <Compile Include="Configuration\WebDrivers\ChromeWebDriverConfig.cs" />
     <Compile Include="Configuration\WebDrivers\Interfaces\IWebDriverConfig.cs" />
     <Compile Include="Configuration\WebDrivers\WebDriverConfigs.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverState.cs" />
     <Compile Include="WebDrivers\Exceptions\WebDriverException.cs" />
     <Compile Include="WebDrivers\WebDriverFactory.cs" />
+    <Compile Include="WebDrivers\WebDriverState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages.config" />
