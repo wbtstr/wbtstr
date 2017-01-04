@@ -8,6 +8,10 @@ namespace WbTstr.WebDrivers.Exceptions
 {
     public class UnexpectedWebDriverState : WebDriverException
     {
+        public UnexpectedWebDriverState()
+        {
+        }
+
         public UnexpectedWebDriverState(string message) : base(message)
         {
         }
