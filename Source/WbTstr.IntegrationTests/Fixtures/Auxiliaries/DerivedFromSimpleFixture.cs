@@ -8,6 +8,7 @@ using WbTstr.Fixtures.Attributes;
 using WbTstr.Session.Performers;
 using WbTstr.Session.Recorders;
 using WbTstr.Session.Trackers;
+using WbTstr.Utilities.Constants;
 using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
@@ -18,14 +19,16 @@ namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
         public void TestMethod()
         {
             // Arrange
-            const string mirabeauUrl = "https://www.mirabeau.nl/";
-            const string mirabeauTitle = "Mirabeau - digital agency | AHEAD IN A DIGITAL WORLD";
+            const string mirabeauUrl = "https://github.com/wbtstr/wbtstr";
+            const string mirabeauTitle = "GitHub - wbtstr/wbtstr: Advanced functional testing and automation framework.";
 
             // Act
-            I.NavigateTo("http://www.google.com")
-                .Type("mirabeau")
+            I.NavigateTo("https://github.com/")
+                .Type("wbtstr.net", ".header-search-input")
                 .Wait(seconds: 3)
-                .ClickOn(".r > a")
+                .Type("wbtstr" + Keys.Enter, ".header-search-input", true)
+                .Wait(seconds: 3)
+                .ClickOn(".js-repo-list a:first-child")
                 .TakeScreenshot();
 
             // Assert
