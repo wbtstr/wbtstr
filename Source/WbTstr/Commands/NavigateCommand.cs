@@ -10,11 +10,16 @@ namespace WbTstr.Commands
 {
     internal class NavigateCommand : ICommand
     {
-        private readonly string _url;
+        private readonly Uri _uri;
+
+        public NavigateCommand(Uri uri)
+        {
+            _uri = uri;
+        }
 
         public NavigateCommand(string url)
         {
-            _url = url;
+            _uri = new Uri(url);
         }
 
         /* Methods ----------------------------------------------------------*/
@@ -22,12 +27,12 @@ namespace WbTstr.Commands
         public void Execute(object webDriverObj)
         {
             var webDriver = webDriverObj as IWebDriver;
-            webDriver?.Navigate().GoToUrl(_url);
+            webDriver?.Navigate().GoToUrl(_uri);
         }
 
         public override string ToString()
         {
-            return $"Navigate to {_url}";
+            return $"Navigate to {_uri}";
         }
     }
 }
