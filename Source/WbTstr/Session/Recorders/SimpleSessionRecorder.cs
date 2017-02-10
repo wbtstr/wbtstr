@@ -9,6 +9,7 @@ using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Recorders.Interfaces;
 using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Constants;
+using WbTstr.Utilities.Constants;
 
 namespace WbTstr.Session.Recorders
 {
@@ -48,9 +49,9 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder ClickOn(string selector, bool doubleClick = false)
+        public SimpleSessionRecorder ClickOn(string selector, MouseClick clickType = MouseClick.Single)
         {
-            var command = new ClickCommand(selector, doubleClick);
+            var command = new ClickCommand(selector, clickType);
             _performer.Perform(command);
 
             return this;
