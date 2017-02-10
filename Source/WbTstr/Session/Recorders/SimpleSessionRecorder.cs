@@ -40,6 +40,14 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
+        public SimpleSessionRecorder NavigateTo(Uri uri)
+        {
+            var command = new NavigateCommand(uri);
+            _performer.Perform(command);
+
+            return this;
+        }
+
         public SimpleSessionRecorder ClickOn(string selector, bool doubleClick = false)
         {
             var command = new ClickCommand(selector, doubleClick);
