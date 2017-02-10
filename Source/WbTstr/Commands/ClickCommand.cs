@@ -5,16 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using WbTstr.Commands.Interfaces;
+using OpenQA.Selenium.Interactions;
 
 namespace WbTstr.Commands
 {
     internal class ClickCommand : ICommand
     {
         private readonly string _selector;
+        private readonly bool _isDoubleClick;
 
-        public ClickCommand(string selector)
+        public ClickCommand(string selector, bool isDoubleClick)
         {
             _selector = selector;
+            _isDoubleClick = isDoubleClick;
         }
 
         /* Methods ----------------------------------------------------------*/
@@ -23,13 +26,16 @@ namespace WbTstr.Commands
         {
             var webDriver = webDriverObj as IWebDriver;
             var webElement = webDriver?.FindElement(By.CssSelector(_selector));
-            
-            webElement?.Click();
+
+            var interaction = new Actions(webDriver);
+
+            interaction = _isDoubleClick ? interaction.DoubleClick(webElement) : interaction.Click(webElement);
+            interaction.Build().Perform();
         }
 
         public override string ToString()
         {
-            return $"Click on {_selector}";
+            return (_isDoubleClick ? "Double click" : "Click") + $" on {_selector}";
         }
     }
 }

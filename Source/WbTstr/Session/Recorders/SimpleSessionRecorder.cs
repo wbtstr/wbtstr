@@ -40,9 +40,9 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder ClickOn(string selector)
+        public SimpleSessionRecorder ClickOn(string selector, bool doubleClick = false)
         {
-            var command = new ClickCommand(selector);
+            var command = new ClickCommand(selector, doubleClick);
             _performer.Perform(command);
 
             return this;
