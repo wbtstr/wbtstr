@@ -73,9 +73,9 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Type(string text, string selector = "body")
+        public SimpleSessionRecorder Type(string text, string selector = null, bool clearFirst = false)
         {
-            var command = new TypeCommand(text, selector);
+            var command = selector == null ? new TypeCommand(text) : new TypeCommand(text, selector, clearFirst);
             _performer.Perform(command);
 
             return this;
