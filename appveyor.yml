@@ -2,7 +2,7 @@
 #      General configuration      #
 #---------------------------------#
 
-image: Visual Studio 2017 RC
+image: Visual Studio 2017
 
 version: 0.0.0.{build}
 
