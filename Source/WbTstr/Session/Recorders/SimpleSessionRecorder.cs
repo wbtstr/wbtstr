@@ -65,6 +65,14 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
+        public SimpleSessionRecorder Focus(string selector)
+        {
+            var command = new FocusCommand(selector);
+            _performer.Perform(command);
+
+            return this;
+        }
+
         public SimpleSessionRecorder CheckThat(string url = null, string title = null)
         {
             if (!string.IsNullOrEmpty(url))
