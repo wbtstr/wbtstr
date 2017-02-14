@@ -1,4 +1,6 @@
 # WbTstr.Net
+Uncomplicated test automation framework for .NET.
+
 | master | develop |
 | --- | --- |
 | [![Build status](https://img.shields.io/appveyor/ci/onnovalkering/wbtstr/master.svg)](https://ci.appveyor.com/project/onnovalkering/wbtstr/branch/master) | [![Build status](https://img.shields.io/appveyor/ci/onnovalkering/wbtstr/develop.svg)](https://ci.appveyor.com/project/onnovalkering/wbtstr/branch/develop) |
