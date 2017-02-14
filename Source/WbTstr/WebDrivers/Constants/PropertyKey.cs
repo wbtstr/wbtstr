@@ -8,6 +8,7 @@ namespace WbTstr.WebDrivers.Constants
 {
     public enum PropertyKey
     {
+        None = 0,
         Url,
         Title
     }
