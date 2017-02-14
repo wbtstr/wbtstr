@@ -22,8 +22,10 @@ namespace WbTstr.Commands
 
         public TypeCommand(string text, string selector, bool clear)
         {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            
             _text = text;
-            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
+            _selector = selector;
             _clear = clear;
         }
 
