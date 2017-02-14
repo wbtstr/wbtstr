@@ -28,6 +28,8 @@ namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
                 .Wait(seconds: 3)
                 .Type("wbtstr" + Keys.Enter, ".header-search-input", true)
                 .Wait(seconds: 3)
+                .Hover(".js-repo-list a:first-child")
+                .Wait(seconds: 3)
                 .ClickOn(".js-repo-list a:first-child")
                 .TakeScreenshot();
 

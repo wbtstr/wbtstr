@@ -33,6 +33,14 @@ namespace WbTstr.Session.Recorders
 
         /* Methods ----------------------------------------------------------*/
 
+        public SimpleSessionRecorder Hover(string selector)
+        {
+            var command = new HoverCommand(selector);
+            _performer.Perform(command);
+
+            return this;
+        }
+
         public SimpleSessionRecorder NavigateTo(string url)
         {
             var command = new NavigateCommand(url);
