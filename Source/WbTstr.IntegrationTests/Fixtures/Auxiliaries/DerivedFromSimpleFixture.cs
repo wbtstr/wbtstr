@@ -20,7 +20,7 @@ namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
         {
             // Arrange
             const string mirabeauUrl = "https://github.com/wbtstr/wbtstr";
-            const string mirabeauTitle = "GitHub - wbtstr/wbtstr: Advanced functional testing and automation framework.";
+            const string mirabeauTitle = "GitHub - wbtstr/wbtstr: The uncomplicated test automation framework.";
 
             // Act
             I.NavigateTo("https://github.com/")

@@ -1,5 +1,5 @@
 # WbTstr.Net
-Uncomplicated test automation framework for .NET.
+The uncomplicated test automation framework.
 
 | master | develop |
 | --- | --- |
