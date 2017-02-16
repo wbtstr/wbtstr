@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WbTstr.Fixtures;
 using WbTstr.Fixtures.Attributes;
+using WbTstr.Proxies.Interfaces;
 using WbTstr.Session.Performers;
 using WbTstr.Session.Recorders;
 using WbTstr.Session.Trackers;
@@ -35,6 +36,9 @@ namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
                 .Wait(seconds: 3)
                 .ClickOn(".js-repo-list a:first-child")
                 .TakeScreenshot();
+
+            IElement md = I.FindOnPage(".markdown-body");
+            string mdTagName = md.TagName;
 
             // Assert
             I.CheckThat(
