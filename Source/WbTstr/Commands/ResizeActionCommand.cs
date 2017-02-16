@@ -9,12 +9,12 @@ using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {
-    public class ResizeCommand : ICommand
+    public class ResizeActionCommand : IActionCommand
     {
         private readonly int _height;
         private readonly int _width;
 
-        public ResizeCommand(int width, int height)
+        public ResizeActionCommand(int width, int height)
         {
             if (width <= 0) throw new ArgumentException($"{nameof(width)} must be 1 or larger.");
             if (height <= 0) throw new ArgumentException($"{nameof(height)} must be 1 or larger.");

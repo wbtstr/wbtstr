@@ -11,12 +11,12 @@ using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {
-    public class ScreenshotCommand : ICommand
+    public class ScreenshotActionCommand : IActionCommand
     {
         private readonly string _fileName;
         private readonly string _directoryPath;
 
-        public ScreenshotCommand(string fileName, string directoryPath)
+        public ScreenshotActionCommand(string fileName, string directoryPath)
         {
             _fileName = fileName;
             _directoryPath = directoryPath ?? Path.GetTempPath();

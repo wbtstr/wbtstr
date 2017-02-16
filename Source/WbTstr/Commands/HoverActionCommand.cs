@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +9,11 @@ using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {
-    public class FocusCommand : ICommand
+    public class HoverActionCommand : IActionCommand
     {
         private readonly string _selector;
 
-        public FocusCommand(string selector)
+        public HoverActionCommand(string selector)
         {
             _selector = selector;
         }
@@ -24,10 +24,12 @@ namespace WbTstr.Commands
         {
             var webDriver = webDriverObj as IWebDriver;
 
-            RemoteWebElement element = (RemoteWebElement)webDriver.FindElement(By.CssSelector(_selector));
-            var viewPosition = element.LocationOnScreenOnceScrolledIntoView;
-
-            element.Click();
+            var element = webDriver.FindElement(By.CssSelector(_selector));
+            if (element != null)
+            {
+                var interaction = new Actions(webDriver);
+                interaction.MoveToElement(element).Perform();
+            }
         }
     }
 }

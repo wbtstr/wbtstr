@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace WbTstr.Commands.Interfaces
 {
-    public interface ICommand
+    public interface IReturnCommand<T> : ICommand
     {
-        string ToString();
+        T Execute(object webDriverObj);
     }
 }

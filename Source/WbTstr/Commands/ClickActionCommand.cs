@@ -10,12 +10,12 @@ using WbTstr.Utilities.Constants;
 
 namespace WbTstr.Commands
 {
-    internal class ClickCommand : ICommand
+    internal class ClickActionCommand : IActionCommand
     {
         private readonly string _selector;
         private readonly MouseClick _clickType;
 
-        public ClickCommand(string selector, MouseClick clickType = MouseClick.Single)
+        public ClickActionCommand(string selector, MouseClick clickType = MouseClick.Single)
         {
             _selector = selector;
             _clickType = clickType;

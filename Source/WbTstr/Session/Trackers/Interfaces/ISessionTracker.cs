@@ -11,8 +11,12 @@ namespace WbTstr.Session.Trackers.Interfaces
     {
         ISessionTracker Initialize();
 
-        void MarkExecutionBegin(ICommand command);
+        void MarkExecutionBegin(IActionCommand actionCommand);
 
-        void MarkExecutionEnd(ICommand command);
+        void MarkExecutionBegin<T>(IReturnCommand<T> command);
+
+        void MarkExecutionEnd(IActionCommand actionCommand);
+
+        void MarkExecutionEnd<T>(IReturnCommand<T> command);
     }
 }

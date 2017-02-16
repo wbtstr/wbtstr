@@ -15,7 +15,9 @@ namespace WbTstr.Session.Performers.Interfaces
 
         bool DirectPlay { get; set; }
 
-        void Perform(ICommand command);
+        void Perform(IActionCommand actionCommand);
+
+        T PerformAndReturn<T>(IReturnCommand<T> command);
 
         void Play();
     }
