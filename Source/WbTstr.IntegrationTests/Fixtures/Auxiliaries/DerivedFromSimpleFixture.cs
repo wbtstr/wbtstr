@@ -24,6 +24,7 @@ namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
 
             // Act
             I.NavigateTo("https://github.com/")
+                .Resize(1920, 1080)
                 .Focus(".header-search-input")
                 .Wait(seconds: 3)
                 .Type("wbtstr.net", ".header-search-input")

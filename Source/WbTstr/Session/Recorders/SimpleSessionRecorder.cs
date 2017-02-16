@@ -33,6 +33,15 @@ namespace WbTstr.Session.Recorders
 
         /* Methods ----------------------------------------------------------*/
 
+        public SimpleSessionRecorder Resize(int width, int height)
+        {
+            var command = new ResizeCommand(width, height);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+
         public SimpleSessionRecorder Hover(string selector)
         {
             var command = new HoverCommand(selector);
