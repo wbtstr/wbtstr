@@ -8,16 +8,16 @@ using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {
-    internal class NavigateActionCommand : IActionCommand
+    internal class NavigateCommand : IActionCommand
     {
         private readonly Uri _uri;
 
-        public NavigateActionCommand(Uri uri)
+        public NavigateCommand(Uri uri)
         {
             _uri = uri;
         }
 
-        public NavigateActionCommand(string url)
+        public NavigateCommand(string url)
         {
             _uri = new Uri(url);
         }

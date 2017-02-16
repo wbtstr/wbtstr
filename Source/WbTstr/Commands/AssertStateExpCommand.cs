@@ -11,11 +11,11 @@ using WbTstr.WebDrivers.Exceptions;
 
 namespace WbTstr.Commands
 {
-    internal class AssertStateExpActionCommand : IActionCommand
+    internal class AssertStateExpCommand : IActionCommand
     {
         private readonly Expression<Func<WebDriverState, bool>> _expression;
 
-        public AssertStateExpActionCommand(Expression<Func<WebDriverState, bool>> expression)
+        public AssertStateExpCommand(Expression<Func<WebDriverState, bool>> expression)
         {
             _expression = expression;
         }

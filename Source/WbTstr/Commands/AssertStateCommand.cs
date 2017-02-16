@@ -10,12 +10,12 @@ using WbTstr.WebDrivers.Exceptions;
 
 namespace WbTstr.Commands
 {
-    public class AssertStateActionCommand : IActionCommand
+    public class AssertStateCommand : IActionCommand
     {
         private readonly PropertyKey _key;
         private readonly string _value;
 
-        public AssertStateActionCommand(PropertyKey key, string value)
+        public AssertStateCommand(PropertyKey key, string value)
         {
             _key = key;
             _value = value;

@@ -17,7 +17,16 @@ namespace WbTstr.Proxies
             _webElement = webElement;
         }
 
-        /*-------------------------------------------------------------------*/
+        /* Methods ----------------------------------------------------------*/
+
+        internal static IWebElement AsWebElement(IElement element)
+        {
+            if (element == null) throw new ArgumentNullException(nameof(element));
+
+            return (element as Element).InnerWebElement;
+        }
+
+        /* Properties -------------------------------------------------------*/
 
         internal IWebElement InnerWebElement => _webElement;
 
@@ -30,10 +39,6 @@ namespace WbTstr.Proxies
         public bool Selected => _webElement.Selected;
 
         public bool Displayed => _webElement.Displayed;
-
-        public void Clear() => _webElement.Clear();
-
-        public void Click() => _webElement.Click();
 
         public string GetAttribute(string name) => _webElement.GetAttribute(name);
 

@@ -18,10 +18,6 @@ namespace WbTstr.Proxies.Interfaces
 
         bool Displayed { get; }
 
-        void Clear();
-
-        void Click();
-
         string GetAttribute(string name);
 
         string GetCssValue(string property);
