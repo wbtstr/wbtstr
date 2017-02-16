@@ -11,10 +11,17 @@ namespace WbTstr.Proxies
     public class Element : IElement
     {
         private readonly IWebElement _webElement;
+        private readonly string _selector;
 
         internal Element(IWebElement webElement)
         {
             _webElement = webElement;
+        }
+
+        internal Element(IWebElement webElement, string selector)
+        {
+            _webElement = webElement;
+            _selector = selector;
         }
 
         /* Methods ----------------------------------------------------------*/
@@ -29,6 +36,8 @@ namespace WbTstr.Proxies
         /* Properties -------------------------------------------------------*/
 
         internal IWebElement InnerWebElement => _webElement;
+
+        public string Selector => _selector;
 
         public string TagName => _webElement.TagName;
 

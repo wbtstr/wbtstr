@@ -17,6 +17,9 @@ namespace WbTstr.Commands
 
         public AssertStateCommand(PropertyKey key, string value)
         {
+            if (key == default(PropertyKey)) throw new ArgumentException(nameof(key));
+            if (value == null) throw new ArgumentNullException(nameof(value));
+
             _key = key;
             _value = value;
         }
@@ -25,18 +28,19 @@ namespace WbTstr.Commands
 
         public void Execute(object webDriverObj)
         {
+            if (webDriverObj == null) throw new ArgumentNullException(nameof(webDriverObj));
             var webDriver = webDriverObj as IWebDriver;
 
             if (_key == PropertyKey.Url)
             {
-                if (webDriver?.Url != _value)
+                if (webDriver.Url != _value)
                 {
                     throw new UnexpectedWebDriverState($"Url is not {_value}");
                 }
             }
             if (_key == PropertyKey.Title)
             {
-                if (webDriver?.Title != _value)
+                if (webDriver.Title != _value)
                 {
                     throw new UnexpectedWebDriverState($"Title is not {_value}");
                 }

@@ -16,6 +16,8 @@ namespace WbTstr.Commands
 
         public FindCommand(string selector)
         {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+
             _selector = selector;
         }
 
@@ -23,10 +25,16 @@ namespace WbTstr.Commands
 
         public IElement Execute(object webDriverObj)
         {
+            if (webDriverObj == null) throw new ArgumentNullException(nameof(_selector));
             var webDriver = webDriverObj as IWebDriver;
 
             var webElement = webDriver?.FindElement(By.CssSelector(_selector));
-            return new Element(webElement);
+            return new Element(webElement, _selector);
+        }
+
+        public override string ToString()
+        {
+            return $"Finding element by '{_selector}'";
         }
     }
 }

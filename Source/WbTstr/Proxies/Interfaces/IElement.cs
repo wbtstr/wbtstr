@@ -8,6 +8,8 @@ namespace WbTstr.Proxies.Interfaces
 {
     public interface IElement
     {
+        string Selector { get; }
+
         string TagName { get; }
 
         string Text { get; }

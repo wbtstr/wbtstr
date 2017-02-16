@@ -27,13 +27,19 @@ namespace WbTstr.Commands
 
         public void Execute(object webDriverObj)
         {
+            if (webDriverObj == null) throw new ArgumentNullException(nameof(webDriverObj));
             var webdriver = webDriverObj as IWebDriver;
-            var window = webdriver?.Manage().Window;
 
+            var window = webdriver?.Manage().Window;
             if (window != null)
             {
                 window.Size = new Size(_width, _height);
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Resizing window to {_width}x{_height}";
         }
     }
 }

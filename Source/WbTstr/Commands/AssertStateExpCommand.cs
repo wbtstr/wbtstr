@@ -17,6 +17,8 @@ namespace WbTstr.Commands
 
         public AssertStateExpCommand(Expression<Func<WebDriverState, bool>> expression)
         {
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
+
             _expression = expression;
         }
 
@@ -24,7 +26,9 @@ namespace WbTstr.Commands
 
         public void Execute(object webDriverObj)
         {
+            if (webDriverObj == null) throw new ArgumentNullException(nameof(webDriverObj));
             var webDriver = webDriverObj as IWebDriver;
+
             var webDriverState = new WebDriverState(webDriver);
 
             var function = _expression.Compile();
