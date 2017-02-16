@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Commands\FocusCommand.cs" />
     <Compile Include="Commands\HoverCommand.cs" />
+    <Compile Include="Commands\ResizeCommand.cs" />
     <Compile Include="Utilities\Constants\Keys.cs" />
     <Compile Include="Commands\AssertStateExpCommand.cs" />
     <Compile Include="Commands\ClickCommand.cs" />
