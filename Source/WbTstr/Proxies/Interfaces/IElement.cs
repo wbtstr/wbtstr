@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WbTstr.Commands.Interfaces
+namespace WbTstr.Proxies.Interfaces
 {
-    public interface ICommand
+    public interface IElement
     {
-        string ToString();
+
     }
 }

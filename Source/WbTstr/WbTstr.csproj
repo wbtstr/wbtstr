@@ -50,20 +50,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\FocusCommand.cs" />
-    <Compile Include="Commands\HoverCommand.cs" />
-    <Compile Include="Commands\ResizeCommand.cs" />
+    <Compile Include="Commands\FindCommand.cs" />
+    <Compile Include="Commands\FocusActionCommand.cs" />
+    <Compile Include="Commands\HoverActionCommand.cs" />
+    <Compile Include="Commands\Interfaces\ICommand.cs" />
+    <Compile Include="Commands\Interfaces\IReturnCommand.cs" />
+    <Compile Include="Commands\ResizeActionCommand.cs" />
+    <Compile Include="Proxies\Element.cs" />
+    <Compile Include="Proxies\Interfaces\IElement.cs" />
     <Compile Include="Utilities\Constants\Keys.cs" />
-    <Compile Include="Commands\AssertStateExpCommand.cs" />
-    <Compile Include="Commands\ClickCommand.cs" />
-    <Compile Include="Commands\ScreenshotCommand.cs" />
-    <Compile Include="Commands\TypeCommand.cs" />
-    <Compile Include="Commands\WaitCommand.cs" />
+    <Compile Include="Commands\AssertStateExpActionCommand.cs" />
+    <Compile Include="Commands\ClickActionCommand.cs" />
+    <Compile Include="Commands\ScreenshotActionCommand.cs" />
+    <Compile Include="Commands\TypeActionCommand.cs" />
+    <Compile Include="Commands\WaitActionCommand.cs" />
     <Compile Include="Utilities\Constants\MouseClick.cs" />
     <Compile Include="WebDrivers\Constants\PropertyKey.cs" />
-    <Compile Include="Commands\Interfaces\ICommand.cs" />
-    <Compile Include="Commands\NavigateCommand.cs" />
-    <Compile Include="Commands\AssertStateCommand.cs" />
+    <Compile Include="Commands\Interfaces\IActionCommand.cs" />
+    <Compile Include="Commands\NavigateActionCommand.cs" />
+    <Compile Include="Commands\AssertStateActionCommand.cs" />
     <Compile Include="Configuration\WebDrivers\ChromeWebDriverConfig.cs" />
     <Compile Include="Configuration\WebDrivers\Interfaces\IWebDriverConfig.cs" />
     <Compile Include="Configuration\WebDrivers\WebDriverConfigs.cs" />

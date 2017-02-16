@@ -9,18 +9,18 @@ using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {
-    public class TypeCommand : ICommand
+    public class TypeActionCommand : IActionCommand
     {
         private readonly string _text;
         private readonly string _selector;
         private readonly bool _clear;
 
-        public TypeCommand(string text)
+        public TypeActionCommand(string text)
         {
             _text = text;
         }
 
-        public TypeCommand(string text, string selector, bool clear)
+        public TypeActionCommand(string text, string selector, bool clear)
         {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
             

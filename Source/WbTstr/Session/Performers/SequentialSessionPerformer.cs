@@ -50,15 +50,25 @@ namespace WbTstr.Session.Performers
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Perform(ICommand command)
+        public void Perform(IActionCommand actionCommand)
+        {
+            if (!DirectPlay)
+            {
+                _commands.Enqueue(actionCommand);
+                return;
+            }
+
+            ExecuteActionCommand(actionCommand);
+        }
+
+        public T PerformAndReturn<T>(IReturnCommand<T> command)
         {
             if (!DirectPlay)
             {
                 _commands.Enqueue(command);
-                return;
             }
 
-            Execute(command);
+            return ExecuteReturnCommand(command);
         }
 
         public void Play()
@@ -66,26 +76,47 @@ namespace WbTstr.Session.Performers
             while (_commands.Count != 0)
             {
                 var command = _commands.Dequeue();
-                Execute(command);
+                if (command is IActionCommand)
+                {
+                    ExecuteActionCommand(command as IActionCommand);
+                }
             }
         }
 
-        private void Execute(ICommand command)
+        private void ExecuteActionCommand(IActionCommand actionCommand)
         {
             try
             {
-                _tracker.MarkExecutionBegin(command);
+                _tracker.MarkExecutionBegin(actionCommand);
 
-                command.Execute(WebDriver);
+                actionCommand.Execute(WebDriver);
 
-                _tracker.MarkExecutionEnd(command);
+                _tracker.MarkExecutionEnd(actionCommand);
             }
             catch (UnexpectedWebDriverState)
             {
                 Dispose();
                 throw;
             }
+        }
 
+        private T ExecuteReturnCommand<T>(IReturnCommand<T> command)
+        {
+            try
+            {
+                _tracker.MarkExecutionBegin(command);
+
+                var result = command.Execute(WebDriver);
+
+                _tracker.MarkExecutionEnd(command);
+
+                return result;
+            }
+            catch (UnexpectedWebDriverState)
+            {
+                Dispose();
+                throw;
+            }
         }
 
         /* Finalizer --------------------------------------------------------*/

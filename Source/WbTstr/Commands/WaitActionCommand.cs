@@ -7,13 +7,13 @@ using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {
-    public class WaitCommand : ICommand
+    public class WaitActionCommand : IActionCommand
     {
         private readonly int _miliseconds;
         private readonly int _minutes;
         private readonly int _seconds;
 
-        public WaitCommand(int miliseconds, int seconds, int minutes)
+        public WaitActionCommand(int miliseconds, int seconds, int minutes)
         {
             _miliseconds = miliseconds;
             _seconds = seconds;
