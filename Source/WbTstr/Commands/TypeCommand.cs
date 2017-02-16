@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using WbTstr.Commands.Interfaces;
+using WbTstr.Proxies.Interfaces;
+using WbTstr.Proxies.Extensions;
+using WbTstr.WebDrivers.Extensions;
 
 namespace WbTstr.Commands
 {
-    public class TypeActionCommand : IActionCommand
+    public class TypeCommand : IActionCommand
     {
         private readonly string _text;
         private readonly string _selector;
+        private readonly IElement _element;
         private readonly bool _clear;
 
-        public TypeActionCommand(string text)
+        public TypeCommand(string text)
         {
             _text = text;
         }
 
-        public TypeActionCommand(string text, string selector, bool clear)
+        public TypeCommand(string text, string selector, bool clear)
         {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
             
@@ -29,13 +33,20 @@ namespace WbTstr.Commands
             _clear = clear;
         }
 
+        public TypeCommand(string text, IElement element, bool clear)
+        {
+            _text = text;
+            _element = element;
+            _clear = clear;
+        }
+
         /* Methods ----------------------------------------------------------*/
 
         public void Execute(object webDriverObj)
         {
             var webDriver = webDriverObj as IWebDriver;
-            var webElement = webDriver?.FindElement(By.CssSelector(_selector ?? "body"));
 
+            var webElement = _element?.AsWebElement() ?? webDriver.FindElementBySelector(_selector);
             if (_clear) {
                 webElement?.Clear();
             }
