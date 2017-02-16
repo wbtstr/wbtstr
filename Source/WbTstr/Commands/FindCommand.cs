@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium;
 using WbTstr.Commands.Interfaces;
+using WbTstr.Proxies;
 using WbTstr.Proxies.Interfaces;
 
 namespace WbTstr.Commands
@@ -21,7 +23,10 @@ namespace WbTstr.Commands
 
         public IElement Execute(object webDriverObj)
         {
-            throw new NotImplementedException();
+            var webDriver = webDriverObj as IWebDriver;
+
+            var webElement = webDriver?.FindElement(By.CssSelector(_selector));
+            return new Element(webElement);
         }
     }
 }
