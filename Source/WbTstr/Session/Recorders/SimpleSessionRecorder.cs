@@ -76,6 +76,62 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
+        public SimpleSessionRecorder Drag(string selectorA, string selectorB)
+        {
+            var command = new DragCommand(selectorA, selectorB);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Drag(IElement elementA, IElement elementB)
+        {
+            var command = new DragCommand(elementA, elementB);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Drag(string selectorA, int xOffsetToB, int yOffsetToB)
+        {
+            var command = new DragCommand(selectorA, xOffsetToB, yOffsetToB);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Drag(IElement selectorA, int xOffsetToB, int yOffsetToB)
+        {
+            var command = new DragCommand(selectorA, xOffsetToB, yOffsetToB);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Drag(int xOffsetToA, int yOffsetToA, string selectorB)
+        {
+            var command = new DragCommand(xOffsetToA, yOffsetToA, selectorB);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Drag(int xOffsetToA, int yOffsetToA, IElement elementB)
+        {
+            var command = new DragCommand(xOffsetToA, yOffsetToA, elementB);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Drag(int xOffsetToA, int yOffsetToA, int xOffsetToB, int yOffsetToB)
+        {
+            var command = new DragCommand(xOffsetToA, yOffsetToA, xOffsetToB, yOffsetToB);
+            _performer.Perform(command);
+
+            return this;
+        }
+
         public IElement FindOnPage(string selector)
         {
             var command = new FindCommand(selector);

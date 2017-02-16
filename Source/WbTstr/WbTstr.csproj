@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\DragCommand.cs" />
     <Compile Include="Commands\FindCommand.cs" />
     <Compile Include="Commands\FocusCommand.cs" />
     <Compile Include="Commands\HoverCommand.cs" />

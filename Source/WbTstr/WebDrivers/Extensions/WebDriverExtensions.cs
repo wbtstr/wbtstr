@@ -11,6 +11,11 @@ namespace WbTstr.WebDrivers.Extensions
     {
         internal static IWebElement FindElementBySelector(this IWebDriver webDriver, string selector)
         {
+            if (string.IsNullOrEmpty(selector))
+            {
+                return null;
+            }
+
             return webDriver.FindElement(By.CssSelector(selector));
         }
     }
