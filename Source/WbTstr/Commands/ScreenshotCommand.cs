@@ -18,14 +18,18 @@ namespace WbTstr.Commands
 
         public ScreenshotCommand(string fileName, string directoryPath)
         {
+            if (fileName == null) throw new ArgumentNullException(nameof(fileName));
+            if (directoryPath == null) throw new ArgumentNullException(nameof(directoryPath));
+
             _fileName = fileName;
-            _directoryPath = directoryPath ?? Path.GetTempPath();
+            _directoryPath = directoryPath;
         }
 
         /* Methods ----------------------------------------------------------*/
 
         public void Execute(object webDriverObj)
         {
+            if (webDriverObj == null) throw new ArgumentNullException(nameof(webDriverObj));
             var webDriver = webDriverObj as IWebDriver;
 
             var screenshot = webDriver?.TakeScreenshot();
@@ -34,11 +38,6 @@ namespace WbTstr.Commands
             var filePath = Path.Combine(_directoryPath, _fileName);
             var imageFormat = DetermineImageFormat(filePath);
             screenshot.SaveAsFile(filePath, imageFormat);
-        }
-
-        public override string ToString()
-        {
-            return $"Take a screenshot ({_fileName})";
         }
 
         private ImageFormat DetermineImageFormat(string filePath)
@@ -54,6 +53,11 @@ namespace WbTstr.Commands
                 default:
                     return ImageFormat.Png;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Take a screenshot ({_fileName})";
         }
     }
 }

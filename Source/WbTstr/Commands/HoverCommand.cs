@@ -20,11 +20,15 @@ namespace WbTstr.Commands
 
         public HoverCommand(string selector)
         {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+
             _selector = selector;
         }
 
         public HoverCommand(IElement element)
         {
+            if (element == null) throw new ArgumentNullException(nameof(element));
+
             _element = element;
         }
 
@@ -41,6 +45,11 @@ namespace WbTstr.Commands
                 var interaction = new Actions(webDriver);
                 interaction.MoveToElement(webElement).Perform();
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Hovering on element '{_selector ?? _element.Selector ?? "?"}'";
         }
     }
 }

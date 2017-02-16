@@ -11,6 +11,7 @@ using WbTstr.Session.Recorders.Interfaces;
 using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Constants;
 using WbTstr.Utilities.Constants;
+using System.IO;
 
 namespace WbTstr.Session.Recorders
 {
@@ -141,7 +142,7 @@ namespace WbTstr.Session.Recorders
 
         public SimpleSessionRecorder TakeScreenshot(string fileName = "screenshot.png", string fileDirectory = null)
         {
-            var command = new ScreenshotCommand(fileName, fileDirectory);
+            var command = new ScreenshotCommand(fileName, fileDirectory ?? Path.GetTempPath());
             _performer.Perform(command);
 
             return this;

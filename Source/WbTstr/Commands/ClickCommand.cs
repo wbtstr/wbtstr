@@ -9,6 +9,8 @@ using OpenQA.Selenium.Interactions;
 using WbTstr.Utilities.Constants;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.Proxies;
+using WbTstr.Proxies.Extensions;
+using WbTstr.WebDrivers.Extensions;
 
 namespace WbTstr.Commands
 {
@@ -18,14 +20,20 @@ namespace WbTstr.Commands
         private readonly IElement _element;
         private readonly MouseClick _clickType;
 
-        public ClickCommand(string selector, MouseClick clickType = MouseClick.Single)
+        public ClickCommand(string selector, MouseClick clickType)
         {
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            if (clickType == default(MouseClick)) throw new ArgumentException(nameof(clickType));
+
             _selector = selector;
             _clickType = clickType;
         }
 
-        public ClickCommand(IElement element, MouseClick clickType = MouseClick.Single)
+        public ClickCommand(IElement element, MouseClick clickType)
         {
+            if (element == null) throw new ArgumentNullException(nameof(element));
+            if (clickType == default(MouseClick)) throw new ArgumentException(nameof(clickType));
+
             _element = element;
             _clickType = clickType;
         }
@@ -37,15 +45,7 @@ namespace WbTstr.Commands
             if (webDriverObj == null) throw new ArgumentNullException(nameof(webDriverObj));
             var webDriver = webDriverObj as IWebDriver;
 
-            IWebElement webElement;
-            if (_element != null)
-            {
-                webElement = Element.AsWebElement(_element);
-            }
-            else
-            {
-                webElement = webDriver.FindElement(By.CssSelector(_selector));
-            }
+            var webElement = _element?.AsWebElement() ?? webDriver.FindElementBySelector(_selector);
 
             var interaction = new Actions(webDriver);
             switch (_clickType)

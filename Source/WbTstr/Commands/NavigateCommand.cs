@@ -14,11 +14,15 @@ namespace WbTstr.Commands
 
         public NavigateCommand(Uri uri)
         {
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
+
             _uri = uri;
         }
 
         public NavigateCommand(string url)
         {
+            if (url == null) throw new ArgumentNullException(nameof(url));
+
             _uri = new Uri(url);
         }
 
@@ -26,7 +30,9 @@ namespace WbTstr.Commands
 
         public void Execute(object webDriverObj)
         {
+            if (webDriverObj == null) throw new ArgumentNullException(nameof(webDriverObj));
             var webDriver = webDriverObj as IWebDriver;
+
             webDriver?.Navigate().GoToUrl(_uri);
         }
 

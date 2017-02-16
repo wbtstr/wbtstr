@@ -21,11 +21,14 @@ namespace WbTstr.Commands
 
         public TypeCommand(string text)
         {
+            if (text == null) throw new ArgumentNullException(nameof(text));
+
             _text = text;
         }
 
         public TypeCommand(string text, string selector, bool clear)
         {
+            if (text == null) throw new ArgumentNullException(nameof(text));
             if (selector == null) throw new ArgumentNullException(nameof(selector));
             
             _text = text;
@@ -35,6 +38,9 @@ namespace WbTstr.Commands
 
         public TypeCommand(string text, IElement element, bool clear)
         {
+            if (text == null) throw new ArgumentNullException(nameof(text));
+            if (element == null) throw new ArgumentNullException(nameof(element));
+
             _text = text;
             _element = element;
             _clear = clear;
@@ -44,6 +50,7 @@ namespace WbTstr.Commands
 
         public void Execute(object webDriverObj)
         {
+            if (webDriverObj == null) throw new ArgumentNullException(nameof(webDriverObj));
             var webDriver = webDriverObj as IWebDriver;
 
             var webElement = _element?.AsWebElement() ?? webDriver.FindElementBySelector(_selector);
