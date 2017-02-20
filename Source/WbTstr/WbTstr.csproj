@@ -75,8 +75,8 @@
     <Compile Include="Configuration\WebDrivers\Interfaces\IWebDriverConfig.cs" />
     <Compile Include="Configuration\WebDrivers\WebDriverConfigs.cs" />
     <Compile Include="Fixtures\Attributes\WebDriverConfigAttribute.cs" />
-    <Compile Include="Fixtures\CustomFixture.cs" />
-    <Compile Include="Fixtures\SimpleFixture.cs" />
+    <Compile Include="Fixtures\WbTstrFixture.cs" />
+    <Compile Include="Fixtures\SimpleWbTstrFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\Recorders\Interfaces\ISessionRecorder.cs" />
     <Compile Include="Session\Recorders\SimpleSessionRecorder.cs" />

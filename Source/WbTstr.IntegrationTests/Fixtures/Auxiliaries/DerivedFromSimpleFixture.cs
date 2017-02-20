@@ -15,7 +15,7 @@ using WbTstr.WebDrivers.Constants;
 namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
 {
     [WebDriverConfig("Chrome")]
-    public class DerivedFromSimpleFixture : SimpleFixture<SequentialSessionPerformer>
+    public class DerivedFromSimpleFixture : SimpleWbTstrFixture
     {
         public void TestMethod()
         {
