@@ -15,12 +15,12 @@ namespace WbTstr.Configuration.WebDrivers
             return new ChromeWebDriverConfig();
         }
 
-        public static IWebDriverConfig GetFromConfig(WebDriverName name)
+        public static IWebDriverConfig GetFromConfig(WbTstr.WebDrivers.Constants.WebDriverType name)
         {
             IWebDriverConfig webDriverConfig;
             switch (name)
             {
-                case WebDriverName.Chrome:
+                case WbTstr.WebDrivers.Constants.WebDriverType.Chrome:
                     webDriverConfig = new ChromeWebDriverConfig();
                     break;
                 default:

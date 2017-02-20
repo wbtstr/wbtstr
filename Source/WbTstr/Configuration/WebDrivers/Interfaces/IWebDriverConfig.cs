@@ -9,6 +9,6 @@ namespace WbTstr.Configuration.WebDrivers.Interfaces
 {
     public interface IWebDriverConfig
     {
-        WebDriverName Type { get; }
+        WebDriverType Type { get; }
     }
 }

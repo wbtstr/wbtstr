@@ -188,7 +188,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Resize(int width, int height)
+        public SimpleSessionRecorder ResizeWindow(int width, int height)
         {
             var command = new ResizeCommand(width, height);
             _performer.Perform(command);
