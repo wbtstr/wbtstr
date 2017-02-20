@@ -12,21 +12,50 @@ namespace WbTstr.Configuration.WebDrivers
     {
         public static IWebDriverConfig GetDefault()
         {
+            return GetDefaultChromeWebDriverConfig();
+        }
+
+        public static IWebDriverConfig GetDefaultForType(WebDriverType type)
+        {
+            if (type == default(WebDriverType)) throw new ArgumentException(nameof(type));
+
+            IWebDriverConfig webDriverConfig = null;
+            switch (type)
+            {
+                case WebDriverType.Chrome:
+                    webDriverConfig = GetDefaultChromeWebDriverConfig();
+                    break;
+            }
+
+            return webDriverConfig;
+        }
+
+        public static IWebDriverConfig GetFromPreset(WebDriverType type, string preset)
+        {
+            if (type == default(WebDriverType)) throw new ArgumentException(nameof(type));
+            if (preset == null) throw new ArgumentNullException(nameof(preset));
+
+            IWebDriverConfig webDriverConfig = null;
+            switch (type)
+            {
+                case WebDriverType.Chrome:
+                    webDriverConfig = GetPresetChromeWebDriverConfig(preset);
+                    break;
+            }
+
+            return webDriverConfig;
+        }
+
+        private static ChromeWebDriverConfig GetDefaultChromeWebDriverConfig()
+        {
             return new ChromeWebDriverConfig();
         }
 
-        public static IWebDriverConfig GetFromConfig(WbTstr.WebDrivers.Constants.WebDriverType name)
+        private static ChromeWebDriverConfig GetPresetChromeWebDriverConfig(string preset)
         {
-            IWebDriverConfig webDriverConfig;
-            switch (name)
-            {
-                case WbTstr.WebDrivers.Constants.WebDriverType.Chrome:
-                    webDriverConfig = new ChromeWebDriverConfig();
-                    break;
-                default:
-                    webDriverConfig = GetDefault();
-                    break;
-            }
+            ChromeWebDriverConfig webDriverConfig = GetDefaultChromeWebDriverConfig();
+
+            // TODO: update WebDriver config from preset
 
             return webDriverConfig;
         }
