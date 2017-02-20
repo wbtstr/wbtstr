@@ -90,6 +90,7 @@
     <Compile Include="WebDrivers\Extensions\WebDriverExtensions.cs" />
     <Compile Include="WebDrivers\WebDriverFactory.cs" />
     <Compile Include="WebDrivers\WebDriverState.cs" />
+    <Compile Include="WebDrivers\WebDriverUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages.config" />
