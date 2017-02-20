@@ -38,7 +38,16 @@ namespace WbTstr.Fixtures
                 if (_webDriverConfig == null)
                 {
                     var attribute = Attribute.GetCustomAttribute(GetType(), typeof(WebDriverConfigAttribute)) as WebDriverConfigAttribute;
-                    _webDriverConfig = attribute != null ? WebDriverConfigs.GetFromConfig(attribute.Type) : WebDriverConfigs.GetDefault();
+                    if (attribute == null)
+                    {
+                        _webDriverConfig = WebDriverConfigs.GetDefault();
+                    }
+                    else
+                    {
+                        _webDriverConfig = string.IsNullOrEmpty(attribute.Preset) 
+                            ? WebDriverConfigs.GetDefaultForType(attribute.Type) 
+                            : WebDriverConfigs.GetFromPreset(attribute.Type, attribute.Preset);
+                    }
                 }
 
                 return _webDriverConfig;
@@ -46,23 +55,6 @@ namespace WbTstr.Fixtures
         }
 
         protected R I { get; }
-
-        /* Methods ----------------------------------------------------------*/
-
-        protected void Retry(Action expression, int times = 3, int delay = 15)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected void WaitUntilTrue(Func<bool> expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected void WaitUntilFalse(Func<bool> expression)
-        {
-            throw new NotImplementedException();
-        }
 
         /* Finalizer --------------------------------------------------------*/
 
