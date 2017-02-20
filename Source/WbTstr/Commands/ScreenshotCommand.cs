@@ -40,18 +40,18 @@ namespace WbTstr.Commands
             screenshot.SaveAsFile(filePath, imageFormat);
         }
 
-        private ImageFormat DetermineImageFormat(string filePath)
+        private ScreenshotImageFormat DetermineImageFormat(string filePath)
         {
             var fileExtension = Path.GetExtension(filePath)?.Substring(1).ToUpper();
             switch (fileExtension)
             {
                 case "BMP":
-                    return ImageFormat.Bmp;
+                    return ScreenshotImageFormat.Bmp;
                 case "JPG":
                 case "JPEG":
-                    return ImageFormat.Jpeg;
+                    return ScreenshotImageFormat.Jpeg;
                 default:
-                    return ImageFormat.Png;
+                    return ScreenshotImageFormat.Png;
             }
         }
 

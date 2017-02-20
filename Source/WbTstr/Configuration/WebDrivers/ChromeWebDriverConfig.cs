@@ -10,6 +10,6 @@ namespace WbTstr.Configuration.WebDrivers
 {
     public class ChromeWebDriverConfig : IWebDriverConfig
     {
-        public WebDriverName Type { get; } = WebDriverName.Chrome;
+        public WebDriverType Type { get; } = WbTstr.WebDrivers.Constants.WebDriverType.Chrome;
     }
 }

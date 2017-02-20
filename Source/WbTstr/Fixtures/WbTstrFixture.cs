@@ -38,7 +38,7 @@ namespace WbTstr.Fixtures
                 if (_webDriverConfig == null)
                 {
                     var attribute = Attribute.GetCustomAttribute(GetType(), typeof(WebDriverConfigAttribute)) as WebDriverConfigAttribute;
-                    _webDriverConfig = attribute != null ? WebDriverConfigs.GetFromConfig(attribute.Name) : WebDriverConfigs.GetDefault();
+                    _webDriverConfig = attribute != null ? WebDriverConfigs.GetFromConfig(attribute.Type) : WebDriverConfigs.GetDefault();
                 }
 
                 return _webDriverConfig;

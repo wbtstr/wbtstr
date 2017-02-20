@@ -14,7 +14,7 @@ using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
 {
-    [WebDriverConfig("Chrome")]
+    [WebDriverConfig(type: "Chrome", preset: "Chrome01")]
     public class DerivedFromSimpleFixture : SimpleWbTstrFixture
     {
         public void TestMethod()
@@ -25,7 +25,7 @@ namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
 
             // Act
             I.NavigateTo("https://github.com/")
-                .Resize(1920, 1080)
+                .ResizeWindow(1920, 1080)
                 .Focus(".header-search-input")
                 .Wait(seconds: 3)
                 .Type("wbtstr.net", ".header-search-input")

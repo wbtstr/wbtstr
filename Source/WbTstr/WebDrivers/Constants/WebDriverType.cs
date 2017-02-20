@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WbTstr.WebDrivers.Constants
 {
-    public enum WebDriverName
+    public enum WebDriverType
     {
         Chrome
     }
