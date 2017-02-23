@@ -55,6 +55,8 @@
     <Compile Include="Commands\Interfaces\ICommand.cs" />
     <Compile Include="Commands\Interfaces\IReturnCommand.cs" />
     <Compile Include="Commands\ResizeCommand.cs" />
+    <Compile Include="Configuration\WebDrivers\Exceptions\MissingWebDriverConfigException.cs" />
+    <Compile Include="Configuration\WebDrivers\Exceptions\WebDriverConfigException.cs" />
     <Compile Include="Proxies\Element.cs" />
     <Compile Include="Proxies\Extensions\ElementExtensions.cs" />
     <Compile Include="Proxies\Interfaces\IElement.cs" />

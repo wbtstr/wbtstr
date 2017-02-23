@@ -28,14 +28,14 @@ namespace WbTstr.Session.Performers
             _commands = new Queue<ICommand>();
         }
 
-        public ISessionPerformer Initialize(IWebDriverConfig webDriverConfig, ISessionTracker tracker)
+        public ISessionPerformer Initialize(Lazy<IWebDriverConfig> webDriverConfig, ISessionTracker tracker)
         {
             if (_initialized)
             {
                 throw new InvalidOperationException($"{nameof(SequentialSessionPerformer)} can be initialized only once.");
             }
 
-            _webDriver = new Lazy<IWebDriver>(() => WebDriverFactory.CreateFromConfig(webDriverConfig));
+            _webDriver = new Lazy<IWebDriver>(() => WebDriverFactory.CreateFromConfig(webDriverConfig.Value));
             _tracker = tracker;
 
             _initialized = true;
