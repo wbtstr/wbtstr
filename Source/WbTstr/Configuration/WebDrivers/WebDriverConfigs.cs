@@ -10,12 +10,18 @@ namespace WbTstr.Configuration.WebDrivers
 {
     public static class WebDriverConfigs
     {
-        public static IWebDriverConfig GetDefault()
+        internal static IWebDriverConfig GetDefault()
         {
-            return GetDefaultChromeWebDriverConfig();
+            return GetDefault(WebDriverType.Chrome);
         }
 
-        public static IWebDriverConfig GetDefaultForType(WebDriverType type)
+        public static IWebDriverConfig GetDefault(string type)
+        {
+            var webDriverType = (WebDriverType)Enum.Parse(typeof(WebDriverType), type, true);
+            return GetDefault(webDriverType);
+        }
+
+        public static IWebDriverConfig GetDefault(WebDriverType type)
         {
             if (type == default(WebDriverType)) throw new ArgumentException(nameof(type));
 
@@ -53,11 +59,7 @@ namespace WbTstr.Configuration.WebDrivers
 
         private static ChromeWebDriverConfig GetPresetChromeWebDriverConfig(string preset)
         {
-            ChromeWebDriverConfig webDriverConfig = GetDefaultChromeWebDriverConfig();
-
-            // TODO: update WebDriver config from preset
-
-            return webDriverConfig;
+            throw new NotImplementedException();
         }
     }
 }

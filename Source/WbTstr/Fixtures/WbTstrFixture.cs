@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WbTstr.Configuration.WebDrivers;
 using WbTstr.Configuration.WebDrivers.Interfaces;
+using WbTstr.Configuration.WebDrivers.Exceptions;
 using WbTstr.Fixtures.Attributes;
 using WbTstr.Session.Recorders.Interfaces;
 using WbTstr.Session.Performers.Interfaces;
@@ -20,6 +21,7 @@ namespace WbTstr.Fixtures
         private readonly ISessionPerformer _performer;
         private readonly ISessionTracker _tracker;
         private IWebDriverConfig _webDriverConfig;
+        private Lazy<IWebDriverConfig> _webDriverConfigPointer;
 
         protected WbTstrFixture()
         {
@@ -31,30 +33,54 @@ namespace WbTstr.Fixtures
 
         /* Properties -------------------------------------------------------*/
 
-        protected IWebDriverConfig WebDriverConfig
+        protected Lazy<IWebDriverConfig> WebDriverConfig
         {
             get
             {
-                if (_webDriverConfig == null)
+                if (_webDriverConfigPointer == null)
                 {
-                    var attribute = Attribute.GetCustomAttribute(GetType(), typeof(WebDriverConfigAttribute)) as WebDriverConfigAttribute;
-                    if (attribute == null)
+                    if (_webDriverConfig == null)
                     {
-                        _webDriverConfig = WebDriverConfigs.GetDefault();
+                        var attribute = Attribute.GetCustomAttribute(GetType(), typeof(WebDriverConfigAttribute)) as WebDriverConfigAttribute;
+                        if (attribute != null)
+                        {
+                            _webDriverConfig = string.IsNullOrEmpty(attribute.Preset)
+                                ? WebDriverConfigs.GetDefault(attribute.Type)
+                                : WebDriverConfigs.GetFromPreset(attribute.Type, attribute.Preset);
+                        }
                     }
-                    else
+
+                    // As long as _webDriverConfig is initialized at the moment we need it, it's all fine.
+                    _webDriverConfigPointer = new Lazy<IWebDriverConfig>(() => 
                     {
-                        _webDriverConfig = string.IsNullOrEmpty(attribute.Preset) 
-                            ? WebDriverConfigs.GetDefaultForType(attribute.Type) 
-                            : WebDriverConfigs.GetFromPreset(attribute.Type, attribute.Preset);
-                    }
+                        if (_webDriverConfig == null)
+                        {
+                            throw new MissingWebDriverConfigException();
+                        }
+
+                        return _webDriverConfig;
+                    });
                 }
 
-                return _webDriverConfig;
+                return _webDriverConfigPointer;
             }
         }
 
         protected R I { get; }
+
+        /* Methods ----------------------------------------------------------*/
+
+        protected void Use(IWebDriverConfig webDriverConfig)
+        {
+            if (webDriverConfig == null) throw new ArgumentNullException(nameof(webDriverConfig));
+
+            if (_webDriverConfig != null)
+            {
+                throw new InvalidOperationException("Cannot override already initialized WebDriver configuration.");
+            }
+
+            _webDriverConfig = webDriverConfig;
+        }
 
         /* Finalizer --------------------------------------------------------*/
 

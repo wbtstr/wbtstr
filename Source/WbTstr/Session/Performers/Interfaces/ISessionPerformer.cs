@@ -11,7 +11,7 @@ namespace WbTstr.Session.Performers.Interfaces
 {
     public interface ISessionPerformer : IDisposable
     {
-        ISessionPerformer Initialize(IWebDriverConfig webDriverConfig, ISessionTracker tracker);
+        ISessionPerformer Initialize(Lazy<IWebDriverConfig> webDriverConfig, ISessionTracker tracker);
 
         bool DirectPlay { get; set; }
 

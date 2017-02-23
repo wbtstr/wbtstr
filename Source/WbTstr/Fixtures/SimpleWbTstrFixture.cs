@@ -18,6 +18,6 @@ namespace WbTstr.Fixtures
 
     public abstract class SimpleWbTstrFixture: SimpleWbTstrFixture<SequentialSessionPerformer>
     {
-                        
+                                
     }
 }
