@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OpenQA.Selenium;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
 using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands

@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using WbTstr.WebDrivers.Constants;
 using WbTstr.Commands.Interfaces;
-using WbTstr.WebDrivers.Exceptions;
 using WbTstr.WebDrivers;
+using WbTstr.WebDrivers.Constants;
+using WbTstr.WebDrivers.Exceptions;
 
 namespace WbTstr.Commands
 {
@@ -18,11 +13,8 @@ namespace WbTstr.Commands
 
         public AssertStateCommand(PropertyKey key, string value)
         {
-            if (key == default(PropertyKey)) throw new ArgumentException(nameof(key));
-            if (value == null) throw new ArgumentNullException(nameof(value));
-
-            _key = key;
-            _value = value;
+            _key = key != PropertyKey.None ? key : throw new ArgumentException(nameof(key));
+            _value = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /* Methods ----------------------------------------------------------*/

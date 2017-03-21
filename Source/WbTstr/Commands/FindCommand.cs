@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
+using System;
 using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies;
 using WbTstr.Proxies.Interfaces;
@@ -16,9 +12,7 @@ namespace WbTstr.Commands
 
         public FindCommand(string selector)
         {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            _selector = selector;
+            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
         }
 
         /*-------------------------------------------------------------------*/

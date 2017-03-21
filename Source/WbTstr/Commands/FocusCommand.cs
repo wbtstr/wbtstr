@@ -1,12 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WbTstr.Commands.Interfaces;
-using WbTstr.Proxies;
 using WbTstr.Proxies.Extensions;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.WebDrivers.Extensions;
@@ -20,16 +15,12 @@ namespace WbTstr.Commands
 
         public FocusCommand(string selector)
         {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            _selector = selector;
+            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
         }
 
         public FocusCommand(IElement element)
         {
-            if (element == null) throw new ArgumentNullException(nameof(element));
-
-            _element = element;
+            _element = element ?? throw new ArgumentNullException(nameof(element));
         }
 
         /* Methods ----------------------------------------------------------*/

@@ -21,28 +21,20 @@ namespace WbTstr.Commands
 
         public TypeCommand(string text)
         {
-            if (text == null) throw new ArgumentNullException(nameof(text));
-
-            _text = text;
+            _text = text ?? throw new ArgumentNullException(nameof(text));
         }
 
         public TypeCommand(string text, string selector, bool clear)
         {
-            if (text == null) throw new ArgumentNullException(nameof(text));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            
-            _text = text;
-            _selector = selector;
+            _text = text ?? throw new ArgumentNullException(nameof(text));
+            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
             _clear = clear;
         }
 
         public TypeCommand(string text, IElement element, bool clear)
         {
-            if (text == null) throw new ArgumentNullException(nameof(text));
-            if (element == null) throw new ArgumentNullException(nameof(element));
-
-            _text = text;
-            _element = element;
+            _text = text ?? throw new ArgumentNullException(nameof(text));
+            _element = element ?? throw new ArgumentNullException(nameof(element));
             _clear = clear;
         }
 

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using WbTstr.Commands.Interfaces;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using WbTstr.Utilities.Constants;
-using WbTstr.Proxies.Interfaces;
-using WbTstr.Proxies;
+using System;
+using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies.Extensions;
+using WbTstr.Proxies.Interfaces;
+using WbTstr.Utilities.Constants;
 using WbTstr.WebDrivers.Extensions;
 
 namespace WbTstr.Commands
@@ -22,20 +17,14 @@ namespace WbTstr.Commands
 
         public ClickCommand(string selector, MouseClick clickType)
         {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            if (clickType == default(MouseClick)) throw new ArgumentException(nameof(clickType));
-
-            _selector = selector;
-            _clickType = clickType;
+            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
+            _clickType = clickType != MouseClick.None ? clickType : throw new ArgumentException(nameof(clickType));
         }
 
         public ClickCommand(IElement element, MouseClick clickType)
         {
-            if (element == null) throw new ArgumentNullException(nameof(element));
-            if (clickType == default(MouseClick)) throw new ArgumentException(nameof(clickType));
-
-            _element = element;
-            _clickType = clickType;
+            _element = element ?? throw new ArgumentNullException(nameof(element));
+            _clickType = clickType != MouseClick.None ? clickType : throw new ArgumentException(nameof(clickType));
         }
 
         /* Methods ----------------------------------------------------------*/

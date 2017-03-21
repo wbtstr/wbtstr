@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using OpenQA.Selenium;
+using System;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
 using WbTstr.Commands.Interfaces;
 using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Exceptions;
@@ -17,9 +13,7 @@ namespace WbTstr.Commands
 
         public AssertStateExpCommand(Expression<Func<WebDriverState, bool>> expression)
         {
-            if (expression == null) throw new ArgumentNullException(nameof(expression));
-
-            _expression = expression;
+            _expression = expression ?? throw new ArgumentNullException(nameof(expression));
         }
 
         /* Methods ----------------------------------------------------------*/
