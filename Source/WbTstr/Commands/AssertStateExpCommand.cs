@@ -20,9 +20,7 @@ namespace WbTstr.Commands
 
         public void Execute(object webDriverObj)
         {
-            if (webDriverObj == null) throw new ArgumentNullException(nameof(webDriverObj));
-            var webDriver = webDriverObj as IWebDriver;
-
+            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
             var webDriverState = new WebDriverState(webDriver);
 
             var function = _expression.Compile();

@@ -9,6 +9,7 @@ using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.Proxies.Extensions;
 using WbTstr.WebDrivers.Extensions;
+using WbTstr.WebDrivers;
 
 namespace WbTstr.Commands
 {
@@ -42,10 +43,9 @@ namespace WbTstr.Commands
 
         public void Execute(object webDriverObj)
         {
-            if (webDriverObj == null) throw new ArgumentNullException(nameof(webDriverObj));
-            var webDriver = webDriverObj as IWebDriver;
-
+            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
             var webElement = _element?.AsWebElement() ?? webDriver.FindElementBySelector(_selector);
+
             if (_clear) {
                 webElement?.Clear();
             }

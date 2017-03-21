@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 using WbTstr.Commands.Interfaces;
+using WbTstr.WebDrivers;
 
 namespace WbTstr.Commands
 {
@@ -22,8 +23,7 @@ namespace WbTstr.Commands
 
         public void Execute(object webDriverObj)
         {
-            if (webDriverObj == null) throw new ArgumentNullException(nameof(webDriverObj));
-            var webDriver = webDriverObj as IWebDriver;
+            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
 
             webDriver?.Navigate().GoToUrl(_uri);
         }
