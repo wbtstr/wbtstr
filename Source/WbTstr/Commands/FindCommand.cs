@@ -3,6 +3,7 @@ using System;
 using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies;
 using WbTstr.Proxies.Interfaces;
+using WbTstr.WebDrivers;
 
 namespace WbTstr.Commands
 {
@@ -19,10 +20,9 @@ namespace WbTstr.Commands
 
         public IElement Execute(object webDriverObj)
         {
-            if (webDriverObj == null) throw new ArgumentNullException(nameof(_selector));
-            var webDriver = webDriverObj as IWebDriver;
-
+            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
             var webElement = webDriver?.FindElement(By.CssSelector(_selector));
+
             return new Element(webElement, _selector);
         }
 
