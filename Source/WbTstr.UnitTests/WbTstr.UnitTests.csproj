@@ -62,6 +62,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Commands\AssertStateCommandTests.cs" />
+    <Compile Include="Commands\AssertStateExpCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
