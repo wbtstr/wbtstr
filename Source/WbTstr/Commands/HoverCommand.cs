@@ -1,14 +1,9 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WbTstr.Commands.Interfaces;
-using WbTstr.Proxies;
-using WbTstr.Proxies.Interfaces;
 using WbTstr.Proxies.Extensions;
+using WbTstr.Proxies.Interfaces;
 using WbTstr.WebDrivers.Extensions;
 
 namespace WbTstr.Commands
@@ -20,16 +15,12 @@ namespace WbTstr.Commands
 
         public HoverCommand(string selector)
         {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            _selector = selector;
+            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
         }
 
         public HoverCommand(IElement element)
         {
-            if (element == null) throw new ArgumentNullException(nameof(element));
-
-            _element = element;
+            _element = element ?? throw new ArgumentNullException(nameof(element));
         }
 
         /* Methods ----------------------------------------------------------*/

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
+using System;
 using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
@@ -14,16 +10,12 @@ namespace WbTstr.Commands
 
         public NavigateCommand(Uri uri)
         {
-            if (uri == null) throw new ArgumentNullException(nameof(uri));
-
-            _uri = uri;
+            _uri = uri ?? throw new ArgumentNullException(nameof(uri));
         }
 
         public NavigateCommand(string url)
         {
-            if (url == null) throw new ArgumentNullException(nameof(url));
-
-            _uri = new Uri(url);
+            _uri = new Uri(url ?? throw new ArgumentNullException(nameof(url)));
         }
 
         /* Methods ----------------------------------------------------------*/

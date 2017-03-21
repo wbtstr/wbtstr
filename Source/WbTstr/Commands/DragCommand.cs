@@ -1,10 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies.Extensions;
 using WbTstr.Proxies.Interfaces;
@@ -25,56 +21,42 @@ namespace WbTstr.Commands
 
         public DragCommand(string selectorA, string selectorB)
         {
-            if (selectorA == null) throw new ArgumentNullException(nameof(selectorA));
-            if (selectorB == null) throw new ArgumentNullException(nameof(selectorB));
-
-            _selectorA = selectorA;
-            _selectorB = selectorB;
+            _selectorA = selectorA ?? throw new ArgumentNullException(nameof(selectorA));
+            _selectorB = selectorB ?? throw new ArgumentNullException(nameof(selectorB));
         }
 
         public DragCommand(IElement elementA, IElement elementB)
         {
-            if (elementA == null) throw new ArgumentNullException(nameof(elementA));
-            if (elementB == null) throw new ArgumentNullException(nameof(elementB));
-
-            _elementA = elementA;
-            _elementB = elementB;
+            _elementA = elementA ?? throw new ArgumentNullException(nameof(elementA));
+            _elementB = elementB ?? throw new ArgumentNullException(nameof(elementB));
         }
 
         public DragCommand(string selectorA, int xOffsetToB, int yOffsetToB)
         {
-            if (selectorA == null) throw new ArgumentNullException(nameof(selectorA));
-
-            _selectorA = selectorA;
+            _selectorA = selectorA ?? throw new ArgumentNullException(nameof(selectorA));
             _xOffsetToB = xOffsetToB;
             _yOffsetToB = yOffsetToB;
         }
 
         public DragCommand(IElement elementA, int xOffsetToB, int yOffsetToB)
         {
-            if (elementA == null) throw new ArgumentNullException(nameof(elementA));
-
-            _elementA = elementA;
+            _elementA = elementA ?? throw new ArgumentNullException(nameof(elementA));
             _xOffsetToB = xOffsetToB;
             _yOffsetToB = yOffsetToB;
         }
 
         public DragCommand(int xOffsetToA, int yOffsetToA, string selectorB)
         {
-            if (selectorB == null) throw new ArgumentNullException(nameof(selectorB));
-
             _xOffsetToA = xOffsetToA;
             _yOffsetToA = yOffsetToA;
-            _selectorB = selectorB;
+            _selectorB = selectorB ?? throw new ArgumentNullException(nameof(selectorB));
         }
 
         public DragCommand(int xOffsetToA, int yOffsetToA, IElement elementB)
         {
-            if (elementB == null) throw new ArgumentNullException(nameof(elementB));
-
             _xOffsetToA = xOffsetToA;
             _yOffsetToA = yOffsetToA;
-            _elementB = elementB;
+            _elementB = elementB ?? throw new ArgumentNullException(nameof(elementB));
         }
 
         public DragCommand(int xOffsetToA, int yOffsetToA, int xOffsetToB, int yOffsetToB)

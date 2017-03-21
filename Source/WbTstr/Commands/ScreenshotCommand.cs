@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
+using System;
+using System.IO;
 using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
@@ -18,11 +13,8 @@ namespace WbTstr.Commands
 
         public ScreenshotCommand(string fileName, string directoryPath)
         {
-            if (fileName == null) throw new ArgumentNullException(nameof(fileName));
-            if (directoryPath == null) throw new ArgumentNullException(nameof(directoryPath));
-
-            _fileName = fileName;
-            _directoryPath = directoryPath;
+            _fileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
+            _directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
         }
 
         /* Methods ----------------------------------------------------------*/
