@@ -1,29 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WbTstr.Configuration.WebDrivers;
-using WbTstr.Configuration.WebDrivers.Interfaces;
+﻿using NUnit.Framework;
 using WbTstr.Fixtures;
 using WbTstr.Fixtures.Attributes;
 using WbTstr.Proxies.Interfaces;
-using WbTstr.Session.Performers;
-using WbTstr.Session.Recorders;
-using WbTstr.Session.Trackers;
 using WbTstr.Utilities.Constants;
 using WbTstr.WebDrivers.Constants;
 
-namespace WbTstr.IntegrationTests.Fixtures.Auxiliaries
+namespace WbTstr.IntegrationTests.Fixtures
 {
+    [TestFixture]
+    [WebDriverConfig(WebDriverType.Chrome)]
     public class DerivedFromSimpleFixture : SimpleWbTstrFixture
     {
-        public DerivedFromSimpleFixture()
-        {
-            var chrome = WebDriverConfigs.GetDefault("Chrome");
-            Use(chrome);
-        }
-
+        [Test]
         public void TestMethod()
         {
             // Arrange
