@@ -1,6 +1,9 @@
-﻿using NUnit.Framework;
+﻿using NSubstitute;
+using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using WbTstr.Commands;
+using WbTstr.UnitTests._Auxiliaries;
 using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.UnitTests.Commands
@@ -73,7 +76,35 @@ namespace WbTstr.UnitTests.Commands
             TestDelegate action = () => command.Execute(webDriverObj);
 
             // Assert
-            Assert.Throws<NullReferenceException>(action);
+            Assert.Throws<ArgumentException>(action);
+        }
+
+        [TestCase]
+        public void Execute_AssertTitleProperty_UseRightStateProperty()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var command = new AssertStateExpCommand(x => x.Title == DefaultPropertyValue);
+
+            // Act
+            IgnoreExpections.Run(() => command.Execute(webDriver));
+
+            // Assert
+            string title = webDriver.Received().Title;
+        }
+
+        [TestCase]
+        public void Execute_AssertUrlProperty_UseRightStateProperty()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var command = new AssertStateExpCommand(x => x.Url == DefaultPropertyValue);
+
+            // Act
+            IgnoreExpections.Run(() => command.Execute(webDriver));
+
+            // Assert
+            string url = webDriver.Received().Url;
         }
     }
 }
