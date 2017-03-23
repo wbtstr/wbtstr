@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WbTstr.Configuration.WebDrivers;
-using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.Configuration.WebDrivers.Exceptions;
+using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.Fixtures.Attributes;
-using WbTstr.Session.Recorders.Interfaces;
 using WbTstr.Session.Performers.Interfaces;
+using WbTstr.Session.Recorders.Interfaces;
 using WbTstr.Session.Trackers.Interfaces;
 
 namespace WbTstr.Fixtures
