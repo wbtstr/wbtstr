@@ -20,6 +20,7 @@ namespace WbTstr.IntegrationTests.Fixtures
 
             // Act
             I.NavigateTo("https://github.com/")
+                .Type("username??")
                 .ResizeWindow(1024, 720)
                 .Focus(".header-search-input")
                 .Wait(seconds: 3)
