@@ -196,6 +196,14 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
+        public SimpleSessionRecorder MaximizeWindow()
+        {
+            var command = new MaximizeCommand();
+            _performer.Perform(command);
+
+            return this;
+        }
+
         public SimpleSessionRecorder TakeScreenshot(string fileName = "screenshot.png", string fileDirectory = null)
         {
             var command = new ScreenshotCommand(fileName, fileDirectory ?? Path.GetTempPath());
