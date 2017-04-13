@@ -212,6 +212,14 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
+        public SimpleSessionRecorder Type(string text)
+        {
+            var command = new TypeWindowCommand(text);
+            _performer.Perform(command);
+
+            return this;
+        }
+
         public SimpleSessionRecorder Type(string text, string selector, bool clearFirst = false)
         {
             var command = new TypeCommand(text, selector, clearFirst);

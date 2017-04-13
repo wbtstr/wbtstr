@@ -55,7 +55,8 @@ namespace WbTstr.Commands
 
         public override string ToString()
         {
-            return $"Type '{_text}'";
+            string selector = _element?.Selector ?? _selector;
+            return $"Type '{_text}' in {selector}";
         }
     }
 }
