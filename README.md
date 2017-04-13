@@ -1,4 +1,4 @@
-# WbTstr.Net
+# WbTstr
 The uncomplicated test automation framework.
 
 | master | develop |
@@ -17,4 +17,3 @@ We have the following contributors (A-Z):
 
 * Maarten Groeneweg
 * Onno Valkering
-* Marcel de Wit
