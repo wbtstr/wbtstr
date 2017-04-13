@@ -20,11 +20,12 @@ namespace WbTstr.IntegrationTests.Fixtures
 
             // Act
             I.NavigateTo("https://github.com/")
-                .ResizeWindow(1920, 1080)
+                .ResizeWindow(1024, 720)
                 .Focus(".header-search-input")
                 .Wait(seconds: 3)
                 .Type("wbtstr.net", ".header-search-input")
                 .Wait(seconds: 3)
+                .MaximizeWindow()
                 .Type("wbtstr" + Keys.Enter, ".header-search-input", true)
                 .Wait(seconds: 3)
                 .Hover(".js-repo-list a:first-child")
