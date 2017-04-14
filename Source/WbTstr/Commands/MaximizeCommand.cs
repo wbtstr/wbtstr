@@ -8,9 +8,6 @@ namespace WbTstr.Commands
 {
     public class MaximizeCommand : IActionCommand
     {
-        private readonly int _height;
-        private readonly int _width;
-
         public MaximizeCommand()
         {
         }
