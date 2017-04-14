@@ -35,7 +35,7 @@ build:
 
 test_script:
 - ps: >-
-    .\Source\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:nunit-console.exe "-targetargs:""Source\WbTstr.UnitTests\bin\$env:CONFIGURATION\WbTstr.UnitTests.dll"" /noshadow" -filter:"+[WbTstr*]*" -output:opencoverCoverage.xml
+    .\Source\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:nunit-console.exe "-targetargs:""Source\WbTstr.UnitTests\bin\Debug\WbTstr.UnitTests.dll"" /noshadow" -filter:"+[WbTstr*]*" -output:opencoverCoverage.xml
 
     $coveralls = (Resolve-Path "Source/packages/coveralls.net.*/tools/csmacnz.coveralls.exe").ToString()
     
