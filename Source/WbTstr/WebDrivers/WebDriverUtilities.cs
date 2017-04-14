@@ -28,5 +28,12 @@ namespace WbTstr.WebDrivers
 
             return webDriver;
         }
+
+        internal static IJavaScriptExecutor WebDriverToJavaScriptExecutor(IWebDriver webDriver)
+        {
+            if (webDriver == null) throw new ArgumentNullException(nameof(webDriver));
+
+            return webDriver as IJavaScriptExecutor;
+        }
     }
 }
