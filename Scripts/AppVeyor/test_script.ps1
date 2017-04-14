@@ -9,7 +9,11 @@ $nunitrunner = (Resolve-Path ".\Source\Packages\NUnit.ConsoleRunner.*\tools\nuni
              -targetargs:".\Source\WbTstr.UnitTests\bin\Debug\WbTstr.UnitTests.dll" `
              -targetargs:".\Source\WbTstr.IntegrationTests\bin\Debug\WbTstr.IntegrationTests.dll" `
              -filter:"+[WbTstr*]*" `
+             -filter:"-[UnitTests*]*" `
+             -filter:"-[IntegrationTests*]*" `
              -output:opencover.xml 
+
+             
              
 # Push results to Coveralls
 & $coveralls --useRelativePaths `
