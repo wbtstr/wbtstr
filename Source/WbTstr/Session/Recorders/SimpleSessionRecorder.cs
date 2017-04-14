@@ -243,5 +243,13 @@ namespace WbTstr.Session.Recorders
 
             return this;
         }
+
+        public T ExecuteJs<T>(string jsExpression, bool async = false)
+        {
+            var command = new ExecuteJsCommand<T>(jsExpression, async);
+            var returnValue = _performer.PerformAndReturn(command);
+
+            return returnValue;
+        }
     }
 }
