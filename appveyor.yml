@@ -11,13 +11,33 @@ branches:
     - master
     - develop
 
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'    
+
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: ZM3cfILSeJIYHKAvV+/wa5Smu9spteVYfCGlreP6jXRKRryNL8rqwXDKrUD+KnMc    
+
 #---------------------------------#
 #       Build configuration       #
 #---------------------------------#
 
 before_build:
-- cmd: nuget restore Source\WbTstr.sln
+- cmd: nuget restore .\Source\WbTstr.sln
 
 build:
-  project: Source\WbTstr.sln
+  project: .\Source\WbTstr.sln
   verbosity: minimal
+
+test_script:
+- ps: >-
+    .\Source\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:nunit-console.exe "-targetargs:"".\Source\WbTstr.UnitTests\bin\$env:CONFIGURATION\WbTstr.UnitTests.dll"" /noshadow" -filter:"+[WbTstr*]*" -output:opencoverCoverage.xml
+    $coveralls = (Resolve-Path "./Source/packages/coveralls.net.*/tools/csmacnz.coveralls.exe").ToString()
+    
+    $env:APPVEYOR_BUILD_NUMBER
+    
+    & $coveralls --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --useRelativePaths --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_BUILD_NUMBER --serviceName appveyor  
