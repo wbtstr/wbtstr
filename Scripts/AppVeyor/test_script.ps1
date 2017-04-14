@@ -1,11 +1,17 @@
-$opencover = (Resolve-Path ".\Source\packages\OpenCover.4.6.*\tools\OpenCover.Console.exe").ToString()
+# Resolve paths of executables
+$opencover = (Resolve-Path ".\Source\packages\OpenCover.*\tools\OpenCover.Console.exe").ToString()
+$coveralls = (Resolve-Path ".\Source\packages\coveralls.net.*\tools\csmacnz.coveralls.exe").ToString()
+$nunitrunner = (Resolve-Path ".\Source\Packages\NUnit.ConsoleRunner.*\tools\nunit3-console.exe").ToString()
+
+# Run tests through OpenCover
 & $opencover -register:user `
-             -target:"Source\Packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe" `
-             -targetargs:"Source\WbTstr.UnitTests\bin\Debug\WbTstr.UnitTests.dll" `
+             -target:"$nunitrunner" `
+             -targetargs:".\Source\WbTstr.UnitTests\bin\Debug\WbTstr.UnitTests.dll" `
+             -targetargs:".\Source\WbTstr.IntegrationTests\bin\Debug\WbTstr.IntegrationTests.dll" `
              -filter:"+[WbTstr*]*" `
              -output:opencover.xml 
-
-$coveralls = (Resolve-Path "Source\packages\coveralls.net.*\tools\csmacnz.coveralls.exe").ToString()
+             
+# Push results to Coveralls
 & $coveralls --useRelativePaths `
              --serviceName AppVeyor `
              --opencover -i opencover.xml `
