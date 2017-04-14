@@ -37,7 +37,16 @@ namespace WbTstr.IntegrationTests.Fixtures
             IElement md = I.FindOnPage(".markdown-body");
             string mdTagName = md.TagName;
 
+            IElement b = I.ExecuteJs<IElement>("return window.document.body");
+            string bTagName = I.ExecuteJs<string>("return window.document.body.tagName");
+            long bChildElementCount = I.ExecuteJs<long>("return window.document.body.childElementCount");
+            bool bHasAttributes = I.ExecuteJs<bool>("return window.document.body.hasAttributes()");
+
             // Assert
+            Assert.AreEqual(b.TagName.ToUpper(), bTagName.ToUpper());
+            Assert.NotZero(bChildElementCount);
+            Assert.IsTrue(bHasAttributes);
+
             I.CheckThat(
                 title: mirabeauTitle,
                 url: mirabeauUrl

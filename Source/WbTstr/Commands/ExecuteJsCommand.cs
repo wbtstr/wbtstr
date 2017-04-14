@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,8 +18,23 @@ namespace WbTstr.Commands
         private readonly string _jsExpression;
         private readonly bool _async;
 
+        private static ReadOnlyCollection<Type> SupportedReturnTypes { get; } = new ReadOnlyCollection<Type>(
+          new Type[] {
+              typeof(string),
+              typeof(long),
+              typeof(bool),
+              typeof(IElement)
+          }
+        );
+
         public ExecuteJsCommand(string jsExpression, bool async = false)
         {
+            if (!SupportedReturnTypes.Contains(typeof(T)))
+            {
+                string message = $"{typeof(T).Name} is not a supported return type. Use 'string', 'bool', 'long' or 'IElement' instead.";
+                throw new ArgumentException(message);
+            }
+
             _jsExpression = jsExpression ?? throw new ArgumentNullException(nameof(jsExpression)); ;
             _async = async;
         }
@@ -45,16 +61,13 @@ namespace WbTstr.Commands
                 return (T)returnValue;
             }
 
-            if (typeof(T) is IElement)
+            if (typeof(T).Equals(typeof(IElement)))
             {
-                var webElement = returnValue as IWebElement;
-                if (webElement == null)
+                if (returnValue is IWebElement webElement)
                 {
-                    throw new InvalidCastException("Return value is not a Element");
+                    IElement element = new Element(webElement);
+                    return (T)(element);
                 }
-
-                IElement element = new Element(webElement);
-                return (T)(element);
             }
 
             throw new InvalidCastException($"Return value is not of type: {typeof(T).Name}");
