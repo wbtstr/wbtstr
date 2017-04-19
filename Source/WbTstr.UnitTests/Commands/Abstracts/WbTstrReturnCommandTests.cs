@@ -1,23 +1,18 @@
 ﻿using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WbTstr.Commands.Abstracts;
-using WbTstr.UnitTests._Auxiliaries;
+using WbTstr.UnitTests._Stubs;
 
 namespace WbTstr.UnitTests.Commands.Abstracts
 {
     [TestFixture]
     public class WbTstrReturnCommandTests
     {
-        private DummyReturnCommand _defaultCommand;
+        private ReturnCommandStub _defaultCommand;
 
         [SetUp]
         public void SetUp()
         {
-            _defaultCommand = new DummyReturnCommand();
+            _defaultCommand = new ReturnCommandStub();
         }
 
         [TestCase]

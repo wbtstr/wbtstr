@@ -32,28 +32,52 @@ namespace WbTstr.Commands
             _clickType = clickType != MouseClick.None ? clickType : throw new ArgumentException(nameof(clickType));
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {
             var webElement = _element?.AsWebElement() ?? webDriver.FindElementBySelector(_selector);
 
-            var interaction = new Actions(webDriver);
             switch (_clickType)
             {
-                case MouseClick.Context:
-                    interaction.ContextClick(webElement);
+                case MouseClick.Single:
+                    PerformSingleClickOnElement(webDriver, webElement);
                     break;
                 case MouseClick.Double:
-                    interaction.DoubleClick(webElement);
+                    PerformDoubleClickOnElement(webDriver, webElement);
                     break;
-                case MouseClick.Single:
+                case MouseClick.Context:
                 default:
-                    interaction.Click(webElement);
+                    PerformContextClickOnElement(webDriver, webElement);
                     break;
             }
-                
-            interaction.Build().Perform();
+        }
+
+        public virtual void PerformSingleClickOnElement(IWebDriver webDriver, IWebElement webElement)
+        {
+            var interaction = new Actions(webDriver);
+            interaction
+                .Click(webElement)
+                .Build()
+                .Perform();
+        }
+
+        public virtual void PerformDoubleClickOnElement(IWebDriver webDriver, IWebElement webElement)
+        {
+            var interaction = new Actions(webDriver);
+            interaction
+                .DoubleClick(webElement)
+                .Build()
+                .Perform();
+        }
+
+        public virtual void PerformContextClickOnElement(IWebDriver webDriver, IWebElement webElement)
+        {
+            var interaction = new Actions(webDriver);
+            interaction
+                .ContextClick(webElement)
+                .Build()
+                .Perform();
         }
 
         public override string ToString()
