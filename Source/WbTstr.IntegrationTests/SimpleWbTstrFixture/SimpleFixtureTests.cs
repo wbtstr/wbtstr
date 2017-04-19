@@ -11,7 +11,7 @@ namespace WbTstr.IntegrationTests.Fixtures
     [WebDriverConfig(WebDriverType.Chrome)]
     public class DerivedFromSimpleFixture : SimpleWbTstrFixture
     {
-        [Test]
+        [Test, Ignore("")]
         public void TestMethod()
         {
             // Arrange
