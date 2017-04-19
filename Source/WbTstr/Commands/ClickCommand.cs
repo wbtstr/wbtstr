@@ -44,10 +44,8 @@ namespace WbTstr.Commands
                     PerformSingleClickOnElement(webDriver, webElement);
                     break;
                 case MouseClick.Double:
-                    PerformDoubleClickOnElement(webDriver, webElement);
-                    break;
+                    PerformDoubleClickOnElement(webDriver, webElement); break;
                 case MouseClick.Context:
-                default:
                     PerformContextClickOnElement(webDriver, webElement);
                     break;
             }
@@ -64,8 +62,7 @@ namespace WbTstr.Commands
 
         public virtual void PerformDoubleClickOnElement(IWebDriver webDriver, IWebElement webElement)
         {
-            var interaction = new Actions(webDriver);
-            interaction
+            new Actions(webDriver)
                 .DoubleClick(webElement)
                 .Build()
                 .Perform();
@@ -74,10 +71,7 @@ namespace WbTstr.Commands
         public virtual void PerformContextClickOnElement(IWebDriver webDriver, IWebElement webElement)
         {
             var interaction = new Actions(webDriver);
-            interaction
-                .ContextClick(webElement)
-                .Build()
-                .Perform();
+            interaction.ContextClick(webElement).Build().Perform();
         }
 
         public override string ToString()

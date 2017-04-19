@@ -5,14 +5,6 @@ using WbTstr.Commands;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.UnitTests._Auxiliaries;
 
-// Constructor  string  string      no throw
-// Constructor  element element     no throw
-// Constructor  string  0,0         no throw
-// Constructor  element 0,0         no throw
-// Constructor  0,0     string      no throw
-// Constructor  0,0     element     no throw
-// Constructor  0,0     0,0         no throw
-
 namespace WbTstr.UnitTests.Commands
 {
     [TestFixture]
@@ -177,6 +169,18 @@ namespace WbTstr.UnitTests.Commands
 
             // Assert
             AssertMultiple.DoesNotThrow(actions);
+        }
+
+        [TestCase]
+        public void ToString_NoArguments_ReturnString()
+        {
+            // Arrange
+
+            // Act
+            string stringRepresentation = _defaultCommand.ToString();
+
+            // Assert
+            AssertString.NotNullOrWhiteSpace(stringRepresentation);
         }
     }
 }

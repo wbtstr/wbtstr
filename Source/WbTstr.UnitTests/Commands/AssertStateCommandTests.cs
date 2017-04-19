@@ -100,5 +100,17 @@ namespace WbTstr.UnitTests.Commands
             // Assert
             string url = webDriver.Received().Url;
         }
+
+        [TestCase]
+        public void ToString_NoArguments_ReturnString()
+        {
+            // Arrange
+
+            // Act
+            string stringRepresentation = _defaultCommand.ToString();
+
+            // Assert
+            AssertString.NotNullOrWhiteSpace(stringRepresentation);
+        }
     }
 }

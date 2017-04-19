@@ -134,5 +134,17 @@ namespace WbTstr.UnitTests.Commands
             // Assert
             command.ReceivedWithAnyArgs().PerformContextClickOnElement(null, null);
         }
+
+        [TestCase]
+        public void ToString_NoArguments_ReturnString()
+        {
+            // Arrange
+
+            // Act
+            string stringRepresentation = _defaultCommand.ToString();
+
+            // Assert
+            AssertString.NotNullOrWhiteSpace(stringRepresentation);
+        }
     }
 }

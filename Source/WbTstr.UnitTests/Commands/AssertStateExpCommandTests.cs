@@ -11,6 +11,14 @@ namespace WbTstr.UnitTests.Commands
     {
         private const string DefaultPropertyValue = "WbTstr 4 Life";
 
+        private AssertStateExpCommand _defaultCommand;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _defaultCommand = new AssertStateExpCommand(x => x.Title == DefaultPropertyValue);
+        }
+
         [TestCase]
         public void Constructor_TypicalPropertyKeyValue_DoesNotThrow()
         {
@@ -54,10 +62,9 @@ namespace WbTstr.UnitTests.Commands
         {
             // Arrange
             var webDriver = Substitute.For<IWebDriver>();
-            var command = new AssertStateExpCommand(x => x.Title == DefaultPropertyValue);
 
             // Act
-            IgnoreExceptions.Run(() => command.Execute(webDriver));
+            IgnoreExceptions.Run(() => _defaultCommand.Execute(webDriver));
 
             // Assert
             string title = webDriver.Received().Title;
@@ -75,6 +82,18 @@ namespace WbTstr.UnitTests.Commands
 
             // Assert
             string url = webDriver.Received().Url;
+        }
+
+        [TestCase]
+        public void ToString_NoArguments_ReturnString()
+        {
+            // Arrange
+
+            // Act
+            string stringRepresentation = _defaultCommand.ToString();
+
+            // Assert
+            AssertString.NotNullOrWhiteSpace(stringRepresentation);
         }
     }
 }
