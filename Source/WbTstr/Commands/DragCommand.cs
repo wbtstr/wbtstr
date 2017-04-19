@@ -2,10 +2,8 @@
 using OpenQA.Selenium.Interactions;
 using System;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies.Extensions;
 using WbTstr.Proxies.Interfaces;
-using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Extensions;
 
 namespace WbTstr.Commands
@@ -23,8 +21,11 @@ namespace WbTstr.Commands
 
         public DragCommand(string selectorA, string selectorB)
         {
-            _selectorA = selectorA ?? throw new ArgumentNullException(nameof(selectorA));
-            _selectorB = selectorB ?? throw new ArgumentNullException(nameof(selectorB));
+            if (selectorA == null) throw new ArgumentNullException(nameof(selectorA));
+            if (selectorB == null) throw new ArgumentNullException(nameof(selectorB));
+
+            _selectorA = !string.IsNullOrWhiteSpace(selectorA) ? selectorA : throw new ArgumentException(nameof(selectorA));
+            _selectorB = !string.IsNullOrWhiteSpace(selectorB) ? selectorB : throw new ArgumentException(nameof(selectorB));
         }
 
         public DragCommand(IElement elementA, IElement elementB)
@@ -35,38 +36,42 @@ namespace WbTstr.Commands
 
         public DragCommand(string selectorA, int xOffsetToB, int yOffsetToB)
         {
-            _selectorA = selectorA ?? throw new ArgumentNullException(nameof(selectorA));
-            _xOffsetToB = xOffsetToB;
-            _yOffsetToB = yOffsetToB;
+            if (selectorA == null) throw new ArgumentNullException(nameof(selectorA));
+
+            _selectorA = !string.IsNullOrWhiteSpace(selectorA) ? selectorA : throw new ArgumentException(nameof(selectorA));
+            _xOffsetToB = xOffsetToB >= 0 ? xOffsetToB : throw new ArgumentException(nameof(xOffsetToB));
+            _yOffsetToB = yOffsetToB >= 0 ? yOffsetToB : throw new ArgumentException(nameof(xOffsetToB));
         }
 
         public DragCommand(IElement elementA, int xOffsetToB, int yOffsetToB)
         {
             _elementA = elementA ?? throw new ArgumentNullException(nameof(elementA));
-            _xOffsetToB = xOffsetToB;
-            _yOffsetToB = yOffsetToB;
+            _xOffsetToB = xOffsetToB >= 0 ? xOffsetToB : throw new ArgumentException(nameof(xOffsetToB));
+            _yOffsetToB = yOffsetToB >= 0 ? yOffsetToB : throw new ArgumentException(nameof(xOffsetToB));
         }
 
         public DragCommand(int xOffsetToA, int yOffsetToA, string selectorB)
         {
-            _xOffsetToA = xOffsetToA;
-            _yOffsetToA = yOffsetToA;
-            _selectorB = selectorB ?? throw new ArgumentNullException(nameof(selectorB));
+            if (selectorB == null) throw new ArgumentNullException(nameof(selectorB));
+
+            _xOffsetToA = xOffsetToA >= 0 ? xOffsetToA : throw new ArgumentException(nameof(xOffsetToA));
+            _yOffsetToA = yOffsetToA >= 0 ? yOffsetToA : throw new ArgumentException(nameof(yOffsetToA));
+            _selectorB = !string.IsNullOrWhiteSpace(selectorB) ? selectorB : throw new ArgumentException(nameof(selectorB));
         }
 
         public DragCommand(int xOffsetToA, int yOffsetToA, IElement elementB)
         {
-            _xOffsetToA = xOffsetToA;
-            _yOffsetToA = yOffsetToA;
+            _xOffsetToA = xOffsetToA >= 0 ? xOffsetToA : throw new ArgumentException(nameof(xOffsetToA));
+            _yOffsetToA = yOffsetToA >= 0 ? yOffsetToA : throw new ArgumentException(nameof(yOffsetToA));
             _elementB = elementB ?? throw new ArgumentNullException(nameof(elementB));
         }
 
         public DragCommand(int xOffsetToA, int yOffsetToA, int xOffsetToB, int yOffsetToB)
         {
-            _xOffsetToA = xOffsetToA;
-            _yOffsetToA = yOffsetToA;
-            _xOffsetToB = xOffsetToB;
-            _yOffsetToB = yOffsetToB;
+            _xOffsetToA = xOffsetToA >= 0 ? xOffsetToA : throw new ArgumentException(nameof(xOffsetToA));
+            _yOffsetToA = yOffsetToA >= 0 ? yOffsetToA : throw new ArgumentException(nameof(yOffsetToA));
+            _xOffsetToB = xOffsetToB >= 0 ? xOffsetToB : throw new ArgumentException(nameof(xOffsetToB));
+            _yOffsetToB = yOffsetToB >= 0 ? yOffsetToB : throw new ArgumentException(nameof(xOffsetToB));
         }
 
         /* Methods ----------------------------------------------------------*/
