@@ -1,7 +1,9 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using WbTstr.Commands;
+using WbTstr.Proxies;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.UnitTests._Auxiliaries;
 
@@ -22,15 +24,13 @@ namespace WbTstr.UnitTests.Commands
         public void Constructor_NullSelector_ThrowsArgumentNullException()
         {
             // Arrange
-            string selectorA = null;
-            string selectorB = null;
-            string selectorC = DefaultSelector;
+            string selector = null;
 
             // Act
             TestDelegate[] actions = {
-                () => new DragCommand(selectorA, selectorB),
-                () => new DragCommand(selectorC, selectorB),
-                () => new DragCommand(selectorA, selectorC),
+                () => new DragCommand(selector, selector),
+                () => new DragCommand(selector, DefaultSelector),
+                () => new DragCommand(DefaultSelector, selector),
             };
 
             // Assert
@@ -181,6 +181,109 @@ namespace WbTstr.UnitTests.Commands
 
             // Assert
             AssertString.NotNullOrWhiteSpace(stringRepresentation);
+        }
+
+        [TestCase]
+        public void Execute_TwoSelectors_PerformDragElementToElement()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var webElementA = Substitute.For<IWebElement>();
+            var webElementB = Substitute.For<IWebElement>();
+            var command = Substitute.ForPartsOf<DragCommand>("A", "B");
+
+            webDriver.FindElement(By.CssSelector("A")).Returns(webElementA);
+            webDriver.FindElement(By.CssSelector("B")).Returns(webElementB);
+
+            // Act
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
+
+            // Assert
+            command.Received().PerformDragElementToElement(webDriver, webElementA, webElementB);
+        }
+
+        [TestCase]
+        public void Execute_TwoElements_PerformDragElementToElement()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var webElementA = Substitute.For<IWebElement>();
+            var webElementB = Substitute.For<IWebElement>();
+            var elementA = new Element(webElementA);
+            var elementB = new Element(webElementB);
+            var command = Substitute.ForPartsOf<DragCommand>(elementA, elementB);
+
+            // Act
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
+
+            // Assert
+            command.Received().PerformDragElementToElement(webDriver, webElementA, webElementB);
+        }
+
+        [TestCase]
+        public void Execute_SelectorOffset_PerformDragElementToElement()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var webElement = Substitute.For<IWebElement>();
+            var command = Substitute.ForPartsOf<DragCommand>("A", 0, 0);
+
+            webDriver.FindElement(By.CssSelector("A")).Returns(webElement);
+
+            // Act
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
+
+            // Assert
+            command.Received().PerformDragElementToCoordinate(webDriver, webElement, 0, 0);
+        }
+
+        [TestCase]
+        public void Execute_ElementOffset_PerformDragElementToElement()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var webElement = Substitute.For<IWebElement>();
+            var element = new Element(webElement);
+            var command = Substitute.ForPartsOf<DragCommand>(element, 0, 0);
+
+            // Act
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
+
+            // Assert
+            command.Received().PerformDragElementToCoordinate(webDriver, webElement, 0, 0);
+        }
+
+        [TestCase]
+        public void Execute_OffsetSelector_PerformDragElementToElement()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var webElement = Substitute.For<IWebElement>();
+            var command = Substitute.ForPartsOf<DragCommand>(0, 0, "B");
+
+            webDriver.FindElement(By.CssSelector("B")).Returns(webElement);
+
+            // Act
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
+
+            // Assert
+            command.Received().PerformDragCoordinateToElement(webDriver, 0, 0, webElement);
+        }
+
+        [TestCase]
+        public void Execute_OffsetElement_PerformDragElementToElement()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var webElement = Substitute.For<IWebElement>();
+            var element = new Element(webElement);
+            var command = Substitute.ForPartsOf<DragCommand>(0, 0, element);
+
+            // Act
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
+
+            // Assert
+            command.Received().PerformDragCoordinateToElement(webDriver, 0, 0, webElement);
         }
     }
 }
