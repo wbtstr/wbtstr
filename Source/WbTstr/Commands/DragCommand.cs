@@ -74,45 +74,81 @@ namespace WbTstr.Commands
             _yOffsetToB = yOffsetToB >= 0 ? yOffsetToB : throw new ArgumentException(nameof(xOffsetToB));
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {
             var webElementA = _elementA?.AsWebElement() ?? webDriver.FindElementBySelector(_selectorA);
             var webElementB = _elementB?.AsWebElement() ?? webDriver.FindElementBySelector(_selectorB);
 
-            var interaction = new Actions(webDriver);
             if (webElementA != null)
             {
                 if (webElementB != null)
                 {
-                    interaction = interaction.DragAndDrop(webElementA, webElementB);
+                    PerformDragElementToElement(webDriver, webElementA, webElementB);
                 }
                 else
                 {
-                    interaction = interaction.DragAndDropToOffset(webElementA, _xOffsetToA.Value, _yOffsetToB.Value);
+                    PerformDragElementToCoordinate(webDriver, webElementA, _xOffsetToB.Value, _yOffsetToB.Value);
                 }
             }
             else
             {
-                var root = webDriver.FindElementBySelector("html");
-                interaction = interaction
-                    .MoveToElement(root, _xOffsetToA.Value, _yOffsetToA.Value)
-                    .ClickAndHold();
-                
                 if (webElementB != null)
                 {
-                    interaction = interaction.MoveToElement(webElementB);
+                    PerformDragCoordinateToElement(webDriver, _xOffsetToA.Value, _yOffsetToA.Value, webElementB);
                 }
                 else
                 {
-                    interaction = interaction.MoveToElement(root, _xOffsetToB.Value, _yOffsetToB.Value);
+                    PerformDragCoordinateToCoordinate(webDriver, _xOffsetToA.Value, _yOffsetToA.Value, _xOffsetToB.Value, _yOffsetToB.Value);
                 }
-
-                interaction = interaction.Release();
             }
+        }
 
-            interaction.Perform();
+        public virtual void PerformDragElementToElement(IWebDriver webDriver, IWebElement webElementA, IWebElement webElementB)
+        {
+            var interaction = new Actions(webDriver);
+            interaction
+                .DragAndDrop(webElementA, webElementB)
+                .Build()
+                .Perform();
+        }
+
+        public virtual void PerformDragElementToCoordinate(IWebDriver webDriver, IWebElement webElement, int x, int y)
+        {
+            var interaction = new Actions(webDriver);
+            interaction
+                .DragAndDropToOffset(webElement, x, y)
+                .Build()
+                .Perform();
+        }
+
+        public virtual void PerformDragCoordinateToElement(IWebDriver webDriver, int x, int y, IWebElement webElement)
+        {
+            var root = webDriver.FindElementBySelector("body");
+
+            var interaction = new Actions(webDriver);
+            interaction
+                .MoveToElement(root, x, y)
+                .ClickAndHold()
+                .MoveToElement(webElement)
+                .Release()
+                .Build()
+                .Perform();
+        }
+
+        public virtual void PerformDragCoordinateToCoordinate(IWebDriver webDriver, int x1, int y1, int x2, int y2)
+        {
+            var root = webDriver.FindElementBySelector("body");
+
+            var interaction = new Actions(webDriver);
+            interaction
+                .MoveToElement(root, x1, y1)
+                .ClickAndHold()
+                .MoveToElement(root, x2, y2)
+                .Release()
+                .Build()
+                .Perform();
         }
 
         public override string ToString()
