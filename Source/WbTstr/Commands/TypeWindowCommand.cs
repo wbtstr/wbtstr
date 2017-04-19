@@ -9,10 +9,11 @@ using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies.Extensions;
 using WbTstr.WebDrivers.Extensions;
 using WbTstr.WebDrivers;
+using WbTstr.Commands.Abstracts;
 
 namespace WbTstr.Commands
 {
-    public class TypeWindowCommand : IActionCommand
+    internal class TypeWindowCommand : WbTstrActionCommand
     {
         private readonly string _text;
         private readonly bool _clear;
@@ -30,10 +31,8 @@ namespace WbTstr.Commands
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
-
             var interaction = new Actions(webDriver);
             interaction.SendKeys(_text);
             interaction.Perform();

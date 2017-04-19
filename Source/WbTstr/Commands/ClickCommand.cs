@@ -1,16 +1,15 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
-using WbTstr.Commands.Interfaces;
+using WbTstr.Commands.Abstracts;
 using WbTstr.Proxies.Extensions;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.Utilities.Constants;
-using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Extensions;
 
 namespace WbTstr.Commands
 {
-    internal class ClickCommand : IActionCommand
+    internal class ClickCommand : WbTstrActionCommand
     {
         private readonly string _selector;
         private readonly IElement _element;
@@ -35,9 +34,8 @@ namespace WbTstr.Commands
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
             var webElement = _element?.AsWebElement() ?? webDriver.FindElementBySelector(_selector);
 
             var interaction = new Actions(webDriver);

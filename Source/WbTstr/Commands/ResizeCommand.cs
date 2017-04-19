@@ -1,12 +1,13 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Drawing;
+using WbTstr.Commands.Abstracts;
 using WbTstr.Commands.Interfaces;
 using WbTstr.WebDrivers;
 
 namespace WbTstr.Commands
 {
-    public class ResizeCommand : IActionCommand
+    internal class ResizeCommand : WbTstrActionCommand
     {
         private readonly int _height;
         private readonly int _width;
@@ -22,11 +23,9 @@ namespace WbTstr.Commands
 
         /*-------------------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
-
-            var window = webDriver?.Manage().Window;
+            var window = webDriver.Manage().Window;
             if (window != null)
             {
                 window.Size = new Size(_width, _height);

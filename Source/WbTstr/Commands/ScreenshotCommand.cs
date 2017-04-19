@@ -2,12 +2,13 @@
 using OpenQA.Selenium.Support.Extensions;
 using System;
 using System.IO;
+using WbTstr.Commands.Abstracts;
 using WbTstr.Commands.Interfaces;
 using WbTstr.WebDrivers;
 
 namespace WbTstr.Commands
 {
-    public class ScreenshotCommand : IActionCommand
+    internal class ScreenshotCommand : WbTstrActionCommand
     {
         private readonly string _fileName;
         private readonly string _directoryPath;
@@ -20,11 +21,9 @@ namespace WbTstr.Commands
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
-
-            var screenshot = webDriver?.TakeScreenshot();
+            var screenshot = webDriver.TakeScreenshot();
             if (screenshot == null) return;
 
             var filePath = Path.Combine(_directoryPath, _fileName);

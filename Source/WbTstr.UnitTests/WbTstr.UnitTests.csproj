@@ -61,10 +61,14 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Commands\Abstracts\WbTstrActionCommandTests.cs" />
+    <Compile Include="Commands\Abstracts\WbTstrReturnCommandTests.cs" />
     <Compile Include="Commands\AssertStateCommandTests.cs" />
     <Compile Include="Commands\AssertStateExpCommandTests.cs" />
     <Compile Include="Commands\ClickCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Auxiliaries\DummyActionCommand.cs" />
+    <Compile Include="_Auxiliaries\DummyReturnCommand.cs" />
     <Compile Include="_Auxiliaries\IgnoreExpections.cs" />
   </ItemGroup>
   <ItemGroup>
