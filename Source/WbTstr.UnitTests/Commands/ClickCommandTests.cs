@@ -104,7 +104,7 @@ namespace WbTstr.UnitTests.Commands
             IgnoreExceptions.Run(() => command.Execute(webDriver));
 
             // Assert
-            command.ReceivedWithAnyArgs().PerformSingleClickOnElement(webDriver, null);
+            command.ReceivedWithAnyArgs().PerformSingleClickOnElement(null, null);
         }
 
         [TestCase]
@@ -118,7 +118,7 @@ namespace WbTstr.UnitTests.Commands
             IgnoreExceptions.Run(() => command.Execute(webDriver));
 
             // Assert
-            command.ReceivedWithAnyArgs().PerformDoubleClickOnElement(webDriver, null);
+            command.ReceivedWithAnyArgs().PerformDoubleClickOnElement(null, null);
         }
 
         [TestCase]
@@ -132,7 +132,7 @@ namespace WbTstr.UnitTests.Commands
             IgnoreExceptions.Run(() => command.Execute(webDriver));
 
             // Assert
-            command.ReceivedWithAnyArgs().PerformContextClickOnElement(Arg.Any<object>(), Arg.Any<oj);
+            command.ReceivedWithAnyArgs().PerformContextClickOnElement(null, null);
         }
     }
 }
