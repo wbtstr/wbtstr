@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
+using WbTstr.Commands.Abstracts;
 using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies.Extensions;
 using WbTstr.Proxies.Interfaces;
@@ -9,7 +10,7 @@ using WbTstr.WebDrivers.Extensions;
 
 namespace WbTstr.Commands
 {
-    public class DragCommand : IActionCommand
+    internal class DragCommand : WbTstrActionCommand
     {
         private readonly string _selectorA;
         private readonly IElement _elementA;
@@ -70,10 +71,8 @@ namespace WbTstr.Commands
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
-
             var webElementA = _elementA?.AsWebElement() ?? webDriver.FindElementBySelector(_selectorA);
             var webElementB = _elementB?.AsWebElement() ?? webDriver.FindElementBySelector(_selectorB);
 
@@ -113,7 +112,7 @@ namespace WbTstr.Commands
 
         public override string ToString()
         {
-            return base.ToString();
+            return "TODO: DragCommand.ToString()";
         }
     }
 }

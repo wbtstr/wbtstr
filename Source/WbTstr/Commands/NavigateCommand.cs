@@ -1,11 +1,12 @@
 ﻿using OpenQA.Selenium;
 using System;
+using WbTstr.Commands.Abstracts;
 using WbTstr.Commands.Interfaces;
 using WbTstr.WebDrivers;
 
 namespace WbTstr.Commands
 {
-    internal class NavigateCommand : IActionCommand
+    internal class NavigateCommand : WbTstrActionCommand
     {
         private readonly Uri _uri;
 
@@ -21,11 +22,9 @@ namespace WbTstr.Commands
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
-
-            webDriver?.Navigate().GoToUrl(_uri);
+            webDriver.Navigate().GoToUrl(_uri);
         }
 
         public override string ToString()

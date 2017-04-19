@@ -1,19 +1,14 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WbTstr.Commands.Interfaces;
+using WbTstr.Commands.Abstracts;
 using WbTstr.Proxies;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.WebDrivers;
 
 namespace WbTstr.Commands
 {
-    public class ExecuteJsCommand<T> : IReturnCommand<T>
+    internal class ExecuteJsCommand<T> : WbTstrReturnCommand<T>
     {
         private readonly string _jsExpression;
         private readonly bool _async;
@@ -41,9 +36,8 @@ namespace WbTstr.Commands
 
         /*-------------------------------------------------------------------*/
 
-        public T Execute(object webDriverObj)
+        protected override T Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
             var jsExecutor = WebDriverUtilities.WebDriverToJavaScriptExecutor(webDriver);
 
             object returnValue;
@@ -71,6 +65,11 @@ namespace WbTstr.Commands
             }
 
             throw new InvalidCastException($"Return value is not of type: {typeof(T).Name}");
+        }
+
+        public override string ToString()
+        {
+            return "TODO: ExecuteJsCommand.ToString()";
         }
     }
 }

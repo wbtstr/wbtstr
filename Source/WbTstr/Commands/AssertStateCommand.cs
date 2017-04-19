@@ -1,12 +1,13 @@
-﻿using System;
-using WbTstr.Commands.Interfaces;
+﻿using OpenQA.Selenium;
+using System;
+using WbTstr.Commands.Abstracts;
 using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Constants;
 using WbTstr.WebDrivers.Exceptions;
 
 namespace WbTstr.Commands
 {
-    public class AssertStateCommand : IActionCommand
+    internal class AssertStateCommand : WbTstrActionCommand
     {
         private readonly PropertyKey _key;
         private readonly string _value;
@@ -19,10 +20,8 @@ namespace WbTstr.Commands
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
-
             if (_key == PropertyKey.Url)
             {
                 if (webDriver.Url != _value)

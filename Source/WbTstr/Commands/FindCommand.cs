@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
+using WbTstr.Commands.Abstracts;
 using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies;
 using WbTstr.Proxies.Interfaces;
@@ -7,7 +8,7 @@ using WbTstr.WebDrivers;
 
 namespace WbTstr.Commands
 {
-    public class FindCommand : IReturnCommand<IElement>
+    internal class FindCommand : WbTstrReturnCommand<IElement>
     {
         private readonly string _selector;
 
@@ -18,10 +19,9 @@ namespace WbTstr.Commands
 
         /*-------------------------------------------------------------------*/
 
-        public IElement Execute(object webDriverObj)
+        protected override IElement Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
-            var webElement = webDriver?.FindElement(By.CssSelector(_selector));
+            var webElement = webDriver.FindElement(By.CssSelector(_selector));
 
             return new Element(webElement, _selector);
         }

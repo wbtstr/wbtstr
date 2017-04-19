@@ -1,13 +1,13 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Linq.Expressions;
-using WbTstr.Commands.Interfaces;
+using WbTstr.Commands.Abstracts;
 using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Exceptions;
 
 namespace WbTstr.Commands
 {
-    internal class AssertStateExpCommand : IActionCommand
+    internal class AssertStateExpCommand : WbTstrActionCommand
     {
         private readonly Expression<Func<WebDriverState, bool>> _expression;
 
@@ -18,9 +18,8 @@ namespace WbTstr.Commands
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
             var webDriverState = new WebDriverState(webDriver);
 
             var function = _expression.Compile();

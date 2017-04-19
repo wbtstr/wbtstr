@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
+using WbTstr.Commands.Abstracts;
 using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies.Extensions;
 using WbTstr.Proxies.Interfaces;
@@ -9,7 +10,7 @@ using WbTstr.WebDrivers.Extensions;
 
 namespace WbTstr.Commands
 {
-    public class HoverCommand : IActionCommand
+    internal class HoverCommand : WbTstrActionCommand
     {
         private readonly string _selector;
         private readonly IElement _element;
@@ -26,9 +27,8 @@ namespace WbTstr.Commands
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
             var webElement = _element?.AsWebElement() ?? webDriver.FindElementBySelector(_selector);
 
             if (webElement != null)

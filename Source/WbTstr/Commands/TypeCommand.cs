@@ -10,10 +10,11 @@ using WbTstr.Proxies.Interfaces;
 using WbTstr.Proxies.Extensions;
 using WbTstr.WebDrivers.Extensions;
 using WbTstr.WebDrivers;
+using WbTstr.Commands.Abstracts;
 
 namespace WbTstr.Commands
 {
-    public class TypeCommand : IActionCommand
+    internal class TypeCommand : WbTstrActionCommand
     {
         private readonly string _text;
         private readonly string _selector;
@@ -41,9 +42,8 @@ namespace WbTstr.Commands
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
             var webElement = _element?.AsWebElement() ?? webDriver.FindElementBySelector(_selector);
 
             if (_clear) {

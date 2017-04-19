@@ -1,10 +1,12 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Threading;
+using WbTstr.Commands.Abstracts;
 using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {
-    public class WaitCommand : IActionCommand
+    internal class WaitCommand : WbTstrActionCommand
     {
         private readonly int _milliseconds;
         private readonly int _minutes;
@@ -23,7 +25,7 @@ namespace WbTstr.Commands
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
             Thread.Sleep(new TimeSpan(0, 0, _minutes, _seconds, _milliseconds));
         }

@@ -1,12 +1,13 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Drawing;
+using WbTstr.Commands.Abstracts;
 using WbTstr.Commands.Interfaces;
 using WbTstr.WebDrivers;
 
 namespace WbTstr.Commands
 {
-    public class MaximizeCommand : IActionCommand
+    internal class MaximizeCommand : WbTstrActionCommand
     {
         public MaximizeCommand()
         {
@@ -14,11 +15,9 @@ namespace WbTstr.Commands
 
         /*-------------------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = WebDriverUtilities.ObjectToWebDriver(webDriverObj);
-
-            webDriver?.Manage().Window.Maximize();
+            webDriver.Manage().Window.Maximize();
         }
 
         public override string ToString()

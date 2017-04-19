@@ -74,32 +74,6 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Execute_UninitializedWebDriver_ThrowsArgumentNullException()
-        {
-            // Arrange
-            object webDriverObj = null;
-
-            // Act
-            TestDelegate action = () => _defaultCommand.Execute(webDriverObj);
-
-            // Assert
-            Assert.Throws<ArgumentNullException>(action);
-        }
-
-        [TestCase]
-        public void Execute_DifferentThanWebDriverType_ThrowsArgumentException()
-        {
-            // Arrange
-            object webDriverObj = "Not a WebDriver object";
-
-            // Act
-            TestDelegate action = () => _defaultCommand.Execute(webDriverObj);
-
-            // Assert
-            Assert.Throws<ArgumentException>(action);
-        }
-
-        [TestCase]
         public void Execute_AssertTitleProperty_UseRightStateProperty()
         {
             // Arrange
