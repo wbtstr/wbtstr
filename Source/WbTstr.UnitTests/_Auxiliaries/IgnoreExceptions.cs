@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WbTstr.UnitTests._Auxiliaries
 {
-    public static class IgnoreExpections
+    public static class IgnoreExceptions
     {
         public static void Run(Action action)
         {

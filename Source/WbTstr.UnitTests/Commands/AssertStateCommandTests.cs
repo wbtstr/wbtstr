@@ -81,7 +81,7 @@ namespace WbTstr.UnitTests.Commands
             var command = new AssertStateCommand(PropertyKey.Title, DefaultPropertyValue);
 
             // Act
-            IgnoreExpections.Run(() => command.Execute(webDriver));
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
 
             // Assert
             string title = webDriver.Received().Title;
@@ -95,7 +95,7 @@ namespace WbTstr.UnitTests.Commands
             var command = new AssertStateCommand(PropertyKey.Url, DefaultPropertyValue);
 
             // Act
-            IgnoreExpections.Run(() => command.Execute(webDriver));
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
 
             // Assert
             string url = webDriver.Received().Url;

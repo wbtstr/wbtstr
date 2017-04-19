@@ -1,12 +1,11 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WbTstr.Commands;
 using WbTstr.Proxies.Interfaces;
+using WbTstr.UnitTests._Auxiliaries;
 using WbTstr.Utilities.Constants;
 
 namespace WbTstr.UnitTests.Commands
@@ -79,6 +78,61 @@ namespace WbTstr.UnitTests.Commands
 
             // Assert
             Assert.DoesNotThrow(action);
+        }
+
+        [TestCase]
+        public void Execute_ClickOnSelector_FindSingleElement()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+
+            // Act
+            IgnoreExceptions.Run(() => _defaultCommand.Execute(webDriver));
+
+            // Assert
+            var element = webDriver.Received().FindElement(By.CssSelector(DefaultSelector));
+        }
+
+        [TestCase]
+        public void Execute_MouseClickSingle_PerformSingleClick()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var command = Substitute.ForPartsOf<ClickCommand>(DefaultSelector, MouseClick.Single);
+
+            // Act
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
+
+            // Assert
+            command.ReceivedWithAnyArgs().PerformSingleClickOnElement(webDriver, null);
+        }
+
+        [TestCase]
+        public void Execute_MouseClickDouble_PerformDoubleClick()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var command = Substitute.ForPartsOf<ClickCommand>(DefaultSelector, MouseClick.Double);
+
+            // Act
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
+
+            // Assert
+            command.ReceivedWithAnyArgs().PerformDoubleClickOnElement(webDriver, null);
+        }
+
+        [TestCase]
+        public void Execute_MouseClickContext_PerformContextClick()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var command = Substitute.ForPartsOf<ClickCommand>(DefaultSelector, MouseClick.Context);
+
+            // Act
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
+
+            // Assert
+            command.ReceivedWithAnyArgs().PerformContextClickOnElement(Arg.Any<object>(), Arg.Any<oj);
         }
     }
 }
