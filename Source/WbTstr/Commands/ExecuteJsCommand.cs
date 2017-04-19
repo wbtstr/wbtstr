@@ -24,14 +24,16 @@ namespace WbTstr.Commands
 
         public ExecuteJsCommand(string jsExpression, bool async = false)
         {
+            if (jsExpression == null) throw new ArgumentNullException(nameof(jsExpression));
+
+            _jsExpression = !string.IsNullOrWhiteSpace(jsExpression) ? jsExpression : throw new ArgumentException(nameof(jsExpression));
+            _async = async;
+
             if (!SupportedReturnTypes.Contains(typeof(T)))
             {
                 string message = $"{typeof(T).Name} is not a supported return type. Use 'string', 'bool', 'long' or 'IElement' instead.";
                 throw new ArgumentException(message);
             }
-
-            _jsExpression = jsExpression ?? throw new ArgumentNullException(nameof(jsExpression)); ;
-            _async = async;
         }
 
         /*-------------------------------------------------------------------*/
@@ -40,28 +42,59 @@ namespace WbTstr.Commands
         {
             var jsExecutor = WebDriverUtilities.WebDriverToJavaScriptExecutor(webDriver);
 
-            object returnValue;
             if (_async)
             {
-                returnValue = jsExecutor.ExecuteAsyncScript(_jsExpression);
+                if (typeof(T).Equals(typeof(IElement)))
+                {
+                    return PerformJsAsyncAndReturnElement(jsExecutor, _jsExpression);
+                }
+                else
+                {
+                    return PerformJsAsyncAndReturnPrimitive(jsExecutor, _jsExpression);
+                }
             }
             else
             {
-                returnValue = jsExecutor.ExecuteScript(_jsExpression);
-            }
-
-            if (returnValue is T)
-            {
-                return (T)returnValue;
-            }
-
-            if (typeof(T).Equals(typeof(IElement)))
-            {
-                if (returnValue is IWebElement webElement)
+                if (typeof(T).Equals(typeof(IElement)))
                 {
-                    IElement element = new Element(webElement);
-                    return (T)(element);
+                    return PerformJsSyncAndReturnElement(jsExecutor, _jsExpression);
                 }
+                else
+                {
+                    return PerformJsSyncAndReturnPrimitive(jsExecutor, _jsExpression);
+                }
+            }
+
+            throw new InvalidCastException($"Return value is not of type: {typeof(T).Name}");
+        }
+
+        public virtual T PerformJsSyncAndReturnPrimitive(IJavaScriptExecutor jsExecutor, string jsExpression)
+        {
+            return (T)jsExecutor.ExecuteScript(_jsExpression);
+        }
+
+        public virtual T PerformJsAsyncAndReturnPrimitive(IJavaScriptExecutor jsExecutor, string jsExpression)
+        {
+            return (T)jsExecutor.ExecuteAsyncScript(_jsExpression);
+        }
+
+        public virtual T PerformJsSyncAndReturnElement(IJavaScriptExecutor jsExecutor, string jsExpression)
+        {
+            if (jsExecutor.ExecuteScript(_jsExpression) is IWebElement returnValue)
+            {
+                IElement element = new Element(returnValue);
+                return (T)element;
+            }
+
+            throw new InvalidCastException($"Return value is not of type: {typeof(T).Name}");
+        }
+
+        public virtual T PerformJsAsyncAndReturnElement(IJavaScriptExecutor jsExecutor, string jsExpression)
+        {
+            if (jsExecutor.ExecuteAsyncScript(_jsExpression) is IWebElement returnValue)
+            {
+                IElement element = new Element(returnValue);
+                return (T)element;
             }
 
             throw new InvalidCastException($"Return value is not of type: {typeof(T).Name}");
