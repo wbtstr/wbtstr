@@ -5,6 +5,7 @@ using System;
 using WbTstr.Commands;
 using WbTstr.UnitTests._Auxiliaries;
 using WbTstr.WebDrivers.Constants;
+using WbTstr.WebDrivers.Exceptions;
 
 namespace WbTstr.UnitTests.Commands
 {
@@ -74,30 +75,70 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Execute_AssertTitleProperty_UseRightStateProperty()
+        public void Execute_AssertTitlePropertyValid_UseRightStateProperty()
         {
             // Arrange
             var webDriver = Substitute.For<IWebDriver>();
             var command = new AssertStateCommand(PropertyKey.Title, DefaultPropertyValue);
 
+            webDriver.Title.Returns(DefaultPropertyValue);
+
             // Act
-            IgnoreExceptions.Run(() => command.Execute(webDriver));
+            TestDelegate action = () => command.Execute(webDriver);
 
             // Assert
+            Assert.DoesNotThrow(action);
             string title = webDriver.Received().Title;
         }
 
         [TestCase]
-        public void Execute_AssertUrlProperty_UseRightStateProperty()
+        public void Execute_AssertTitlePropertyWrong_ThrowsUnexpectedWebDriverStateException()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var command = new AssertStateCommand(PropertyKey.Title, DefaultPropertyValue);
+
+            webDriver.Title.Returns(DefaultPropertyValue + "!");
+
+            // Act
+            TestDelegate action = () => command.Execute(webDriver);
+
+            // Assert
+            Assert.Throws<UnexpectedWebDriverState>(action);
+            string title = webDriver.Received().Title;
+        }
+
+        [TestCase]
+        public void Execute_AssertUrlPropertyValid_UseRightStateProperty()
         {
             // Arrange
             var webDriver = Substitute.For<IWebDriver>();
             var command = new AssertStateCommand(PropertyKey.Url, DefaultPropertyValue);
 
+            webDriver.Url.Returns(DefaultPropertyValue);
+
             // Act
-            IgnoreExceptions.Run(() => command.Execute(webDriver));
+            TestDelegate action = () => command.Execute(webDriver);
 
             // Assert
+            Assert.DoesNotThrow(action);
+            string url = webDriver.Received().Url;
+        }
+
+        [TestCase]
+        public void Execute_AssertUrlPropertyWrong_ThrowsUnexpectedWebDirverStateException()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver>();
+            var command = new AssertStateCommand(PropertyKey.Url, DefaultPropertyValue);
+
+            webDriver.Url.Returns(DefaultPropertyValue + "!");
+
+            // Act
+            TestDelegate action = () => command.Execute(webDriver);
+
+            // Assert
+            Assert.Throws<UnexpectedWebDriverState>(action);
             string url = webDriver.Received().Url;
         }
 

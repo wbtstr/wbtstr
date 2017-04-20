@@ -187,9 +187,9 @@ namespace WbTstr.UnitTests.Commands
         public void Execute_TwoSelectors_PerformDragElementToElement()
         {
             // Arrange
-            var webDriver = Substitute.For<IWebDriver>();
-            var webElementA = Substitute.For<IWebElement>();
-            var webElementB = Substitute.For<IWebElement>();
+            var webDriver = Substitute.For<IWebDriver, IHasInputDevices>();
+            var webElementA = Substitute.For<IWebElement, ILocatable>();
+            var webElementB = Substitute.For<IWebElement, ILocatable>();
             var command = Substitute.ForPartsOf<DragCommand>("A", "B");
 
             webDriver.FindElement(By.CssSelector("A")).Returns(webElementA);
@@ -206,9 +206,9 @@ namespace WbTstr.UnitTests.Commands
         public void Execute_TwoElements_PerformDragElementToElement()
         {
             // Arrange
-            var webDriver = Substitute.For<IWebDriver>();
-            var webElementA = Substitute.For<IWebElement>();
-            var webElementB = Substitute.For<IWebElement>();
+            var webDriver = Substitute.For<IWebDriver, IHasInputDevices>();
+            var webElementA = Substitute.For<IWebElement, ILocatable>();
+            var webElementB = Substitute.For<IWebElement, ILocatable>();
             var elementA = new Element(webElementA);
             var elementB = new Element(webElementB);
             var command = Substitute.ForPartsOf<DragCommand>(elementA, elementB);
@@ -221,11 +221,11 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Execute_SelectorOffset_PerformDragElementToElement()
+        public void Execute_SelectorOffset_PerformDragElementToCoordinate()
         {
             // Arrange
-            var webDriver = Substitute.For<IWebDriver>();
-            var webElement = Substitute.For<IWebElement>();
+            var webDriver = Substitute.For<IWebDriver, IHasInputDevices>();
+            var webElement = Substitute.For<IWebElement, ILocatable>();
             var command = Substitute.ForPartsOf<DragCommand>("A", 0, 0);
 
             webDriver.FindElement(By.CssSelector("A")).Returns(webElement);
@@ -238,11 +238,11 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Execute_ElementOffset_PerformDragElementToElement()
+        public void Execute_ElementOffset_PerformDragElementToCoordinate()
         {
             // Arrange
-            var webDriver = Substitute.For<IWebDriver>();
-            var webElement = Substitute.For<IWebElement>();
+            var webDriver = Substitute.For<IWebDriver, IHasInputDevices>();
+            var webElement = Substitute.For<IWebElement, ILocatable>();
             var element = new Element(webElement);
             var command = Substitute.ForPartsOf<DragCommand>(element, 0, 0);
 
@@ -254,11 +254,11 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Execute_OffsetSelector_PerformDragElementToElement()
+        public void Execute_OffsetSelector_PerformDragCoordinateToElement()
         {
             // Arrange
-            var webDriver = Substitute.For<IWebDriver>();
-            var webElement = Substitute.For<IWebElement>();
+            var webDriver = Substitute.For<IWebDriver, IHasInputDevices>();
+            var webElement = Substitute.For<IWebElement, ILocatable>();
             var command = Substitute.ForPartsOf<DragCommand>(0, 0, "B");
 
             webDriver.FindElement(By.CssSelector("B")).Returns(webElement);
@@ -271,11 +271,11 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Execute_OffsetElement_PerformDragElementToElement()
+        public void Execute_OffsetElement_PerformDragCoordinateToElement()
         {
             // Arrange
-            var webDriver = Substitute.For<IWebDriver>();
-            var webElement = Substitute.For<IWebElement>();
+            var webDriver = Substitute.For<IWebDriver, IHasInputDevices>();
+            var webElement = Substitute.For<IWebElement, ILocatable>();
             var element = new Element(webElement);
             var command = Substitute.ForPartsOf<DragCommand>(0, 0, element);
 
@@ -284,6 +284,23 @@ namespace WbTstr.UnitTests.Commands
 
             // Assert
             command.Received().PerformDragCoordinateToElement(webDriver, 0, 0, webElement);
+        }
+
+        [TestCase]
+        public void Execute_OffsetOffset_PerformDragCoordinateToCoordinate()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver, IHasInputDevices>();
+            var webElement = Substitute.For<IWebElement, ILocatable>();
+            var command = Substitute.ForPartsOf<DragCommand>(0, 0, 0, 0);
+
+            webDriver.FindElement(null).ReturnsForAnyArgs(webElement);
+
+            // Act
+            IgnoreExceptions.Run(() => command.Execute(webDriver));
+
+            // Assert
+            command.Received().PerformDragCoordinateToCoordinate(webDriver, 0, 0, 0, 0);
         }
     }
 }
