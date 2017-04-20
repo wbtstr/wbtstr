@@ -2,10 +2,8 @@
 using OpenQA.Selenium.Interactions;
 using System;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies.Extensions;
 using WbTstr.Proxies.Interfaces;
-using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Extensions;
 
 namespace WbTstr.Commands
@@ -17,7 +15,9 @@ namespace WbTstr.Commands
 
         public HoverCommand(string selector)
         {
-            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
+            if (selector == null) throw new ArgumentNullException();
+
+            _selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
         }
 
         public HoverCommand(IElement element)
@@ -31,11 +31,15 @@ namespace WbTstr.Commands
         {
             var webElement = _element?.AsWebElement() ?? webDriver.FindElementBySelector(_selector);
 
-            if (webElement != null)
-            {
-                var interaction = new Actions(webDriver);
-                interaction.MoveToElement(webElement).Perform();
-            }
+            PerformMoveMouseToElement(webDriver, webElement);
+        }
+
+        public virtual void PerformMoveMouseToElement(IWebDriver webDriver, IWebElement webElement)
+        {
+            var interaction = new Actions(webDriver);            
+            interaction
+                .MoveToElement(webElement)
+                .Perform();
         }
 
         public override string ToString()

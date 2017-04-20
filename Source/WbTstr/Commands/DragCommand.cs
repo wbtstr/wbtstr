@@ -78,30 +78,27 @@ namespace WbTstr.Commands
 
         protected override void Execute(IWebDriver webDriver)
         {
-            var webElementA = _elementA?.AsWebElement() ?? webDriver.FindElementBySelector(_selectorA);
-            var webElementB = _elementB?.AsWebElement() ?? webDriver.FindElementBySelector(_selectorB);
+            var webElementA = new Lazy<IWebElement>(() => _elementA?.AsWebElement() ?? webDriver.FindElementBySelector(_selectorA));
+            var webElementB = new Lazy<IWebElement>(() => _elementB?.AsWebElement() ?? webDriver.FindElementBySelector(_selectorB));
 
-            if (webElementA != null)
+            if (_xOffsetToA.HasValue)
             {
-                if (webElementB != null)
-                {
-                    PerformDragElementToElement(webDriver, webElementA, webElementB);
-                }
-                else
-                {
-                    PerformDragElementToCoordinate(webDriver, webElementA, _xOffsetToB.Value, _yOffsetToB.Value);
-                }
-            }
-            else
-            {
-                if (webElementB != null)
-                {
-                    PerformDragCoordinateToElement(webDriver, _xOffsetToA.Value, _yOffsetToA.Value, webElementB);
-                }
-                else
+                if (_xOffsetToB.HasValue)
                 {
                     PerformDragCoordinateToCoordinate(webDriver, _xOffsetToA.Value, _yOffsetToA.Value, _xOffsetToB.Value, _yOffsetToB.Value);
                 }
+                else
+                {
+                    PerformDragCoordinateToElement(webDriver, _xOffsetToA.Value, _yOffsetToA.Value, webElementB.Value);
+                }
+            }
+            else if (_xOffsetToB.HasValue)
+            {
+                PerformDragElementToCoordinate(webDriver, webElementA.Value, _xOffsetToB.Value, _yOffsetToB.Value);
+            }
+            else
+            {
+                PerformDragElementToElement(webDriver, webElementA.Value, webElementB.Value);
             }
         }
 
