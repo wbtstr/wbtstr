@@ -90,6 +90,7 @@
     <Compile Include="Session\Trackers\SimpleSessionTracker.cs" />
     <Compile Include="Session\Trackers\Interfaces\ISessionTracker.cs" />
     <Compile Include="WebDrivers\Constants\WebDriverType.cs" />
+    <Compile Include="WebDrivers\Exceptions\ElementNotFoundException.cs" />
     <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverState.cs" />
     <Compile Include="WebDrivers\Exceptions\WebDriverException.cs" />
     <Compile Include="WebDrivers\Extensions\WebDriverExtensions.cs" />
