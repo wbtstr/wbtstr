@@ -103,8 +103,10 @@ namespace WbTstr.UnitTests.Commands
         public void Execute_ReturnPrimitiveSync_PerformJsSyncAndReturnPrimitive()
         {
             // Arrange
-            var webDriver = Substitute.For<IWebDriver>();
+            var webDriver = Substitute.For<IWebDriver, IJavaScriptExecutor>();
             var command = Substitute.ForPartsOf<ExecuteJsCommand<long>>(DefaultJsExpression, false);
+
+            ((IJavaScriptExecutor)webDriver).ExecuteScript(null).ReturnsForAnyArgs(2L);
 
             // Act
             IgnoreExceptions.Run(() => command.Execute(webDriver));
@@ -117,8 +119,10 @@ namespace WbTstr.UnitTests.Commands
         public void Execute_ReturnPrimitiveAsync_PerformJsAsyncAndReturnPrimitive()
         {
             // Arrange
-            var webDriver = Substitute.For<IWebDriver>();
+            var webDriver = Substitute.For<IWebDriver, IJavaScriptExecutor>();
             var command = Substitute.ForPartsOf<ExecuteJsCommand<long>>(DefaultJsExpression, true);
+
+            ((IJavaScriptExecutor)webDriver).ExecuteAsyncScript(null).ReturnsForAnyArgs(2L);
 
             // Act
             IgnoreExceptions.Run(() => command.Execute(webDriver));
@@ -131,8 +135,11 @@ namespace WbTstr.UnitTests.Commands
         public void Execute_ReturnElementSync_PerformJsSyncAndReturnElement()
         {
             // Arrange
-            var webDriver = Substitute.For<IWebDriver>();
+            var webDriver = Substitute.For<IWebDriver, IJavaScriptExecutor>();
+            var webElement = Substitute.For<IWebElement>();
             var command = Substitute.ForPartsOf<ExecuteJsCommand<IElement>>(DefaultJsExpression, false);
+
+            ((IJavaScriptExecutor)webDriver).ExecuteScript(null).ReturnsForAnyArgs(webElement);
 
             // Act
             IgnoreExceptions.Run(() => command.Execute(webDriver));
@@ -145,8 +152,11 @@ namespace WbTstr.UnitTests.Commands
         public void Execute_ReturnElementAsync_PerformJsAsyncAndReturnElement()
         {
             // Arrange
-            var webDriver = Substitute.For<IWebDriver>();
+            var webDriver = Substitute.For<IWebDriver, IJavaScriptExecutor>();
+            var webElement = Substitute.For<IWebElement>();
             var command = Substitute.ForPartsOf<ExecuteJsCommand<IElement>>(DefaultJsExpression, true);
+
+            ((IJavaScriptExecutor)webDriver).ExecuteAsyncScript(null).ReturnsForAnyArgs(webElement);
 
             // Act
             IgnoreExceptions.Run(() => command.Execute(webDriver));
