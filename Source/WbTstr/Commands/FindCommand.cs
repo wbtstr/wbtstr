@@ -1,10 +1,9 @@
 ﻿using OpenQA.Selenium;
 using System;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Commands.Interfaces;
 using WbTstr.Proxies;
 using WbTstr.Proxies.Interfaces;
-using WbTstr.WebDrivers;
+using WbTstr.WebDrivers.Exceptions;
 
 namespace WbTstr.Commands
 {
@@ -14,16 +13,24 @@ namespace WbTstr.Commands
 
         public FindCommand(string selector)
         {
-            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
+            if (selector == null) throw new ArgumentNullException();
+
+            _selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
         }
 
         /*-------------------------------------------------------------------*/
 
         protected override IElement Execute(IWebDriver webDriver)
         {
-            var webElement = webDriver.FindElement(By.CssSelector(_selector));
-
-            return new Element(webElement, _selector);
+            try
+            {
+                var webElement = webDriver.FindElement(By.CssSelector(_selector));
+                return new Element(webElement, _selector);
+            }
+            catch (NoSuchElementException)
+            {
+                throw new ElementNotFoundException($"Could not find element by CSS selector: {_selector}");
+            }
         }
 
         public override string ToString()
