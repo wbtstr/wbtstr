@@ -109,7 +109,7 @@ namespace WbTstr.UnitTests.Commands
             ((IJavaScriptExecutor)webDriver).ExecuteScript(null).ReturnsForAnyArgs(2L);
 
             // Act
-            IgnoreExceptions.Run(() => command.Execute(webDriver));
+            command.Execute(webDriver);
 
             // Assert
             command.ReceivedWithAnyArgs().PerformJsSyncAndReturnPrimitive(null, null);
@@ -125,7 +125,7 @@ namespace WbTstr.UnitTests.Commands
             ((IJavaScriptExecutor)webDriver).ExecuteAsyncScript(null).ReturnsForAnyArgs(2L);
 
             // Act
-            IgnoreExceptions.Run(() => command.Execute(webDriver));
+            command.Execute(webDriver);
 
             // Assert
             command.ReceivedWithAnyArgs().PerformJsAsyncAndReturnPrimitive(null, null);
@@ -142,11 +142,12 @@ namespace WbTstr.UnitTests.Commands
             ((IJavaScriptExecutor)webDriver).ExecuteScript(null).ReturnsForAnyArgs(webElement);
 
             // Act
-            IgnoreExceptions.Run(() => command.Execute(webDriver));
+            command.Execute(webDriver);
 
             // Assert
             command.ReceivedWithAnyArgs().PerformJsSyncAndReturnElement(null, null);
         }
+
 
         [TestCase]
         public void Execute_ReturnElementAsync_PerformJsAsyncAndReturnElement()
@@ -159,10 +160,42 @@ namespace WbTstr.UnitTests.Commands
             ((IJavaScriptExecutor)webDriver).ExecuteAsyncScript(null).ReturnsForAnyArgs(webElement);
 
             // Act
-            IgnoreExceptions.Run(() => command.Execute(webDriver));
+            command.Execute(webDriver);
 
             // Assert
             command.ReceivedWithAnyArgs().PerformJsAsyncAndReturnElement(null, null);
+        }
+
+        [TestCase]
+        public void Execute_ReturnElementSyncOtherType_PerformJsSyncAndReturnElement()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver, IJavaScriptExecutor>();
+            var command = Substitute.ForPartsOf<ExecuteJsCommand<IElement>>(DefaultJsExpression, false);
+
+            ((IJavaScriptExecutor)webDriver).ExecuteScript(null).ReturnsForAnyArgs(false);
+
+            // Act
+            TestDelegate action = () => command.Execute(webDriver);
+
+            // Assert
+            Assert.Throws<InvalidCastException>(action);
+        }
+
+        [TestCase]
+        public void Execute_ReturnElementAsyncOtherType_PerformJsAsyncAndReturnElement()
+        {
+            // Arrange
+            var webDriver = Substitute.For<IWebDriver, IJavaScriptExecutor>();
+            var command = Substitute.ForPartsOf<ExecuteJsCommand<IElement>>(DefaultJsExpression, true);
+
+            ((IJavaScriptExecutor)webDriver).ExecuteAsyncScript(null).ReturnsForAnyArgs(false);
+
+            // Act
+            TestDelegate action = () => command.Execute(webDriver);
+
+            // Assert
+            Assert.Throws<InvalidCastException>(action);
         }
     }
 }
