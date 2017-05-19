@@ -1,8 +1,9 @@
-﻿using OpenQA.Selenium;
-using System;
+﻿using System;
+using OpenQA.Selenium;
 using WbTstr.Commands.Abstracts;
 using WbTstr.Commands.Interfaces;
 using WbTstr.WebDrivers;
+using UriParser = WbTstr.Utilities.UriParser;
 
 namespace WbTstr.Commands
 {
@@ -17,7 +18,9 @@ namespace WbTstr.Commands
 
         public NavigateCommand(string url)
         {
-            _uri = new Uri(url ?? throw new ArgumentNullException(nameof(url)));
+            if (url == null) throw new ArgumentNullException();
+
+            _uri = UriParser.ParseWebUrl(url);
         }
 
         /* Methods ----------------------------------------------------------*/
