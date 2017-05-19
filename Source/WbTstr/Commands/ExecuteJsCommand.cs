@@ -18,7 +18,7 @@ namespace WbTstr.Commands
               typeof(string),
               typeof(long),
               typeof(bool),
-              typeof(IElement)
+              typeof(IElement),
           }
         );
 
@@ -31,7 +31,7 @@ namespace WbTstr.Commands
 
             if (!SupportedReturnTypes.Contains(typeof(T)))
             {
-                string message = $"{typeof(T).Name} is not a supported return type. Use 'string', 'bool', 'long' or 'IElement' instead.";
+                string message = $"{typeof(T).Name} is not a supported return type. Use 'string', 'bool', 'long' (Int64) or 'IElement' instead.";
                 throw new ArgumentException(message);
             }
         }
@@ -44,7 +44,7 @@ namespace WbTstr.Commands
 
             if (_async)
             {
-                if (typeof(T).Equals(typeof(IElement)))
+                if (typeof(T) == typeof(IElement))
                 {
                     return PerformJsAsyncAndReturnElement(jsExecutor, _jsExpression);
                 }
@@ -55,7 +55,7 @@ namespace WbTstr.Commands
             }
             else
             {
-                if (typeof(T).Equals(typeof(IElement)))
+                if (typeof(T) == typeof(IElement))
                 {
                     return PerformJsSyncAndReturnElement(jsExecutor, _jsExpression);
                 }
@@ -64,8 +64,6 @@ namespace WbTstr.Commands
                     return PerformJsSyncAndReturnPrimitive(jsExecutor, _jsExpression);
                 }
             }
-
-            throw new InvalidCastException($"Return value is not of type: {typeof(T).Name}");
         }
 
         public virtual T PerformJsSyncAndReturnPrimitive(IJavaScriptExecutor jsExecutor, string jsExpression)

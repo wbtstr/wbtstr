@@ -18,5 +18,7 @@ namespace WbTstr.Commands.Abstracts
         }
 
         protected abstract void Execute(IWebDriver webDriver);
+
+        public abstract override string ToString();
     }
 }
