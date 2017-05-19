@@ -70,6 +70,8 @@
     <Compile Include="Commands\ExecuteJsCommandTests.cs" />
     <Compile Include="Commands\FindCommandTests.cs" />
     <Compile Include="Commands\HoverCommandTests.cs" />
+    <Compile Include="Commands\MaximizeCommandTests.cs" />
+    <Compile Include="Commands\NavigateCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_Auxiliaries\AssertMultiple.cs" />
     <Compile Include="_Auxiliaries\AssertString.cs" />

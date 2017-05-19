@@ -9,5 +9,10 @@ namespace WbTstr.UnitTests._Stubs
         {
             return string.Empty;
         }
+
+        public override string ToString()
+        {
+            return "ReturnCommandStub.ToString()";
+        }
     }
 }

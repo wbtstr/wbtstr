@@ -8,5 +8,10 @@ namespace WbTstr.UnitTests._Stubs
         protected override void Execute(IWebDriver webDriver)
         {
         }
+
+        public override string ToString()
+        {
+            return "ActionCommandStub.ToString()";
+        }
     }
 }
