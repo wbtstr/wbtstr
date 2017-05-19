@@ -24,6 +24,18 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
+        public void ToString_NoArguments_ReturnString()
+        {
+            // Arrange
+
+            // Act
+            string stringRepresentation = _defaultCommand.ToString();
+
+            // Assert
+            AssertString.NotNullOrWhiteSpace(stringRepresentation);
+        }
+
+        [TestCase]
         public void Constructor_NullUrl_ThrowsArgumentNullException()
         {
             // Arrange
