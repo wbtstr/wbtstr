@@ -109,12 +109,6 @@ namespace WbTstr.UnitTests.Commands
             AssertMultiple.Throws<ArgumentException>(actions);
         }
 
-        //var webElement = _element?.AsWebElement() ?? webDriver.FindElementBySelector(_selector);
-        //    if (_clear) {
-        //    webElement?.Clear();
-        //}
-        //webElement?.SendKeys(_text);
-
         [TestCase]
         public void Execute_NoClearRequested_ClearNotCalled()
         {
