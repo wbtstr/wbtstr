@@ -3,8 +3,7 @@ using OpenQA.Selenium.Support.Extensions;
 using System;
 using System.IO;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Commands.Interfaces;
-using WbTstr.WebDrivers;
+using WbTstr.Utilities;
 
 namespace WbTstr.Commands
 {
@@ -15,8 +14,14 @@ namespace WbTstr.Commands
 
         public ScreenshotCommand(string fileName, string directoryPath)
         {
-            _fileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
-            _directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
+            if (fileName == null) throw new ArgumentNullException(nameof(fileName));
+            if (directoryPath == null) throw new ArgumentNullException(nameof(directoryPath));
+
+            bool isValidFileName = MultiPurposeValidator.IsValidFileName(fileName);
+            bool isValidDirectoryPath = MultiPurposeValidator.IsValidDirectoryPath(directoryPath);
+
+            _fileName = isValidFileName  ? fileName : throw new ArgumentException(nameof(fileName));
+            _directoryPath = isValidDirectoryPath ? directoryPath : throw new ArgumentException(nameof(directoryPath));
         }
 
         /* Methods ----------------------------------------------------------*/
