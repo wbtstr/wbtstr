@@ -4,7 +4,7 @@
 
 image: Visual Studio 2017
 
-version: 0.1.0.{build}
+version: 0.1.0
 
 branches:
   only:
@@ -18,9 +18,8 @@ configuration:
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}'    
+  assembly_version: '{version}.{build}'
+  assembly_file_version: '{version}.{build}'
 
 environment:
   COVERALLS_REPO_TOKEN:
@@ -38,9 +37,12 @@ build:
   publish_nuget: true
   verbosity: minimal
 
+after_build:
+  - ps: .\Scripts\AppVeyor\after_build.ps1
+
 test_script:
   - ps: .\Scripts\AppVeyor\test_script.ps1
 
 artifacts:
-  - path: '**\*.nupkg'
+  - path: '**\WbTstr.{version}.nupkg'
     
