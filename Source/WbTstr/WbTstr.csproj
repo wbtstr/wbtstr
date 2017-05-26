@@ -72,6 +72,7 @@
     <Compile Include="Commands\TypeCommand.cs" />
     <Compile Include="Commands\WaitCommand.cs" />
     <Compile Include="Utilities\Constants\MouseClick.cs" />
+    <Compile Include="Utilities\MultiPurposeValidator.cs" />
     <Compile Include="Utilities\UriParser.cs" />
     <Compile Include="WebDrivers\Constants\PropertyKey.cs" />
     <Compile Include="Commands\Interfaces\IActionCommand.cs" />
