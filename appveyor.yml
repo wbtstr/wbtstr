@@ -4,7 +4,7 @@
 
 image: Visual Studio 2017
 
-version: 0.1.0
+version: 0.1.0.{build}
 
 branches:
   only:
@@ -18,8 +18,8 @@ configuration:
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
-  assembly_version: '{version}.{build}'
-  assembly_file_version: '{version}.{build}'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
 
 environment:
   COVERALLS_REPO_TOKEN:
