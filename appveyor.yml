@@ -31,7 +31,7 @@ environment:
 #---------------------------------#
 
 before_build:
-- cmd: nuget restore .\Source\WbTstr.sln
+  - cmd: nuget restore .\Source\WbTstr.sln
 
 build:
   project: .\Source\WbTstr.sln
@@ -39,6 +39,8 @@ build:
   verbosity: minimal
 
 test_script:
-- ps: .\Scripts\AppVeyor\test_script.ps1
+  - ps: .\Scripts\AppVeyor\test_script.ps1
 
+artifacts:
+  - path: '**\*.nupkg'
     
