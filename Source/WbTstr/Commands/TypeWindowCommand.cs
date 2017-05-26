@@ -18,14 +18,15 @@ namespace WbTstr.Commands
         private readonly string _text;
         private readonly bool _clear;
 
-        public TypeWindowCommand(string text)
+        public TypeWindowCommand(string text) : this(text, false)
         {
-            _text = text ?? throw new ArgumentNullException(nameof(text));
         }
 
         public TypeWindowCommand(string text, bool clear)
         {
-            _text = text ?? throw new ArgumentNullException(nameof(text));
+            if (text == null) throw new ArgumentNullException(nameof(text));
+
+            _text = !string.IsNullOrEmpty(text) ? text : throw new ArgumentException(nameof(text));
             _clear = clear;
         }
 
