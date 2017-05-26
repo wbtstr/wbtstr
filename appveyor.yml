@@ -42,7 +42,3 @@ after_build:
 
 test_script:
   - ps: .\Scripts\AppVeyor\test_script.ps1
-
-artifacts:
-  - path: '**\WbTstr.{version}.nupkg'
-    
