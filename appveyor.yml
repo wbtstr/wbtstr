@@ -11,6 +11,10 @@ branches:
     - master
     - develop
 
+configuration:
+- Debug
+- Release
+
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
@@ -31,6 +35,7 @@ before_build:
 
 build:
   project: .\Source\WbTstr.sln
+  publish_nuget: true
   verbosity: minimal
 
 test_script:
