@@ -10,16 +10,20 @@ namespace WbTstr.Fixtures.Attributes
     [AttributeUsage(AttributeTargets.Class)]
     public class WebDriverConfigAttribute : Attribute
     {
-        public WebDriverConfigAttribute(WebDriverName name)
+        public WebDriverConfigAttribute(WebDriverType type, string preset = null)
         {
-            Name = name;
+            Type = type;
+            Preset = preset;
         }
 
-        public WebDriverConfigAttribute(string name)
+        public WebDriverConfigAttribute(string type, string preset = null)
         {
-            Name = (WebDriverName) Enum.Parse(typeof(WebDriverName), name, true);
+            Type = (WebDriverType)Enum.Parse(typeof(WebDriverType), type, true);
+            Preset = preset;
         }
 
-        public WebDriverName Name { get; }
+        public WebDriverType Type { get; }
+
+        public string Preset { get; }
     }
 }

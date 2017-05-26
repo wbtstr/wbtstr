@@ -18,11 +18,11 @@ namespace WbTstr.WebDrivers
 
             switch (config.Type)
             {
-                case WebDriverName.Chrome:
+                case Constants.WebDriverType.Chrome:
                     webDriver = CreateChromeWebDriver(config);
                     break;
                 default:
-                    throw new ArgumentException($"WebDriver type not supported: {Enum.GetName(typeof(WebDriverName), config.Type)}");
+                    throw new ArgumentException($"WebDriver type not supported: {Enum.GetName(typeof(Constants.WebDriverType), (object)config.Type)}");
             }
 
             return webDriver;

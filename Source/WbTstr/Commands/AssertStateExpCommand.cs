@@ -1,30 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using OpenQA.Selenium;
+using System;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using WbTstr.Commands.Interfaces;
+using WbTstr.Commands.Abstracts;
 using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Exceptions;
 
 namespace WbTstr.Commands
 {
-    internal class AssertStateExpCommand : ICommand
+    internal class AssertStateExpCommand : WbTstrActionCommand
     {
         private readonly Expression<Func<WebDriverState, bool>> _expression;
 
         public AssertStateExpCommand(Expression<Func<WebDriverState, bool>> expression)
         {
-            _expression = expression;
+            _expression = expression ?? throw new ArgumentNullException(nameof(expression));
         }
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = webDriverObj as IWebDriver;
             var webDriverState = new WebDriverState(webDriver);
 
             var function = _expression.Compile();

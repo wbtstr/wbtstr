@@ -2,22 +2,38 @@
 #      General configuration      #
 #---------------------------------#
 
-image: Visual Studio 2015
+image: Visual Studio 2017
 
-version: 0.0.0.{build}
+version: 0.1.0.{build}
 
 branches:
   only:
     - master
     - develop
 
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'    
+
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: ZM3cfILSeJIYHKAvV+/wa5Smu9spteVYfCGlreP6jXRKRryNL8rqwXDKrUD+KnMc    
+
 #---------------------------------#
 #       Build configuration       #
 #---------------------------------#
 
 before_build:
-- cmd: nuget restore Source\WbTstr.sln
+- cmd: nuget restore .\Source\WbTstr.sln
 
 build:
-  project: Source\WbTstr.sln
+  project: .\Source\WbTstr.sln
   verbosity: minimal
+
+test_script:
+- ps: .\Scripts\AppVeyor\test_script.ps1
+
+    

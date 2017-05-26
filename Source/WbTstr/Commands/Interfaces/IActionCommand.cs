@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WbTstr.WebDrivers.Constants
+namespace WbTstr.Commands.Interfaces
 {
-    public enum WebDriverName
+    public interface IActionCommand : ICommand
     {
-        Chrome
+        void Execute(object webDriverObj);
     }
 }
