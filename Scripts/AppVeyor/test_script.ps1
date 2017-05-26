@@ -6,7 +6,7 @@ $nunitrunner = (Resolve-Path ".\Source\Packages\NUnit.ConsoleRunner.*\tools\nuni
 # Run tests through OpenCover
 & $opencover -register:user `
              -target:"$nunitrunner" `
-             -targetargs:".\Source\WbTstr.UnitTests\bin\Debug\WbTstr.UnitTests.dll" `
+             -targetargs:".\Source\WbTstr.UnitTests\bin\$env:CONFIGURATION\WbTstr.UnitTests.dll" `
              -filter:"+[WbTstr*]*" `
              -filter:"-[WbTstr.UnitTests*]*" `
              -output:opencover.xml 

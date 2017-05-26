@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>WbTstr</id>
+    <version>0.1.0</version>
+    <authors>Onno Valkering</authors>
+    <owners>Mirabeau</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/wbtstr/wbtstr/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/wbtstr/wbtstr</projectUrl>
+    <iconUrl>https://avatars1.githubusercontent.com/u/23171457</iconUrl>
+    <description>The uncomplicated test automation framework.</description>
+    <copyright>Copyright 2016-2017</copyright>
+    <tags>selenium test-automation functional-testing</tags>
+    <dependencies>
+      <dependency id="Selenium.WebDriver" version="[3.4.0, 4.0.0)" />
+      <dependency id="Selenium.Support" version="[3.4.0, 4.0.0)" />
+    </dependencies>
+  </metadata>
+  <files>
+     <file src="bin\Release\WbTstr.dll" target="lib\net45" />
+  </files> 
+</package>
