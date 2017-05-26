@@ -15,14 +15,24 @@ namespace WbTstr.Session.Trackers
             return this;
         }
 
-        public void MarkExecutionBegin(ICommand command)
+        public void MarkExecutionBegin(IActionCommand actionCommand)
         {
-            Console.WriteLine($"Begin: {command}");
+            Console.WriteLine($"Begin: {actionCommand}");
         }
 
-        public void MarkExecutionEnd(ICommand command)
+        public void MarkExecutionBegin<T>(IReturnCommand<T> returnCommand)
         {
-            Console.WriteLine($"End: {command}");
+            Console.WriteLine($"Begin: {returnCommand}");
+        }
+
+        public void MarkExecutionEnd(IActionCommand actionCommand)
+        {
+            Console.WriteLine($"End: {actionCommand}");
+        }
+
+        public void MarkExecutionEnd<T>(IReturnCommand<T> returnCommand)
+        {
+            Console.WriteLine($"End: {returnCommand}");
         }
     }
 }

@@ -11,11 +11,13 @@ namespace WbTstr.Session.Performers.Interfaces
 {
     public interface ISessionPerformer : IDisposable
     {
-        ISessionPerformer Initialize(IWebDriverConfig webDriverConfig, ISessionTracker tracker);
+        ISessionPerformer Initialize(Lazy<IWebDriverConfig> webDriverConfig, ISessionTracker tracker);
 
         bool DirectPlay { get; set; }
 
-        void Perform(ICommand command);
+        void Perform(IActionCommand actionCommand);
+
+        T PerformAndReturn<T>(IReturnCommand<T> command);
 
         void Play();
     }

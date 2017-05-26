@@ -1,34 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
-using WbTstr.Commands.Interfaces;
+using System;
+using System.IO;
+using WbTstr.Commands.Abstracts;
+using WbTstr.Utilities;
 
 namespace WbTstr.Commands
 {
-    public class ScreenshotCommand : ICommand
+    internal class ScreenshotCommand : WbTstrActionCommand
     {
         private readonly string _fileName;
         private readonly string _directoryPath;
 
         public ScreenshotCommand(string fileName, string directoryPath)
         {
-            _fileName = fileName;
-            _directoryPath = directoryPath ?? Path.GetTempPath();
+            if (fileName == null) throw new ArgumentNullException(nameof(fileName));
+            if (directoryPath == null) throw new ArgumentNullException(nameof(directoryPath));
+
+            bool isValidFileName = MultiPurposeValidator.IsValidFileName(fileName);
+            bool isValidDirectoryPath = MultiPurposeValidator.IsValidDirectoryPath(directoryPath);
+
+            _fileName = isValidFileName  ? fileName : throw new ArgumentException(nameof(fileName));
+            _directoryPath = isValidDirectoryPath ? directoryPath : throw new ArgumentException(nameof(directoryPath));
         }
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = webDriverObj as IWebDriver;
-
-            var screenshot = webDriver?.TakeScreenshot();
+            var screenshot = webDriver.TakeScreenshot();
             if (screenshot == null) return;
 
             var filePath = Path.Combine(_directoryPath, _fileName);
@@ -36,24 +36,24 @@ namespace WbTstr.Commands
             screenshot.SaveAsFile(filePath, imageFormat);
         }
 
-        public override string ToString()
-        {
-            return $"Take a screenshot ({_fileName})";
-        }
-
-        private ImageFormat DetermineImageFormat(string filePath)
+        private ScreenshotImageFormat DetermineImageFormat(string filePath)
         {
             var fileExtension = Path.GetExtension(filePath)?.Substring(1).ToUpper();
             switch (fileExtension)
             {
                 case "BMP":
-                    return ImageFormat.Bmp;
+                    return ScreenshotImageFormat.Bmp;
                 case "JPG":
                 case "JPEG":
-                    return ImageFormat.Jpeg;
+                    return ScreenshotImageFormat.Jpeg;
                 default:
-                    return ImageFormat.Png;
+                    return ScreenshotImageFormat.Png;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Take a screenshot ({_fileName})";
         }
     }
 }

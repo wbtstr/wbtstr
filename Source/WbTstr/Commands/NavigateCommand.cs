@@ -1,33 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
+using WbTstr.Commands.Abstracts;
 using WbTstr.Commands.Interfaces;
+using WbTstr.WebDrivers;
+using UriParser = WbTstr.Utilities.UriParser;
 
 namespace WbTstr.Commands
 {
-    internal class NavigateCommand : ICommand
+    internal class NavigateCommand : WbTstrActionCommand
     {
         private readonly Uri _uri;
 
         public NavigateCommand(Uri uri)
         {
-            _uri = uri;
+            _uri = uri ?? throw new ArgumentNullException(nameof(uri));
         }
 
         public NavigateCommand(string url)
         {
-            _uri = new Uri(url);
+            if (url == null) throw new ArgumentNullException();
+
+            _uri = UriParser.ParseWebUrl(url);
         }
 
         /* Methods ----------------------------------------------------------*/
 
-        public void Execute(object webDriverObj)
+        protected override void Execute(IWebDriver webDriver)
         {
-            var webDriver = webDriverObj as IWebDriver;
-            webDriver?.Navigate().GoToUrl(_uri);
+            webDriver.Navigate().GoToUrl(_uri);
         }
 
         public override string ToString()
