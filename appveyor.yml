@@ -39,6 +39,3 @@ build:
 
 after_build:
   - ps: .\Scripts\AppVeyor\after_build.ps1
-
-test_script:
-  - ps: .\Scripts\AppVeyor\test_script.ps1
