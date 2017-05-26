@@ -74,6 +74,7 @@
     <Compile Include="Commands\NavigateCommandTests.cs" />
     <Compile Include="Commands\ResizeCommandTests.cs" />
     <Compile Include="Commands\ScreenshotCommandTests.cs" />
+    <Compile Include="Commands\TypeCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\UriParserTests.cs" />
     <Compile Include="_Auxiliaries\AssertMultiple.cs" />
