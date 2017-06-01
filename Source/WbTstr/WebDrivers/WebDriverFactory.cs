@@ -14,8 +14,9 @@ namespace WbTstr.WebDrivers
     {
         public static IWebDriver CreateFromConfig(IWebDriverConfig config)
         {
-            IWebDriver webDriver;
+            if (config == null) throw new ArgumentNullException(nameof(config));
 
+            IWebDriver webDriver;
             switch (config.Type)
             {
                 case Constants.WebDriverType.Chrome:
