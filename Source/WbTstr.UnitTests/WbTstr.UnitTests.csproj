@@ -78,6 +78,7 @@
     <Compile Include="Commands\TypeWindowCommandTests.cs" />
     <Compile Include="Commands\WaitCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxies\ElementTests.cs" />
     <Compile Include="Utilities\MultiPursposeValidatorTests.cs" />
     <Compile Include="Utilities\UriParserTests.cs" />
     <Compile Include="_Auxiliaries\AssertMultiple.cs" />
