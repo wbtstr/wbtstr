@@ -30,6 +30,9 @@ namespace WbTstr.Session.Performers
 
         public ISessionPerformer Initialize(Lazy<IWebDriverConfig> webDriverConfig, ISessionTracker tracker)
         {
+            if (webDriverConfig == null) throw new ArgumentNullException(nameof(webDriverConfig));
+            if (tracker == null) throw new ArgumentNullException(nameof(tracker));
+
             if (_initialized)
             {
                 throw new InvalidOperationException($"{nameof(SequentialSessionPerformer)} can be initialized only once.");
@@ -52,6 +55,8 @@ namespace WbTstr.Session.Performers
 
         public void Perform(IActionCommand actionCommand)
         {
+            if (actionCommand == null) throw new ArgumentNullException(nameof(actionCommand));
+
             if (!DirectPlay)
             {
                 _commands.Enqueue(actionCommand);
@@ -61,14 +66,16 @@ namespace WbTstr.Session.Performers
             ExecuteActionCommand(actionCommand);
         }
 
-        public T PerformAndReturn<T>(IReturnCommand<T> command)
+        public T PerformAndReturn<T>(IReturnCommand<T> returnCommand)
         {
+            if (returnCommand == null) throw new ArgumentNullException(nameof(returnCommand));
+
             if (!DirectPlay)
             {
-                _commands.Enqueue(command);
+                _commands.Enqueue(returnCommand);
             }
 
-            return ExecuteReturnCommand(command);
+            return ExecuteReturnCommand(returnCommand);
         }
 
         public void Play()
