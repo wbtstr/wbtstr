@@ -13,7 +13,7 @@ $nunitrunner = (Resolve-Path ".\Source\Packages\NUnit.ConsoleRunner.*\tools\nuni
 
 & $opencover -register:user `
              -target:"$nunitrunner" `
-             -targetargs:".\Source\WbTstr.UnitTests\bin\$env:CONFIGURATION\WbTstr.IntegrationTests.dll" `
+             -targetargs:".\Source\WbTstr.IntegrationTests\bin\$env:CONFIGURATION\WbTstr.IntegrationTests.dll" `
              -filter:"+[WbTstr*]*" `
              -filter:"-[WbTstr.IntegrationTests*]*" `
              -mergeoutput `
