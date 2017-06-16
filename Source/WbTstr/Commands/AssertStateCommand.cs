@@ -26,14 +26,14 @@ namespace WbTstr.Commands
             {
                 if (webDriver.Url != _value)
                 {
-                    throw new UnexpectedWebDriverState($"Url is not {_value}");
+                    throw new UnexpectedWebDriverStateException($"Url is not {_value}");
                 }
             }
             if (_key == PropertyKey.Title)
             {
                 if (webDriver.Title != _value)
                 {
-                    throw new UnexpectedWebDriverState($"Title is not {_value}");
+                    throw new UnexpectedWebDriverStateException($"Title is not {_value}");
                 }
             }
         }

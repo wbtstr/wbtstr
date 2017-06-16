@@ -104,7 +104,7 @@ namespace WbTstr.UnitTests.Commands
             TestDelegate action = () => command.Execute(webDriver);
 
             // Assert
-            Assert.Throws<UnexpectedWebDriverState>(action);
+            Assert.Throws<UnexpectedWebDriverStateException>(action);
             string title = webDriver.Received().Title;
         }
 
@@ -138,7 +138,7 @@ namespace WbTstr.UnitTests.Commands
             TestDelegate action = () => command.Execute(webDriver);
 
             // Assert
-            Assert.Throws<UnexpectedWebDriverState>(action);
+            Assert.Throws<UnexpectedWebDriverStateException>(action);
             string url = webDriver.Received().Url;
         }
 
