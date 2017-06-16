@@ -82,8 +82,12 @@
     <Compile Include="Configuration\WebDrivers\Exceptions\MissingWebDriverConfigExceptionTests.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\WebDriverConfigExceptionTests.cs" />
     <Compile Include="Configuration\WebDrivers\WebDriverConfigsTests.cs" />
+    <Compile Include="Fixtures\Attributes\WebDriverConfigAttributeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxies\ElementTests.cs" />
+    <Compile Include="Session\Performers\SequentialSessionPerformerTests.cs" />
+    <Compile Include="Session\Recorders\SimpleSessionRecorderTests.cs" />
+    <Compile Include="Session\Trackers\SimpleSessionTrackerTests.cs" />
     <Compile Include="Utilities\MultiPursposeValidatorTests.cs" />
     <Compile Include="Utilities\UriParserTests.cs" />
     <Compile Include="WebDrivers\Exceptions\ElementNotFoundExceptionTests.cs" />
@@ -108,6 +112,7 @@
       <Name>WbTstr</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
