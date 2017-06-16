@@ -12,6 +12,7 @@ using WbTstr.UnitTests._Auxiliaries;
 
 namespace WbTstr.UnitTests.Commands
 {
+    [TestFixture]
     public class MaximizeCommandTests
     {
         private MaximizeCommand _defaultCommand;

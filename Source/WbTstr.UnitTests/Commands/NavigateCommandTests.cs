@@ -11,6 +11,7 @@ using WbTstr.UnitTests._Auxiliaries;
 
 namespace WbTstr.UnitTests.Commands
 {
+    [TestFixture]
     public class NavigateCommandTests
     {
         private const string DefaultUrl = "http://www.wbtstr.net";
