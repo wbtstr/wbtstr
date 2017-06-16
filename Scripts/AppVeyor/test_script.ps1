@@ -16,7 +16,7 @@ $nunitrunner = (Resolve-Path ".\Source\Packages\NUnit.ConsoleRunner.*\tools\nuni
              -targetargs:".\Source\WbTstr.UnitTests\bin\$env:CONFIGURATION\WbTstr.IntegrationTests.dll" `
              -filter:"+[WbTstr*]*" `
              -filter:"-[WbTstr.IntegrationTests*]*" `
-             -mergeoutput
+             -mergeoutput `
              -output:opencover.xml 
 
 # Push results to Coveralls
