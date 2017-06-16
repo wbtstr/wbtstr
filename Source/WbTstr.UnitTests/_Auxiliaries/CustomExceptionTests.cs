@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework.Internal;
 using NUnit.Framework;
-using WbTstr.UnitTests._Auxiliaries;
+using WbTstr.Configuration.WebDrivers.Exceptions;
 using WbTstr.WebDrivers.Exceptions;
 
-namespace WbTstr.UnitTests.WebDrivers.Exceptions
+namespace WbTstr.UnitTests._Auxiliaries
 {
-    [TestFixture]
-    public class UnexpectedWebDriverStateTests
+    public class CustomExceptionTests<T> where T : Exception, new()
     {
         private const string DefaultMessage = "I'm an exception!";
-        private UnexpectedWebDriverStateException _defaultException;
+        private T _defaultException;
 
         [SetUp]
         public void SetUp()
         {
-            _defaultException = new UnexpectedWebDriverStateException(DefaultMessage);
+            _defaultException = (T)Activator.CreateInstance(typeof(T), new object[] { DefaultMessage });
         }
 
         [TestCase]
@@ -29,7 +28,21 @@ namespace WbTstr.UnitTests.WebDrivers.Exceptions
             string message = null;
 
             // Act
-            TestDelegate action = () => new UnexpectedWebDriverStateException(message);
+            TestDelegate action = () =>
+            {
+                try
+                {
+                    var e = (T) Activator.CreateInstance(typeof(T), new object[] {message});
+                }
+                catch (TargetInvocationException ex)
+                {
+                    // So we can assert to the actual exception
+                    if (ex.InnerException != null)
+                    {
+                        throw ex.InnerException;
+                    }
+                }
+            };
 
             // Assert
             Assert.Throws<ArgumentNullException>(action);
@@ -43,8 +56,8 @@ namespace WbTstr.UnitTests.WebDrivers.Exceptions
             // Act
             TestDelegate[] actions =
             {
-                () => new UnexpectedWebDriverStateException(""),
-                () => new UnexpectedWebDriverStateException("   "),
+                () => { var e = (T) Activator.CreateInstance(typeof(T), new object[] {""}); },
+                () => { var e = (T) Activator.CreateInstance(typeof(T), new object[] {" "}); },
             };
 
             // Assert

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework.Internal;
 using NUnit.Framework;
 using WbTstr.UnitTests._Auxiliaries;
 using WbTstr.WebDrivers.Exceptions;
@@ -10,8 +11,7 @@ using WbTstr.WebDrivers.Exceptions;
 namespace WbTstr.UnitTests.WebDrivers.Exceptions
 {
     [TestFixture]
-    public class WebDriverExceptionTests : CustomExceptionTests<WebDriverException>
+    public class UnexpectedWebDriverStateExceptionTests : CustomExceptionTests<UnexpectedWebDriverStateException>
     {
-        
     }
 }
