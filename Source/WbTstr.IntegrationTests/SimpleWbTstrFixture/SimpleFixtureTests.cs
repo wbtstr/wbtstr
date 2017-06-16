@@ -11,7 +11,7 @@ namespace WbTstr.IntegrationTests.Fixtures
     [WebDriverConfig(WebDriverType.Chrome)]
     public class DerivedFromSimpleFixture : SimpleWbTstrFixture
     {
-        [Test, Ignore("Focus is in Unit Tests for now.")]
+        [Test]
         public void TestMethod()
         {
             // Arrange
