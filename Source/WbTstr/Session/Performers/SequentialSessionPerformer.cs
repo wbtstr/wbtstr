@@ -93,7 +93,7 @@ namespace WbTstr.Session.Performers
 
                 _tracker.MarkExecutionEnd(actionCommand);
             }
-            catch (UnexpectedWebDriverState)
+            catch (UnexpectedWebDriverStateException)
             {
                 Dispose();
                 throw;
@@ -112,7 +112,7 @@ namespace WbTstr.Session.Performers
 
                 return result;
             }
-            catch (UnexpectedWebDriverState)
+            catch (UnexpectedWebDriverStateException)
             {
                 Dispose();
                 throw;

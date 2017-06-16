@@ -81,6 +81,9 @@
     <Compile Include="Proxies\ElementTests.cs" />
     <Compile Include="Utilities\MultiPursposeValidatorTests.cs" />
     <Compile Include="Utilities\UriParserTests.cs" />
+    <Compile Include="WebDrivers\Exceptions\ElementNotFoundExceptionTests.cs" />
+    <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverStateTests.cs" />
+    <Compile Include="WebDrivers\Exceptions\WebDriverExceptionTests.cs" />
     <Compile Include="WebDrivers\WebDriverFactoryTests.cs" />
     <Compile Include="WebDrivers\WebDriverStateTests.cs" />
     <Compile Include="WebDrivers\WebDriverUtilitiesTests.cs" />

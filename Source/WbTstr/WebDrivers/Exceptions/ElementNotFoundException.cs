@@ -15,6 +15,7 @@ namespace WbTstr.WebDrivers.Exceptions
 
         public ElementNotFoundException(string message) : base(message)
         {
+            if (message == null) throw new ArgumentNullException(nameof(message));
         }
     }
 }

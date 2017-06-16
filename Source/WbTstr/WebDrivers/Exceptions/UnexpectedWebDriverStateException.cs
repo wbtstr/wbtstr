@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WbTstr.WebDrivers.Exceptions
 {
-    public class WebDriverException : Exception
+    public class UnexpectedWebDriverStateException : WebDriverException
     {
-        public WebDriverException()
+        public UnexpectedWebDriverStateException()
         {
         }
 
-        public WebDriverException(string message) : base(message)
+        public UnexpectedWebDriverStateException(string message) : base(message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
         }
