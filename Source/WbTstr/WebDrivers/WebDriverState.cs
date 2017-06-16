@@ -13,6 +13,8 @@ namespace WbTstr.WebDrivers
 
         internal WebDriverState(IWebDriver webDriver)
         {
+            if (webDriver == null) throw new ArgumentNullException(nameof(webDriver));
+
             _webDriver = webDriver;
         }
 

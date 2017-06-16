@@ -24,5 +24,14 @@ namespace WbTstr.UnitTests._Auxiliaries
                 Assert.DoesNotThrow(testDelegate);
             }
         }
+
+        public static void Returns(IEnumerable<Func<bool>> testDelegates, bool expected)
+        {
+            foreach (Func<bool> testDelegate in testDelegates)
+            {
+                bool actual = testDelegate();
+                Assert.AreEqual(expected, actual);
+            }
+        }
     }
 }
