@@ -12,12 +12,17 @@ namespace WbTstr.Fixtures.Attributes
     {
         public WebDriverConfigAttribute(WebDriverType type, string preset = null)
         {
+            if (type == default(WebDriverType)) throw new ArgumentException(nameof(type));
+
             Type = type;
             Preset = preset;
         }
 
         public WebDriverConfigAttribute(string type, string preset = null)
         {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrWhiteSpace(type)) throw new ArgumentException(nameof(type));
+
             Type = (WebDriverType)Enum.Parse(typeof(WebDriverType), type, true);
             Preset = preset;
         }

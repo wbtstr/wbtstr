@@ -6,11 +6,19 @@ $nunitrunner = (Resolve-Path ".\Source\Packages\NUnit.ConsoleRunner.*\tools\nuni
 # Run tests through OpenCover
 & $opencover -register:user `
              -target:"$nunitrunner" `
-             -targetargs:".\Source\WbTstr.UnitTests\bin\Debug\WbTstr.UnitTests.dll" `
+             -targetargs:".\Source\WbTstr.UnitTests\bin\$env:CONFIGURATION\WbTstr.UnitTests.dll" `
              -filter:"+[WbTstr*]*" `
              -filter:"-[WbTstr.UnitTests*]*" `
              -output:opencover.xml 
-             
+
+& $opencover -register:user `
+             -target:"$nunitrunner" `
+             -targetargs:".\Source\WbTstr.IntegrationTests\bin\$env:CONFIGURATION\WbTstr.IntegrationTests.dll" `
+             -filter:"+[WbTstr*]*" `
+             -filter:"-[WbTstr.IntegrationTests*]*" `
+             -mergeoutput `
+             -output:opencover.xml 
+
 # Push results to Coveralls
 & $coveralls --useRelativePaths `
              --serviceName AppVeyor `

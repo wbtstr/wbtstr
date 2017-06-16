@@ -13,6 +13,9 @@ namespace WbTstr.Configuration.WebDrivers
 
         public static IWebDriverConfig GetDefault(string type)
         {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrWhiteSpace(type)) throw new ArgumentException(nameof(type));
+
             var webDriverType = (WebDriverType)Enum.Parse(typeof(WebDriverType), type, true);
             return GetDefault(webDriverType);
         }
@@ -37,6 +40,8 @@ namespace WbTstr.Configuration.WebDrivers
             if (type == default(WebDriverType)) throw new ArgumentException(nameof(type));
             if (preset == null) throw new ArgumentNullException(nameof(preset));
 
+            if (string.IsNullOrWhiteSpace(preset)) throw new ArgumentException(nameof(preset));
+
             IWebDriverConfig webDriverConfig = null;
             switch (type)
             {
@@ -55,7 +60,7 @@ namespace WbTstr.Configuration.WebDrivers
 
         private static ChromeWebDriverConfig GetPresetChromeWebDriverConfig(string preset)
         {
-            throw new NotImplementedException();
+            return GetDefaultChromeWebDriverConfig();
         }
     }
 }

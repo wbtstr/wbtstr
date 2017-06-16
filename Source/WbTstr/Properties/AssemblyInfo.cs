@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 [assembly: InternalsVisibleTo("WbTstr.IntegrationTests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
+[assembly: InternalsVisibleTo("WbTstr.Fluent")]
+
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
@@ -14,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Mirabeau")]
 [assembly: AssemblyProduct("WbTstr")]
-[assembly: AssemblyCopyright("Copyright © Mirabeau 2016")]
+[assembly: AssemblyCopyright("Copyright © Mirabeau 2016-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

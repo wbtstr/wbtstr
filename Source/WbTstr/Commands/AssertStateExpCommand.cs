@@ -26,7 +26,7 @@ namespace WbTstr.Commands
             var expected = function(webDriverState);
             if (!expected)
             {
-                throw new UnexpectedWebDriverState();
+                throw new UnexpectedWebDriverStateException();
             }
         }
 

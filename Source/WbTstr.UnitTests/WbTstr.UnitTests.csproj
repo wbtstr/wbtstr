@@ -69,6 +69,7 @@
     <Compile Include="Commands\DragCommandTests.cs" />
     <Compile Include="Commands\ExecuteJsCommandTests.cs" />
     <Compile Include="Commands\FindCommandTests.cs" />
+    <Compile Include="Commands\FocusCommandTests.cs" />
     <Compile Include="Commands\HoverCommandTests.cs" />
     <Compile Include="Commands\MaximizeCommandTests.cs" />
     <Compile Include="Commands\NavigateCommandTests.cs" />
@@ -77,10 +78,27 @@
     <Compile Include="Commands\TypeCommandTests.cs" />
     <Compile Include="Commands\TypeWindowCommandTests.cs" />
     <Compile Include="Commands\WaitCommandTests.cs" />
+    <Compile Include="Configuration\WebDrivers\ChromeWebDriverConfigTests.cs" />
+    <Compile Include="Configuration\WebDrivers\Exceptions\MissingWebDriverConfigExceptionTests.cs" />
+    <Compile Include="Configuration\WebDrivers\Exceptions\WebDriverConfigExceptionTests.cs" />
+    <Compile Include="Configuration\WebDrivers\WebDriverConfigsTests.cs" />
+    <Compile Include="Fixtures\Attributes\WebDriverConfigAttributeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxies\ElementTests.cs" />
+    <Compile Include="Session\Performers\SequentialSessionPerformerTests.cs" />
+    <Compile Include="Session\Recorders\SimpleSessionRecorderTests.cs" />
+    <Compile Include="Session\Trackers\SimpleSessionTrackerTests.cs" />
+    <Compile Include="Utilities\MultiPursposeValidatorTests.cs" />
     <Compile Include="Utilities\UriParserTests.cs" />
+    <Compile Include="WebDrivers\Exceptions\ElementNotFoundExceptionTests.cs" />
+    <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverStateExceptionTests.cs" />
+    <Compile Include="WebDrivers\Exceptions\WebDriverExceptionTests.cs" />
+    <Compile Include="WebDrivers\WebDriverFactoryTests.cs" />
+    <Compile Include="WebDrivers\WebDriverStateTests.cs" />
+    <Compile Include="WebDrivers\WebDriverUtilitiesTests.cs" />
     <Compile Include="_Auxiliaries\AssertMultiple.cs" />
     <Compile Include="_Auxiliaries\AssertString.cs" />
+    <Compile Include="_Auxiliaries\CustomExceptionTests.cs" />
     <Compile Include="_Stubs\ActionCommandStub.cs" />
     <Compile Include="_Stubs\ReturnCommandStub.cs" />
     <Compile Include="_Auxiliaries\IgnoreExceptions.cs" />
@@ -94,6 +112,7 @@
       <Name>WbTstr</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -10,18 +10,20 @@ namespace WbTstr.Proxies
 {
     public class Element : IElement
     {
-        private readonly IWebElement _webElement;
-        private readonly string _selector;
-
         internal Element(IWebElement webElement)
         {
-            _webElement = webElement;
+            if (webElement == null) throw new ArgumentNullException(nameof(webElement));
+
+            InnerWebElement = webElement;
         }
 
         internal Element(IWebElement webElement, string selector)
         {
-            _webElement = webElement;
-            _selector = selector;
+            if (webElement == null) throw new ArgumentNullException(nameof(webElement));
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+
+            InnerWebElement = webElement;
+            Selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
         }
 
         /* Methods ----------------------------------------------------------*/
@@ -30,35 +32,35 @@ namespace WbTstr.Proxies
         {
             if (element == null) throw new ArgumentNullException(nameof(element));
 
-            return (element as Element).InnerWebElement;
+            return (element as Element)?.InnerWebElement;
         }
 
         /* Properties -------------------------------------------------------*/
 
-        internal IWebElement InnerWebElement => _webElement;
+        internal IWebElement InnerWebElement { get; }
 
-        public string Selector => _selector;
+        public string Selector { get; }
 
-        public string TagName => _webElement.TagName;
+        public string TagName => InnerWebElement.TagName;
 
-        public string Text => _webElement.Text;
+        public string Text => InnerWebElement.Text;
 
-        public bool Enabled => _webElement.Enabled;
+        public bool Enabled => InnerWebElement.Enabled;
 
-        public bool Selected => _webElement.Selected;
+        public bool Selected => InnerWebElement.Selected;
 
-        public bool Displayed => _webElement.Displayed;
+        public bool Displayed => InnerWebElement.Displayed;
 
-        public string GetAttribute(string name) => _webElement.GetAttribute(name);
+        public string GetAttribute(string name) => InnerWebElement.GetAttribute(name);
 
-        public string GetCssValue(string name) => _webElement.GetCssValue(name);
+        public string GetCssValue(string name) => InnerWebElement.GetCssValue(name);
 
-        public int Height => _webElement.Size.Width;
+        public int Height => InnerWebElement.Size.Width;
 
-        public int Width => _webElement.Size.Width;
+        public int Width => InnerWebElement.Size.Width;
 
-        public int UpperLeftCornerX => _webElement.Location.X;
+        public int UpperLeftCornerX => InnerWebElement.Location.X;
 
-        public int UpperLeftCornerY => _webElement.Location.Y;
+        public int UpperLeftCornerY => InnerWebElement.Location.Y;
     }
 }
