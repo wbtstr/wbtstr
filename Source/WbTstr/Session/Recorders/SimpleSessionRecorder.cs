@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using OpenQA.Selenium;
 using WbTstr.Commands;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.Session.Performers.Interfaces;
@@ -22,14 +18,12 @@ namespace WbTstr.Session.Recorders
 
         public ISessionRecorder Initialize(ISessionPerformer performer)
         {
-            if (performer == null) throw new ArgumentNullException(nameof(performer));
+            _performer = performer ?? throw new ArgumentNullException(nameof(performer));
 
             if (_initialized)
             {
                 throw new InvalidOperationException($"{nameof(SimpleSessionRecorder)} can be initialized only once.");
             }
-
-            _performer = performer;
 
             _initialized = true;
             return this;

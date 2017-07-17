@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WbTstr.Session.Performers.Interfaces;
-using WbTstr.Session.Trackers.Interfaces;
+﻿using WbTstr.Session.Performers.Interfaces;
 
 namespace WbTstr.Session.Recorders.Interfaces
 {
