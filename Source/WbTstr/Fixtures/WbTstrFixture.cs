@@ -68,14 +68,12 @@ namespace WbTstr.Fixtures
 
         protected void Use(IWebDriverConfig webDriverConfig)
         {
-            if (webDriverConfig == null) throw new ArgumentNullException(nameof(webDriverConfig));
-
             if (_webDriverConfig != null)
             {
                 throw new InvalidOperationException("Cannot override already initialized WebDriver configuration.");
             }
 
-            _webDriverConfig = webDriverConfig;
+            _webDriverConfig = webDriverConfig ?? throw new ArgumentNullException(nameof(webDriverConfig));
         }
 
         /* Finalizer --------------------------------------------------------*/
