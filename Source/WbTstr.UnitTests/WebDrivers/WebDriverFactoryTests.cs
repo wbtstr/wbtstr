@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework.Internal;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using WbTstr.Configuration.WebDrivers;
 using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.WebDrivers;
+using WbTstr.UnitTests._Stubs;
 
 namespace WbTstr.UnitTests.WebDrivers
 {
@@ -27,6 +21,19 @@ namespace WbTstr.UnitTests.WebDrivers
 
             // Assert
             Assert.Throws<ArgumentNullException>(action);
+        }
+
+        [TestCase]
+        public void CreateFromConfig_WhenNoneWebDriver_ThrowArgumentException()
+        {
+            // arrange
+            IWebDriverConfig config = new NoneWebDriverConfigStub();
+
+            // act
+            TestDelegate action = () => WebDriverFactory.CreateFromConfig(config);
+
+            // assert
+            Assert.Throws<ArgumentException>(action);
         }
     }
 }
