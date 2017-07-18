@@ -100,6 +100,7 @@
     <Compile Include="_Auxiliaries\AssertString.cs" />
     <Compile Include="_Auxiliaries\CustomExceptionTests.cs" />
     <Compile Include="_Stubs\ActionCommandStub.cs" />
+    <Compile Include="_Stubs\NoneWebDriverConfigStub.cs" />
     <Compile Include="_Stubs\ReturnCommandStub.cs" />
     <Compile Include="_Auxiliaries\IgnoreExceptions.cs" />
   </ItemGroup>
