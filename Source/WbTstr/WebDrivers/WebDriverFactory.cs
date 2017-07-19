@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using WbTstr.Configuration.WebDrivers.Interfaces;
+using WbTstr.Configuration.WebDrivers;
 
 namespace WbTstr.WebDrivers
 {
@@ -26,11 +27,21 @@ namespace WbTstr.WebDrivers
 
         private static IWebDriver CreateChromeWebDriver(IWebDriverConfig config)
         {
-            var options = new ChromeOptions();
+            var chromeConfig = config as ChromeWebDriverConfig;
+            var options = CreateChromeWebDriverOptions(chromeConfig);
             var service = ChromeDriverService.CreateDefaultService();
             var webDriver = new ChromeDriver(service, options);
 
             return webDriver;
+        }
+
+        private static ChromeOptions CreateChromeWebDriverOptions(ChromeWebDriverConfig chromeConfig)
+        {
+            var options = new ChromeOptions();
+            if (chromeConfig.Options.Args != null) options.AddArguments(chromeConfig.Options.Args);
+            if (chromeConfig.Options.DebuggerAddress != null) options.DebuggerAddress = chromeConfig.Options.DebuggerAddress;
+
+            return options;
         }
     }
 }
