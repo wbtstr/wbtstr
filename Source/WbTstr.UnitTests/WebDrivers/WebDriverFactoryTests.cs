@@ -4,6 +4,8 @@ using NUnit.Framework;
 using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.WebDrivers;
 using WbTstr.UnitTests._Stubs;
+using WbTstr.Configuration.WebDrivers.Options;
+using WbTstr.Configuration.WebDrivers;
 
 namespace WbTstr.UnitTests.WebDrivers
 {
