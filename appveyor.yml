@@ -25,6 +25,9 @@ environment:
   COVERALLS_REPO_TOKEN:
     secure: ZM3cfILSeJIYHKAvV+/wa5Smu9spteVYfCGlreP6jXRKRryNL8rqwXDKrUD+KnMc    
 
+hosts:
+  api.nuget.org: 93.184.221.200
+
 #---------------------------------#
 #       Build configuration       #
 #---------------------------------#
