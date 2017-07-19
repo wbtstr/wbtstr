@@ -1,15 +1,14 @@
 ﻿using NUnit.Framework;
-using WbTstr.Fixtures;
 using WbTstr.Fixtures.Attributes;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.Utilities.Constants;
 using WbTstr.WebDrivers.Constants;
 
-namespace WbTstr.IntegrationTests.Fixtures
+namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
 {
     [TestFixture]
     [WebDriverConfig(WebDriverType.Chrome)]
-    public class DerivedFromSimpleFixture : SimpleWbTstrFixture
+    public class DerivedFromSimpleFixture : Fixtures.SimpleWbTstrFixture
     {
         [TestCase]
         public void TestMethod()
