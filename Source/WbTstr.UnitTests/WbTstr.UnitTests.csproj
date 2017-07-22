@@ -100,10 +100,14 @@
     <Compile Include="_Auxiliaries\AssertString.cs" />
     <Compile Include="_Auxiliaries\CustomExceptionTests.cs" />
     <Compile Include="_Stubs\ActionCommandStub.cs" />
+    <Compile Include="_Stubs\NoneWebDriverConfigStub.cs" />
     <Compile Include="_Stubs\ReturnCommandStub.cs" />
     <Compile Include="_Auxiliaries\IgnoreExceptions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Packages.config" />
   </ItemGroup>
   <ItemGroup>

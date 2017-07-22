@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using WbTstr.Configuration.WebDrivers;
 using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.UnitTests._Auxiliaries;
 using WbTstr.WebDrivers.Constants;
+using System.Configuration;
+using WbTstr.Configuration.WebDrivers.Exceptions;
 
 namespace WbTstr.UnitTests.Configuration.WebDrivers
 {
@@ -157,6 +157,50 @@ namespace WbTstr.UnitTests.Configuration.WebDrivers
 
             // Assert
             AssertMultiple.Throws<ArgumentException>(actions);
+        }
+
+        [TestCase]
+        public void GetFromPreset_FilledPreset_NotNull()
+        {
+            // Arrange
+            WebDriverType type = WebDriverType.Chrome;
+            string preset = "preset1";
+
+            // Act
+            var actual = WebDriverConfigs.GetFromPreset(type, preset) as ChromeWebDriverConfig;
+
+
+            //Assert
+            Assert.NotNull(actual.Options);
+        }
+
+        [TestCase]
+        public void GetFromPreset_FilledPreset_ReturnsOptionArgs()
+        {
+            // Arrange
+            WebDriverType type = WebDriverType.Chrome;
+            string preset = "preset1";
+
+            // Act
+            var actual = WebDriverConfigs.GetFromPreset(type, preset) as ChromeWebDriverConfig;
+            var expected = "start-maximized";
+
+            // Assert
+            Assert.That(actual.Options.Args, Is.EqualTo(expected));
+        }
+
+        [TestCase]
+        public void GetFromPreset_FilledWrongPresetName_ThrowsException()
+        {
+            // Arrange
+            WebDriverType type = WebDriverType.Chrome;
+            string preset = "wrongPreset";
+
+            // Act
+            TestDelegate action = () => WebDriverConfigs.GetFromPreset(type, preset);
+
+            // Assert
+            Assert.Throws<MissingWebDriverConfigSectionException>(action);
         }
     }
 }
