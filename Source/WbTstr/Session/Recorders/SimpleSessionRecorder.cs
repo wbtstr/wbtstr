@@ -241,6 +241,38 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
+        public SimpleSessionRecorder Select(string selector, params string[] values)
+        {
+            var command = new SelectCommand(selector, values);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Select(string selector, params int[] indexes)
+        {
+            var command = new SelectCommand(selector, indexes);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Select(IElement element, params string[] values)
+        {
+            var command = new SelectCommand(element, values);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Select(IElement element, params int[] indexes)
+        {
+            var command = new SelectCommand(element, indexes);
+            _performer.Perform(command);
+
+            return this;
+        }
+
         public SimpleSessionRecorder Wait(int milliseconds = 0, int seconds = 0, int minutes = 0)
         {
             var duration = new TimeSpan(0, 0, minutes, seconds, milliseconds);
