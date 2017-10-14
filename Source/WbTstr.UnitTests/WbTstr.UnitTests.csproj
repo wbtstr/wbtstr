@@ -79,6 +79,7 @@
     <Compile Include="Commands\TypeCommandTests.cs" />
     <Compile Include="Commands\TypeWindowCommandTests.cs" />
     <Compile Include="Commands\WaitCommandTests.cs" />
+    <Compile Include="Commands\WaitUntilCommandTests.cs" />
     <Compile Include="Configuration\WebDrivers\ChromeWebDriverConfigTests.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\MissingWebDriverConfigExceptionTests.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\WebDriverConfigExceptionTests.cs" />

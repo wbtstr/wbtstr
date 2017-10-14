@@ -241,9 +241,22 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Wait(int miliseconds = 0, int seconds = 0, int minutes = 0)
+        public SimpleSessionRecorder Wait(int milliseconds = 0, int seconds = 0, int minutes = 0)
         {
-            var command = new WaitCommand(miliseconds, seconds, minutes);
+            var duration = new TimeSpan(0, 0, minutes, seconds, milliseconds);
+
+            var command = new WaitCommand(duration);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder WaitUntil(Func<bool> predicate, TimeSpan? interval, TimeSpan? timeout)
+        {
+            var defaultInterval = new TimeSpan(0, 0, 1);
+            var defaultTimeout = new TimeSpan(0, 0, 10);
+
+            var command = new WaitUntilCommand(predicate, interval ?? defaultInterval, timeout ?? defaultTimeout);
             _performer.Perform(command);
 
             return this;

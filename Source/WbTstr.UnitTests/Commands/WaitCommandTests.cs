@@ -8,16 +8,14 @@ namespace WbTstr.UnitTests.Commands
     [TestFixture]
     public class WaitCommandTests
     {
-        private const int DefaultMilliseconds = 0;
-        private const int DefaultSeconds = 0;
-        private const int DefaultMinutes = 0;
+        private readonly TimeSpan DefaultDuration = new TimeSpan(0, 0, 0, 0, 0);
 
         private WaitCommand _defaultCommand;
 
         [SetUp]
         public void SetUp()
         {
-            _defaultCommand = new WaitCommand(DefaultMilliseconds, DefaultSeconds, DefaultMinutes);
+            _defaultCommand = new WaitCommand(DefaultDuration);
         }
 
         [TestCase]
@@ -42,10 +40,10 @@ namespace WbTstr.UnitTests.Commands
             // Act
             TestDelegate[] actions =
             {
-                () => new WaitCommand(invalid, invalid, invalid), 
-                () => new WaitCommand(invalid, valid, valid),
-                () => new WaitCommand(valid, invalid, valid),
-                () => new WaitCommand(valid, valid, invalid),
+                () => new WaitCommand(new TimeSpan(0, 0, invalid, invalid, invalid)), 
+                () => new WaitCommand(new TimeSpan(0, 0, invalid, valid, valid)),
+                () => new WaitCommand(new TimeSpan(0, 0, valid, invalid, valid)),
+                () => new WaitCommand(new TimeSpan(0, 0, valid, valid, invalid)),
             };
 
             // Assert

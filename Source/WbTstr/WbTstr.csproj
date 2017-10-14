@@ -62,6 +62,7 @@
     <Compile Include="Commands\MaximizeCommand.cs" />
     <Compile Include="Commands\ResizeCommand.cs" />
     <Compile Include="Commands\TypeWindowCommand.cs" />
+    <Compile Include="Commands\WaitUntilCommand.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\MissingWebDriverConfigException.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\MissingWebDriverConfigSectionException.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\WebDriverConfigException.cs" />

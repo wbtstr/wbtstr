@@ -8,31 +8,23 @@ namespace WbTstr.Commands
 {
     internal class WaitCommand : WbTstrActionCommand
     {
-        private readonly int _milliseconds;
-        private readonly int _minutes;
-        private readonly int _seconds;
+        private readonly TimeSpan _duration;
 
-        public WaitCommand(int milliseconds, int seconds, int minutes)
+        public WaitCommand(TimeSpan duration)
         {
-            if (milliseconds < 0) throw new ArgumentException($"{nameof(milliseconds)} must be a positive number.");
-            if (seconds < 0) throw new ArgumentException($"{nameof(seconds)} must be a positive number.");
-            if (minutes < 0) throw new ArgumentException($"{nameof(minutes)} must be a positive number.");
-
-            _milliseconds = milliseconds;
-            _seconds = seconds;
-            _minutes = minutes;
+            _duration = duration;
         }
 
         /* Methods ----------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {
-            Thread.Sleep(new TimeSpan(0, 0, _minutes, _seconds, _milliseconds));
+            Thread.Sleep(_duration);
         }
 
         public override string ToString()
         {
-            return $"Waiting for {_minutes}m, {_seconds}s and {_milliseconds}ms";
+            return $"Waiting for {_duration.Minutes}m, {_duration.Seconds}s and {_duration.Milliseconds}ms";
         }
     }
 }
