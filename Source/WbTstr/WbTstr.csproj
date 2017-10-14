@@ -54,6 +54,7 @@
     <Compile Include="Commands\DragCommand.cs" />
     <Compile Include="Commands\ExecuteJsCommand.cs" />
     <Compile Include="Commands\FindCommand.cs" />
+    <Compile Include="Commands\FindMultipleCommand.cs" />
     <Compile Include="Commands\FocusCommand.cs" />
     <Compile Include="Commands\HoverCommand.cs" />
     <Compile Include="Commands\Interfaces\ICommand.cs" />

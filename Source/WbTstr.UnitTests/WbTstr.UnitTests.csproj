@@ -69,6 +69,7 @@
     <Compile Include="Commands\DragCommandTests.cs" />
     <Compile Include="Commands\ExecuteJsCommandTests.cs" />
     <Compile Include="Commands\FindCommandTests.cs" />
+    <Compile Include="Commands\FindMultipleCommandTests.cs" />
     <Compile Include="Commands\FocusCommandTests.cs" />
     <Compile Include="Commands\HoverCommandTests.cs" />
     <Compile Include="Commands\MaximizeCommandTests.cs" />

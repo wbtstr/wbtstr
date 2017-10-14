@@ -1,4 +1,6 @@
 ﻿using NUnit.Framework;
+using System.Linq;
+using System.Collections.Generic;
 using WbTstr.Fixtures.Attributes;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.Utilities.Constants;
@@ -35,6 +37,9 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
 
             IElement md = I.FindOnPage(".markdown-body");
             string mdTagName = md.TagName;
+
+            ICollection<IElement> h1 = I.FindMultipleOnPage("h1");
+            Assert.True(h1.Count >= 0);
 
             IElement b = I.ExecuteJs<IElement>("return window.document.body");
             string bTagName = I.ExecuteJs<string>("return window.document.body.tagName");

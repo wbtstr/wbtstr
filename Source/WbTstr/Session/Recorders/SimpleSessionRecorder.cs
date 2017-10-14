@@ -8,6 +8,7 @@ using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Constants;
 using WbTstr.Utilities.Constants;
 using System.IO;
+using System.Collections.Generic;
 
 namespace WbTstr.Session.Recorders
 {
@@ -134,6 +135,14 @@ namespace WbTstr.Session.Recorders
             var element = _performer.PerformAndReturn(command);
 
             return element;
+        }
+
+        public ICollection<IElement> FindMultipleOnPage(string selector)
+        {
+            var command = new FindMultipleCommand(selector);
+            var elements = _performer.PerformAndReturn(command);
+
+            return elements;
         }
 
         public SimpleSessionRecorder Focus(string selector)
