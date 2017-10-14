@@ -4,7 +4,7 @@
 
 image: Visual Studio 2017
 
-version: 0.2.1.{build}
+version: 0.3.0.{build}
 
 branches:
   only:
@@ -24,6 +24,9 @@ assembly_info:
 environment:
   COVERALLS_REPO_TOKEN:
     secure: ZM3cfILSeJIYHKAvV+/wa5Smu9spteVYfCGlreP6jXRKRryNL8rqwXDKrUD+KnMc    
+
+hosts:
+  api.nuget.org: 93.184.221.200
 
 #---------------------------------#
 #       Build configuration       #

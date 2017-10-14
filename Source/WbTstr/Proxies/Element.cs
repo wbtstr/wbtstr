@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 using WbTstr.Proxies.Interfaces;
 
@@ -12,17 +8,14 @@ namespace WbTstr.Proxies
     {
         internal Element(IWebElement webElement)
         {
-            if (webElement == null) throw new ArgumentNullException(nameof(webElement));
-
-            InnerWebElement = webElement;
+            InnerWebElement = webElement ?? throw new ArgumentNullException(nameof(webElement));
         }
 
         internal Element(IWebElement webElement, string selector)
         {
-            if (webElement == null) throw new ArgumentNullException(nameof(webElement));
             if (selector == null) throw new ArgumentNullException(nameof(selector));
 
-            InnerWebElement = webElement;
+            InnerWebElement = webElement ?? throw new ArgumentNullException(nameof(webElement));
             Selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
         }
 

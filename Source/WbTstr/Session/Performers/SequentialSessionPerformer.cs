@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using WbTstr.Commands.Interfaces;
 using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.Session.Performers.Interfaces;
@@ -31,7 +25,7 @@ namespace WbTstr.Session.Performers
         public ISessionPerformer Initialize(Lazy<IWebDriverConfig> webDriverConfig, ISessionTracker tracker)
         {
             if (webDriverConfig == null) throw new ArgumentNullException(nameof(webDriverConfig));
-            if (tracker == null) throw new ArgumentNullException(nameof(tracker));
+            _tracker = tracker ?? throw new ArgumentNullException(nameof(tracker));
 
             if (_initialized)
             {
@@ -39,7 +33,6 @@ namespace WbTstr.Session.Performers
             }
 
             _webDriver = new Lazy<IWebDriver>(() => WebDriverFactory.CreateFromConfig(webDriverConfig.Value));
-            _tracker = tracker;
 
             _initialized = true;
             return this;

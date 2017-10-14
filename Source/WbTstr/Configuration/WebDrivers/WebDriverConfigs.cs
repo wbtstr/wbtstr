@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.Configuration;
 using WbTstr.Configuration.WebDrivers.Interfaces;
+using WbTstr.Configuration.WebDrivers.Options;
 using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.Configuration.WebDrivers
@@ -60,7 +63,10 @@ namespace WbTstr.Configuration.WebDrivers
 
         private static ChromeWebDriverConfig GetPresetChromeWebDriverConfig(string preset)
         {
-            return GetDefaultChromeWebDriverConfig();
+            var driverConfig = new ChromeWebDriverConfig();
+            driverConfig.Options = new ChromeWebDriverOptions(preset);
+
+            return driverConfig;
         }
     }
 }

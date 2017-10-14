@@ -1,7 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
 using WbTstr.Commands.Abstracts;
-using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Constants;
 using WbTstr.WebDrivers.Exceptions;
 
