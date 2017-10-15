@@ -39,8 +39,7 @@ namespace WbTstr.Fixtures
                 {
                     if (_webDriverConfig == null)
                     {
-                        var attribute = Attribute.GetCustomAttribute(GetType(), typeof(WebDriverConfigAttribute)) as WebDriverConfigAttribute;
-                        if (attribute != null)
+                        if (Attribute.GetCustomAttribute(GetType(), typeof(WebDriverConfigAttribute)) is WebDriverConfigAttribute attribute)
                         {
                             _webDriverConfig = string.IsNullOrEmpty(attribute.Preset)
                                 ? WebDriverConfigs.GetDefault(attribute.Type)
@@ -78,9 +77,9 @@ namespace WbTstr.Fixtures
             _webDriverConfig = webDriverConfig ?? throw new ArgumentNullException(nameof(webDriverConfig));
         }
 
-        protected IWebDriverState CaptureState()
+        protected IPage CapturePage()
         {
-            var command = new CaptureStateCommand();
+            var command = new CapturePageCommand();
             return _performer.PerformAndReturn(command);
         }
 

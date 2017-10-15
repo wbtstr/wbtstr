@@ -94,7 +94,6 @@
     <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverStateExceptionTests.cs" />
     <Compile Include="WebDrivers\Exceptions\WebDriverExceptionTests.cs" />
     <Compile Include="WebDrivers\WebDriverFactoryTests.cs" />
-    <Compile Include="WebDrivers\WebDriverStateTests.cs" />
     <Compile Include="WebDrivers\WebDriverUtilitiesTests.cs" />
     <Compile Include="_Auxiliaries\AssertMultiple.cs" />
     <Compile Include="_Auxiliaries\AssertString.cs" />

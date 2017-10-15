@@ -48,9 +48,9 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
             bool bHasAttributes = I.ExecuteJs<bool>("return window.document.body.hasAttributes()");
 
             // Assert
-            var state = CaptureState();
-            Assert.AreEqual(mirabeauTitle, state.Title);
-            Assert.AreEqual(mirabeauUrl, state.Url);
+            var page = CapturePage();
+            Assert.AreEqual(mirabeauTitle, page.Title);
+            Assert.AreEqual(mirabeauUrl, page.Url);
             Assert.AreEqual(b.TagName.ToUpper(), bTagName.ToUpper());
             Assert.NotZero(bChildElementCount);
             Assert.IsTrue(bHasAttributes);

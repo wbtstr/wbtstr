@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="Commands\Abstracts\WbTstrActionCommand.cs" />
     <Compile Include="Commands\Abstracts\WbTstrReturnCommand.cs" />
-    <Compile Include="Commands\CaptureStateCommand.cs" />
+    <Compile Include="Commands\CapturePageCommand.cs" />
     <Compile Include="Commands\DragCommand.cs" />
     <Compile Include="Commands\ExecuteJsCommand.cs" />
     <Compile Include="Commands\FindCommand.cs" />
@@ -69,8 +69,10 @@
     <Compile Include="Configuration\WebDrivers\Exceptions\MissingWebDriverConfigSectionException.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\WebDriverConfigException.cs" />
     <Compile Include="Configuration\WebDrivers\WebDriverProxyConfig.cs" />
+    <Compile Include="Proxies\Cookie.cs" />
     <Compile Include="Proxies\Element.cs" />
     <Compile Include="Proxies\Extensions\ElementExtensions.cs" />
+    <Compile Include="Proxies\Interfaces\ICookie.cs" />
     <Compile Include="Proxies\Interfaces\IElement.cs" />
     <Compile Include="Utilities\Constants\Keys.cs" />
     <Compile Include="Commands\ClickCommand.cs" />
@@ -102,9 +104,9 @@
     <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverStateException.cs" />
     <Compile Include="WebDrivers\Exceptions\WebDriverException.cs" />
     <Compile Include="WebDrivers\Extensions\WebDriverExtensions.cs" />
-    <Compile Include="WebDrivers\Interfaces\IWebDriverState.cs" />
+    <Compile Include="Proxies\Interfaces\IPage.cs" />
     <Compile Include="WebDrivers\WebDriverFactory.cs" />
-    <Compile Include="WebDrivers\WebDriverState.cs" />
+    <Compile Include="Proxies\Page.cs" />
     <Compile Include="WebDrivers\WebDriverUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
