@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Commands\Abstracts\WbTstrActionCommand.cs" />
     <Compile Include="Commands\Abstracts\WbTstrReturnCommand.cs" />
+    <Compile Include="Commands\AuthenticateCommand.cs" />
     <Compile Include="Commands\CapturePageCommand.cs" />
     <Compile Include="Commands\DragCommand.cs" />
     <Compile Include="Commands\ExecuteJsCommand.cs" />

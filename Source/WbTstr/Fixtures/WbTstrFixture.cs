@@ -83,6 +83,12 @@ namespace WbTstr.Fixtures
             return _performer.PerformAndReturn(command);
         }
 
+        protected void Authenticate(string username, string password, TimeSpan? timeout = null)
+        {
+            var command = new AuthenticateCommand(username, password, timeout ?? TimeSpan.FromSeconds(5));
+            _performer.Perform(command);
+        }
+
         /* Finalizer --------------------------------------------------------*/
 
         public void Dispose()
