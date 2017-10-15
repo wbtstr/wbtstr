@@ -36,6 +36,27 @@ namespace WbTstr.Configuration.WebDrivers
         internal ChromeOptions AsChromeOptions()
         {
             var options = new ChromeOptions();
+            foreach (var argument in Arguments)
+            {
+                options.AddArgument(argument.Key);
+            }
+
+            foreach (var extension in Extensions)
+            {
+                if (extension.Value)
+                {
+                    options.AddEncodedExtension(extension.Key);                    
+                }
+                else
+                {
+                    options.AddExtension(extension.Key);
+                }
+            }
+
+            foreach (var capability in Capabilities)
+            {
+                options.AddAdditionalCapability(capability.Key, capability.Value);
+            }
 
             return options;
         }
