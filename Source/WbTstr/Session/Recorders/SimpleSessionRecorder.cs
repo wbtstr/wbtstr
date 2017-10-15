@@ -258,7 +258,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder WaitUntil(Func<bool> predicate, TimeSpan? interval, TimeSpan? timeout)
+        public SimpleSessionRecorder WaitUntil(Func<bool> predicate, TimeSpan? interval = null, TimeSpan? timeout = null)
         {
             var defaultInterval = new TimeSpan(0, 0, 1);
             var defaultTimeout = new TimeSpan(0, 0, 10);

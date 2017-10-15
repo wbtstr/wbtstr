@@ -1,17 +1,16 @@
 ﻿using System;
 using OpenQA.Selenium;
+using WbTstr.WebDrivers.Interfaces;
 
 namespace WbTstr.WebDrivers
 {
-    public class WebDriverState
+    public class WebDriverState : IWebDriverState
     {
         private readonly IWebDriver _webDriver;
 
         internal WebDriverState(IWebDriver webDriver)
         {
-            if (webDriver == null) throw new ArgumentNullException(nameof(webDriver));
-
-            _webDriver = webDriver;
+            _webDriver = webDriver ?? throw new ArgumentNullException(nameof(webDriver));
         }
 
         /* Properties -------------------------------------------------------*/

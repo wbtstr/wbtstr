@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Commands\Abstracts\WbTstrActionCommand.cs" />
     <Compile Include="Commands\Abstracts\WbTstrReturnCommand.cs" />
+    <Compile Include="Commands\CaptureStateCommand.cs" />
     <Compile Include="Commands\DragCommand.cs" />
     <Compile Include="Commands\ExecuteJsCommand.cs" />
     <Compile Include="Commands\FindCommand.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverStateException.cs" />
     <Compile Include="WebDrivers\Exceptions\WebDriverException.cs" />
     <Compile Include="WebDrivers\Extensions\WebDriverExtensions.cs" />
+    <Compile Include="WebDrivers\Interfaces\IWebDriverState.cs" />
     <Compile Include="WebDrivers\WebDriverFactory.cs" />
     <Compile Include="WebDrivers\WebDriverState.cs" />
     <Compile Include="WebDrivers\WebDriverUtilities.cs" />

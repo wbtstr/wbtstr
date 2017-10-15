@@ -1,4 +1,5 @@
 ﻿using System;
+using WbTstr.Commands;
 using WbTstr.Configuration.WebDrivers;
 using WbTstr.Configuration.WebDrivers.Exceptions;
 using WbTstr.Configuration.WebDrivers.Interfaces;
@@ -6,6 +7,7 @@ using WbTstr.Fixtures.Attributes;
 using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Recorders.Interfaces;
 using WbTstr.Session.Trackers.Interfaces;
+using WbTstr.WebDrivers.Interfaces;
 
 namespace WbTstr.Fixtures
 {
@@ -74,6 +76,12 @@ namespace WbTstr.Fixtures
             }
 
             _webDriverConfig = webDriverConfig ?? throw new ArgumentNullException(nameof(webDriverConfig));
+        }
+
+        protected IWebDriverState CaptureState()
+        {
+            var command = new CaptureStateCommand();
+            return _performer.PerformAndReturn(command);
         }
 
         /* Finalizer --------------------------------------------------------*/

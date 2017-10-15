@@ -9,7 +9,7 @@ using WbTstr.WebDrivers.Constants;
 namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
 {
     [TestFixture]
-    [WebDriverConfig(WebDriverType.Chrome, "preset1")]
+    [WebDriverConfig(WebDriverType.Chrome)]
     public class DerivedFromSimpleFixture : Fixtures.SimpleWbTstrFixture
     {
         [TestCase]
@@ -22,7 +22,8 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
             // Act
             I.NavigateTo("https://github.com/")
                 .Type("username??")
-                .ResizeWindow(1024, 720)
+                .ResizeWindow(1600, 1050)
+                .WaitUntil(() => I.FindOnPage(".header-search-input").Displayed)
                 .Focus(".header-search-input")
                 .Wait(seconds: 3)
                 .Type("wbtstr.net", ".header-search-input")
@@ -30,9 +31,9 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
                 .MaximizeWindow()
                 .Type("wbtstr" + Keys.Enter, ".header-search-input", true)
                 .Wait(seconds: 3)
-                .Hover(".js-repo-list a:first-child")
+                .Hover(".repo-list a:first-child")
                 .Wait(seconds: 3)
-                .ClickOn(".js-repo-list a:first-child")
+                .ClickOn(".repo-list a:first-child")
                 .TakeScreenshot();
 
             IElement md = I.FindOnPage(".markdown-body");
@@ -47,6 +48,9 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
             bool bHasAttributes = I.ExecuteJs<bool>("return window.document.body.hasAttributes()");
 
             // Assert
+            var state = CaptureState();
+            Assert.AreEqual(mirabeauTitle, state.Title);
+            Assert.AreEqual(mirabeauUrl, state.Url);
             Assert.AreEqual(b.TagName.ToUpper(), bTagName.ToUpper());
             Assert.NotZero(bChildElementCount);
             Assert.IsTrue(bHasAttributes);
