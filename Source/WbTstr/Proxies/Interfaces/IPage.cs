@@ -22,6 +22,6 @@ namespace WbTstr.WebDrivers.Interfaces
 
         IReadOnlyList<string> Console { get; }
 
-        IReadOnlyCollection<ICookie> Cookies { get; }
+        IReadOnlyDictionary<string, ICookie> Cookies { get; }
     }
 }

@@ -6,6 +6,7 @@ using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Interfaces;
 using WebCookie = OpenQA.Selenium.Cookie;
 using ProxyCookie = WbTstr.Proxies.Cookie;
+using WbTstr.Proxies.Interfaces;
 
 namespace WbTstr.Commands
 {
@@ -32,7 +33,7 @@ namespace WbTstr.Commands
             };
 
             page.Cookies = new List<WebCookie>(cookies.AllCookies)
-                .Select(x => new ProxyCookie(x)).ToList();
+                .Select(x => new ProxyCookie(x)).ToDictionary(x => x.Name, x => (ICookie)x);
 
             page.Console = new List<LogEntry>(logs.GetLog("browser"))
                 .OrderBy(x => x.Timestamp).Select(x => x.Message).ToList();

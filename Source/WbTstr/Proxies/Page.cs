@@ -26,6 +26,6 @@ namespace WbTstr.WebDrivers
 
         public IReadOnlyList<string> Console { get; internal set; }
 
-        public IReadOnlyCollection<ICookie> Cookies { get; internal set; }
+        public IReadOnlyDictionary<string, ICookie> Cookies { get; internal set; }
     }
 }
