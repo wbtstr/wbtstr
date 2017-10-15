@@ -9,7 +9,7 @@ using WbTstr.WebDrivers.Constants;
 namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
 {
     [TestFixture]
-    [WebDriverConfig(WebDriverType.Chrome)]
+    [WebDriverConfig(WebDriverType.Chrome, "preset1")]
     public class DerivedFromSimpleFixture : Fixtures.SimpleWbTstrFixture
     {
         [TestCase]

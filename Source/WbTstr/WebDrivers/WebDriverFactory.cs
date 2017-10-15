@@ -28,20 +28,11 @@ namespace WbTstr.WebDrivers
         private static IWebDriver CreateChromeWebDriver(IWebDriverConfig config)
         {
             var chromeConfig = config as ChromeWebDriverConfig;
-            var options = CreateChromeWebDriverOptions(chromeConfig);
+            var options = chromeConfig.AsChromeOptions();
             var service = ChromeDriverService.CreateDefaultService();
             var webDriver = new ChromeDriver(service, options);
 
             return webDriver;
-        }
-
-        private static ChromeOptions CreateChromeWebDriverOptions(ChromeWebDriverConfig chromeConfig)
-        {
-            var options = new ChromeOptions();
-            if (chromeConfig.Options.Args != null) options.AddArguments(chromeConfig.Options.Args);
-            if (chromeConfig.Options.DebuggerAddress != null) options.DebuggerAddress = chromeConfig.Options.DebuggerAddress;
-
-            return options;
         }
     }
 }
