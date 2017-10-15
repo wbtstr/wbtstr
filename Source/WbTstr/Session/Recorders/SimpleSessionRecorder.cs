@@ -260,8 +260,8 @@ namespace WbTstr.Session.Recorders
 
         public SimpleSessionRecorder WaitUntil(Func<bool> predicate, TimeSpan? interval = null, TimeSpan? timeout = null)
         {
-            var defaultInterval = new TimeSpan(0, 0, 1);
-            var defaultTimeout = new TimeSpan(0, 0, 10);
+            var defaultInterval = TimeSpan.FromSeconds(1);
+            var defaultTimeout = TimeSpan.FromSeconds(5);
 
             var command = new WaitUntilCommand(predicate, interval ?? defaultInterval, timeout ?? defaultTimeout);
             _performer.Perform(command);
@@ -275,6 +275,32 @@ namespace WbTstr.Session.Recorders
             var returnValue = _performer.PerformAndReturn(command);
 
             return returnValue;
+        }
+
+        public SimpleSessionRecorder Authenticate(string username, string password, TimeSpan? timeout = null)
+        {
+            var defaultTimeout = TimeSpan.FromSeconds(5);
+
+            var command = new AuthenticateCommand(username, password, timeout ?? defaultTimeout);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder SetCookie(string name, string value, string domain = null, string path = null, DateTime? expiry = null)
+        {
+            var command = new SetCookieCommand(name, value, domain, path, expiry);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder DeleteCookie(string name)
+        {
+            var command = new DeleteCookieCommand(name);
+            _performer.Perform(command);
+
+            return this;
         }
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="Commands\Abstracts\WbTstrReturnCommand.cs" />
     <Compile Include="Commands\AuthenticateCommand.cs" />
     <Compile Include="Commands\CapturePageCommand.cs" />
+    <Compile Include="Commands\DeleteCookieCommand.cs" />
     <Compile Include="Commands\DragCommand.cs" />
     <Compile Include="Commands\ExecuteJsCommand.cs" />
     <Compile Include="Commands\FindCommand.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Commands\MaximizeCommand.cs" />
     <Compile Include="Commands\ResizeCommand.cs" />
     <Compile Include="Commands\SelectCommand.cs" />
+    <Compile Include="Commands\SetCookieCommand.cs" />
     <Compile Include="Commands\TypeWindowCommand.cs" />
     <Compile Include="Commands\WaitUntilCommand.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\MissingWebDriverConfigException.cs" />
