@@ -50,14 +50,6 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
             Assert.AreEqual(b.TagName.ToUpper(), bTagName.ToUpper());
             Assert.NotZero(bChildElementCount);
             Assert.IsTrue(bHasAttributes);
-
-            I.CheckThat(
-                title: mirabeauTitle,
-                url: mirabeauUrl
-            );
-
-            I.CheckThat(state => state.Title == mirabeauTitle);
-            I.CheckThat(state => state.Url == mirabeauUrl);
         }
     }
 }

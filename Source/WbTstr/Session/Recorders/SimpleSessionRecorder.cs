@@ -32,31 +32,6 @@ namespace WbTstr.Session.Recorders
 
         /* Methods ----------------------------------------------------------*/
 
-        public SimpleSessionRecorder CheckThat(string url = null, string title = null)
-        {
-            if (!string.IsNullOrEmpty(url))
-            {
-                var command = new AssertStateCommand(PropertyKey.Url, url);
-                _performer.Perform(command);
-            }
-
-            if (!string.IsNullOrEmpty(title))
-            {
-                var command = new AssertStateCommand(PropertyKey.Title, title);
-                _performer.Perform(command);
-            }
-
-            return this;
-        }
-
-        public SimpleSessionRecorder CheckThat(Expression<Func<WebDriverState, bool>> expression)
-        {
-            var command = new AssertStateExpCommand(expression);
-            _performer.Perform(command);
-
-            return this;
-        }
-
         public SimpleSessionRecorder ClickOn(string selector, MouseClick clickType = MouseClick.Single)
         {
             var command = new ClickCommand(selector, clickType);

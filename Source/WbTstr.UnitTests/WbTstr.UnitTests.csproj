@@ -63,8 +63,6 @@
   <ItemGroup>
     <Compile Include="Commands\Abstracts\WbTstrActionCommandTests.cs" />
     <Compile Include="Commands\Abstracts\WbTstrReturnCommandTests.cs" />
-    <Compile Include="Commands\AssertStateCommandTests.cs" />
-    <Compile Include="Commands\AssertStateExpCommandTests.cs" />
     <Compile Include="Commands\ClickCommandTests.cs" />
     <Compile Include="Commands\DragCommandTests.cs" />
     <Compile Include="Commands\ExecuteJsCommandTests.cs" />
