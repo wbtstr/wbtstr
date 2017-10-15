@@ -55,5 +55,7 @@ namespace WbTstr.Proxies
         public int UpperLeftCornerX => InnerWebElement.Location.X;
 
         public int UpperLeftCornerY => InnerWebElement.Location.Y;
+
+        public string HTML => InnerWebElement.GetAttribute("outerHTML");
     }
 }

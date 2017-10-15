@@ -51,25 +51,33 @@
   <ItemGroup>
     <Compile Include="Commands\Abstracts\WbTstrActionCommand.cs" />
     <Compile Include="Commands\Abstracts\WbTstrReturnCommand.cs" />
+    <Compile Include="Commands\AuthenticateCommand.cs" />
+    <Compile Include="Commands\CapturePageCommand.cs" />
+    <Compile Include="Commands\DeleteCookieCommand.cs" />
     <Compile Include="Commands\DragCommand.cs" />
     <Compile Include="Commands\ExecuteJsCommand.cs" />
     <Compile Include="Commands\FindCommand.cs" />
+    <Compile Include="Commands\FindMultipleCommand.cs" />
     <Compile Include="Commands\FocusCommand.cs" />
     <Compile Include="Commands\HoverCommand.cs" />
     <Compile Include="Commands\Interfaces\ICommand.cs" />
     <Compile Include="Commands\Interfaces\IReturnCommand.cs" />
     <Compile Include="Commands\MaximizeCommand.cs" />
     <Compile Include="Commands\ResizeCommand.cs" />
+    <Compile Include="Commands\SelectCommand.cs" />
+    <Compile Include="Commands\SetCookieCommand.cs" />
     <Compile Include="Commands\TypeWindowCommand.cs" />
+    <Compile Include="Commands\WaitUntilCommand.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\MissingWebDriverConfigException.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\MissingWebDriverConfigSectionException.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\WebDriverConfigException.cs" />
-    <Compile Include="Configuration\WebDrivers\WebDriverOptions\ChromeDriverOptions.cs" />
+    <Compile Include="Configuration\WebDrivers\WebDriverProxyConfig.cs" />
+    <Compile Include="Proxies\Cookie.cs" />
     <Compile Include="Proxies\Element.cs" />
     <Compile Include="Proxies\Extensions\ElementExtensions.cs" />
+    <Compile Include="Proxies\Interfaces\ICookie.cs" />
     <Compile Include="Proxies\Interfaces\IElement.cs" />
     <Compile Include="Utilities\Constants\Keys.cs" />
-    <Compile Include="Commands\AssertStateExpCommand.cs" />
     <Compile Include="Commands\ClickCommand.cs" />
     <Compile Include="Commands\ScreenshotCommand.cs" />
     <Compile Include="Commands\TypeCommand.cs" />
@@ -77,10 +85,10 @@
     <Compile Include="Utilities\Constants\MouseClick.cs" />
     <Compile Include="Utilities\MultiPurposeValidator.cs" />
     <Compile Include="Utilities\UriParser.cs" />
+    <Compile Include="Utilities\XmlParser.cs" />
     <Compile Include="WebDrivers\Constants\PropertyKey.cs" />
     <Compile Include="Commands\Interfaces\IActionCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
-    <Compile Include="Commands\AssertStateCommand.cs" />
     <Compile Include="Configuration\WebDrivers\ChromeWebDriverConfig.cs" />
     <Compile Include="Configuration\WebDrivers\Interfaces\IWebDriverConfig.cs" />
     <Compile Include="Configuration\WebDrivers\WebDriverConfigs.cs" />
@@ -99,8 +107,9 @@
     <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverStateException.cs" />
     <Compile Include="WebDrivers\Exceptions\WebDriverException.cs" />
     <Compile Include="WebDrivers\Extensions\WebDriverExtensions.cs" />
+    <Compile Include="Proxies\Interfaces\IPage.cs" />
     <Compile Include="WebDrivers\WebDriverFactory.cs" />
-    <Compile Include="WebDrivers\WebDriverState.cs" />
+    <Compile Include="Proxies\Page.cs" />
     <Compile Include="WebDrivers\WebDriverUtilities.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,25 +6,26 @@ using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {
-    internal class WaitCommand : WbTstrActionCommand
+    internal class DeleteCookieCommand : WbTstrActionCommand
     {
-        private readonly TimeSpan _duration;
+        private readonly string _name;
 
-        public WaitCommand(TimeSpan duration)
+        public DeleteCookieCommand(string name)
         {
-            _duration = duration;
+            _name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
         /* Methods ----------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {
-            Thread.Sleep(_duration);
+            var cookies = webDriver.Manage().Cookies;
+            cookies.DeleteCookieNamed(_name);
         }
 
         public override string ToString()
         {
-            return $"Waiting for {_duration.Minutes}m, {_duration.Seconds}s and {_duration.Milliseconds}ms";
+            return $"Deleting cookie '${_name}'.";
         }
     }
 }

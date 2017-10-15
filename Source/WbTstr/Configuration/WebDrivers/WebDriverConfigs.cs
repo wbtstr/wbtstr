@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Xml;
+using WbTstr.Configuration.WebDrivers.Exceptions;
 using WbTstr.Configuration.WebDrivers.Interfaces;
-using WbTstr.Configuration.WebDrivers.Options;
+using WbTstr.Utilities;
 using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.Configuration.WebDrivers
@@ -31,7 +33,7 @@ namespace WbTstr.Configuration.WebDrivers
             switch (type)
             {
                 case WebDriverType.Chrome:
-                    webDriverConfig = GetDefaultChromeWebDriverConfig();
+                    webDriverConfig = new ChromeWebDriverConfig();
                     break;
             }
 
@@ -56,17 +58,20 @@ namespace WbTstr.Configuration.WebDrivers
             return webDriverConfig;
         }
 
-        private static ChromeWebDriverConfig GetDefaultChromeWebDriverConfig()
+        private static ChromeWebDriverConfig GetPresetChromeWebDriverConfig(string presetName)
         {
-            return new ChromeWebDriverConfig();
-        }
+            var configSection = XmlParser.GetSectionByName("webDriverConfig", presetName);
+            if (configSection == null)
+            {
+                throw new MissingWebDriverConfigSectionException(presetName);
+            }
 
-        private static ChromeWebDriverConfig GetPresetChromeWebDriverConfig(string preset)
-        {
-            var driverConfig = new ChromeWebDriverConfig();
-            driverConfig.Options = new ChromeWebDriverOptions(preset);
+            var capabilities = XmlParser.KeyValuePairsToDictionary<string>(configSection.SelectSingleNode("capabilities")?.ChildNodes);
+            var arguments = XmlParser.KeyValuePairsToDictionary<string>(configSection.SelectSingleNode("arguments")?.ChildNodes);
+            var extensions = XmlParser.KeyValuePairsToDictionary<bool>(configSection.SelectSingleNode("extensions")?.ChildNodes, "filePath", "isEncoded");
+            var proxy = XmlParser.XmlNodeToProxyConfig(configSection.SelectSingleNode("proxy"));
 
-            return driverConfig;
+            return new ChromeWebDriverConfig(capabilities, arguments, extensions, proxy);
         }
     }
 }

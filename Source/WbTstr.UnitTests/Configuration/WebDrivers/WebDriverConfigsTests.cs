@@ -164,29 +164,13 @@ namespace WbTstr.UnitTests.Configuration.WebDrivers
         {
             // Arrange
             WebDriverType type = WebDriverType.Chrome;
-            string preset = "preset1";
+            string preset = "chrome";
 
             // Act
             var actual = WebDriverConfigs.GetFromPreset(type, preset) as ChromeWebDriverConfig;
-
 
             //Assert
-            Assert.NotNull(actual.Options);
-        }
-
-        [TestCase]
-        public void GetFromPreset_FilledPreset_ReturnsOptionArgs()
-        {
-            // Arrange
-            WebDriverType type = WebDriverType.Chrome;
-            string preset = "preset1";
-
-            // Act
-            var actual = WebDriverConfigs.GetFromPreset(type, preset) as ChromeWebDriverConfig;
-            var expected = "start-maximized";
-
-            // Assert
-            Assert.That(actual.Options.Args, Is.EqualTo(expected));
+            Assert.NotNull(actual);
         }
 
         [TestCase]

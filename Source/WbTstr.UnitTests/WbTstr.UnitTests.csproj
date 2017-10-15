@@ -63,12 +63,11 @@
   <ItemGroup>
     <Compile Include="Commands\Abstracts\WbTstrActionCommandTests.cs" />
     <Compile Include="Commands\Abstracts\WbTstrReturnCommandTests.cs" />
-    <Compile Include="Commands\AssertStateCommandTests.cs" />
-    <Compile Include="Commands\AssertStateExpCommandTests.cs" />
     <Compile Include="Commands\ClickCommandTests.cs" />
     <Compile Include="Commands\DragCommandTests.cs" />
     <Compile Include="Commands\ExecuteJsCommandTests.cs" />
     <Compile Include="Commands\FindCommandTests.cs" />
+    <Compile Include="Commands\FindMultipleCommandTests.cs" />
     <Compile Include="Commands\FocusCommandTests.cs" />
     <Compile Include="Commands\HoverCommandTests.cs" />
     <Compile Include="Commands\MaximizeCommandTests.cs" />
@@ -78,6 +77,7 @@
     <Compile Include="Commands\TypeCommandTests.cs" />
     <Compile Include="Commands\TypeWindowCommandTests.cs" />
     <Compile Include="Commands\WaitCommandTests.cs" />
+    <Compile Include="Commands\WaitUntilCommandTests.cs" />
     <Compile Include="Configuration\WebDrivers\ChromeWebDriverConfigTests.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\MissingWebDriverConfigExceptionTests.cs" />
     <Compile Include="Configuration\WebDrivers\Exceptions\WebDriverConfigExceptionTests.cs" />
@@ -94,7 +94,6 @@
     <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverStateExceptionTests.cs" />
     <Compile Include="WebDrivers\Exceptions\WebDriverExceptionTests.cs" />
     <Compile Include="WebDrivers\WebDriverFactoryTests.cs" />
-    <Compile Include="WebDrivers\WebDriverStateTests.cs" />
     <Compile Include="WebDrivers\WebDriverUtilitiesTests.cs" />
     <Compile Include="_Auxiliaries\AssertMultiple.cs" />
     <Compile Include="_Auxiliaries\AssertString.cs" />

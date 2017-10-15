@@ -1,4 +1,6 @@
 ﻿using NUnit.Framework;
+using System.Linq;
+using System.Collections.Generic;
 using WbTstr.Fixtures.Attributes;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.Utilities.Constants;
@@ -20,7 +22,8 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
             // Act
             I.NavigateTo("https://github.com/")
                 .Type("username??")
-                .ResizeWindow(1024, 720)
+                .ResizeWindow(1600, 1050)
+                .WaitUntil(() => I.FindOnPage(".header-search-input").Displayed)
                 .Focus(".header-search-input")
                 .Wait(seconds: 3)
                 .Type("wbtstr.net", ".header-search-input")
@@ -28,13 +31,16 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
                 .MaximizeWindow()
                 .Type("wbtstr" + Keys.Enter, ".header-search-input", true)
                 .Wait(seconds: 3)
-                .Hover(".js-repo-list a:first-child")
+                .Hover(".repo-list a:first-child")
                 .Wait(seconds: 3)
-                .ClickOn(".js-repo-list a:first-child")
+                .ClickOn(".repo-list a:first-child")
                 .TakeScreenshot();
 
             IElement md = I.FindOnPage(".markdown-body");
             string mdTagName = md.TagName;
+
+            ICollection<IElement> h1 = I.FindMultipleOnPage("h1");
+            Assert.True(h1.Count >= 0);
 
             IElement b = I.ExecuteJs<IElement>("return window.document.body");
             string bTagName = I.ExecuteJs<string>("return window.document.body.tagName");
@@ -42,17 +48,12 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
             bool bHasAttributes = I.ExecuteJs<bool>("return window.document.body.hasAttributes()");
 
             // Assert
+            var page = CapturePage();
+            Assert.AreEqual(mirabeauTitle, page.Title);
+            Assert.AreEqual(mirabeauUrl, page.Url);
             Assert.AreEqual(b.TagName.ToUpper(), bTagName.ToUpper());
             Assert.NotZero(bChildElementCount);
             Assert.IsTrue(bHasAttributes);
-
-            I.CheckThat(
-                title: mirabeauTitle,
-                url: mirabeauUrl
-            );
-
-            I.CheckThat(state => state.Title == mirabeauTitle);
-            I.CheckThat(state => state.Url == mirabeauUrl);
         }
     }
 }

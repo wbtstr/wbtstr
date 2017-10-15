@@ -8,6 +8,7 @@ using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Constants;
 using WbTstr.Utilities.Constants;
 using System.IO;
+using System.Collections.Generic;
 
 namespace WbTstr.Session.Recorders
 {
@@ -30,31 +31,6 @@ namespace WbTstr.Session.Recorders
         }
 
         /* Methods ----------------------------------------------------------*/
-
-        public SimpleSessionRecorder CheckThat(string url = null, string title = null)
-        {
-            if (!string.IsNullOrEmpty(url))
-            {
-                var command = new AssertStateCommand(PropertyKey.Url, url);
-                _performer.Perform(command);
-            }
-
-            if (!string.IsNullOrEmpty(title))
-            {
-                var command = new AssertStateCommand(PropertyKey.Title, title);
-                _performer.Perform(command);
-            }
-
-            return this;
-        }
-
-        public SimpleSessionRecorder CheckThat(Expression<Func<WebDriverState, bool>> expression)
-        {
-            var command = new AssertStateExpCommand(expression);
-            _performer.Perform(command);
-
-            return this;
-        }
 
         public SimpleSessionRecorder ClickOn(string selector, MouseClick clickType = MouseClick.Single)
         {
@@ -134,6 +110,14 @@ namespace WbTstr.Session.Recorders
             var element = _performer.PerformAndReturn(command);
 
             return element;
+        }
+
+        public ICollection<IElement> FindMultipleOnPage(string selector)
+        {
+            var command = new FindMultipleCommand(selector);
+            var elements = _performer.PerformAndReturn(command);
+
+            return elements;
         }
 
         public SimpleSessionRecorder Focus(string selector)
@@ -232,9 +216,54 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Wait(int miliseconds = 0, int seconds = 0, int minutes = 0)
+        public SimpleSessionRecorder Select(string selector, params string[] values)
         {
-            var command = new WaitCommand(miliseconds, seconds, minutes);
+            var command = new SelectCommand(selector, values);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Select(string selector, params int[] indexes)
+        {
+            var command = new SelectCommand(selector, indexes);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Select(IElement element, params string[] values)
+        {
+            var command = new SelectCommand(element, values);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Select(IElement element, params int[] indexes)
+        {
+            var command = new SelectCommand(element, indexes);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder Wait(int milliseconds = 0, int seconds = 0, int minutes = 0)
+        {
+            var duration = new TimeSpan(0, 0, minutes, seconds, milliseconds);
+
+            var command = new WaitCommand(duration);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder WaitUntil(Func<bool> predicate, TimeSpan? interval = null, TimeSpan? timeout = null)
+        {
+            var defaultInterval = TimeSpan.FromSeconds(1);
+            var defaultTimeout = TimeSpan.FromSeconds(5);
+
+            var command = new WaitUntilCommand(predicate, interval ?? defaultInterval, timeout ?? defaultTimeout);
             _performer.Perform(command);
 
             return this;
@@ -246,6 +275,32 @@ namespace WbTstr.Session.Recorders
             var returnValue = _performer.PerformAndReturn(command);
 
             return returnValue;
+        }
+
+        public SimpleSessionRecorder Authenticate(string username, string password, TimeSpan? timeout = null)
+        {
+            var defaultTimeout = TimeSpan.FromSeconds(5);
+
+            var command = new AuthenticateCommand(username, password, timeout ?? defaultTimeout);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder SetCookie(string name, string value, string domain = null, string path = null, DateTime? expiry = null)
+        {
+            var command = new SetCookieCommand(name, value, domain, path, expiry);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public SimpleSessionRecorder DeleteCookie(string name)
+        {
+            var command = new DeleteCookieCommand(name);
+            _performer.Perform(command);
+
+            return this;
         }
     }
 }
