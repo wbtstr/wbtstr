@@ -1,10 +1,11 @@
 ﻿using OpenQA.Selenium;
+using System.Linq;
 using System.Collections.Generic;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Proxies;
-using WbTstr.Proxies.Interfaces;
 using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Interfaces;
+using WebCookie = OpenQA.Selenium.Cookie;
+using ProxyCookie = WbTstr.Proxies.Cookie;
 
 namespace WbTstr.Commands
 {
@@ -18,21 +19,26 @@ namespace WbTstr.Commands
 
         protected override IPage Execute(IWebDriver webDriver)
         {
-            var options = webDriver.Manage();
+            var cookies = webDriver.Manage().Cookies;
+            var window = webDriver.Manage().Window;
+            var logs = webDriver.Manage().Logs;
 
             var page = new Page()
             {
                 Title = webDriver.Title,
                 Url = webDriver.Url,
-                Source = webDriver.PageSource,
+                InitialHTML = webDriver.PageSource,
+                Size = window.Size,
             };
 
-            var cookies = new List<ICookie>();
-            foreach (var webCookie in options.Cookies.AllCookies)
-            {
-                cookies.Add(new Proxies.Cookie(webCookie));
-            }
-            page.Cookies = cookies;
+            page.Cookies = new List<WebCookie>(cookies.AllCookies)
+                .Select(x => new ProxyCookie(x)).ToList();
+
+            page.Console = new List<LogEntry>(logs.GetLog("browser"))
+                .OrderBy(x => x.Timestamp).Select(x => x.Message).ToList();
+
+            var htmlElement = webDriver.FindElement(By.TagName("html"));
+            page.CurrentHTML = htmlElement?.GetAttribute("outerHTML");
 
             return page;
         }
