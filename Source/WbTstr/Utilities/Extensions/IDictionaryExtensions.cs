@@ -9,15 +9,10 @@ namespace WbTstr.Utilities.Extensions
 {
     public static class IDictionaryExtensions
     {
-        public static void DisposeAndRemoveAll<T>(this IDictionary<string, T> dictionary) where T : IDisposable
+        public static void DisposeAndClear<T>(this IDictionary<string, T> dictionary) where T : IDisposable
         {
             dictionary.Values.ToList().ForEach(o => o.Dispose());
-            dictionary.RemoveAll();
-        }
-
-        public static void RemoveAll<T>(this IDictionary<string, T> dictionary)
-        {
-            dictionary.Keys.ToList().ForEach(k => dictionary.Remove(k));
+            dictionary.Clear();
         }
     }
 }

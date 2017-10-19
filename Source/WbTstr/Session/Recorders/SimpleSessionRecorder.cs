@@ -304,6 +304,14 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
+        public SimpleSessionRecorder SetCookie(ICookie cookie)
+        {
+            var command = new SetCookieCommand(cookie);
+            _performer.Perform(command);
+
+            return this;
+        }
+
         public SimpleSessionRecorder SetCookie(string name, string value, string domain = null, string path = null, DateTime? expiry = null)
         {
             var command = new SetCookieCommand(name, value, domain, path, expiry);

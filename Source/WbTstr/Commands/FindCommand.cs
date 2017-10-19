@@ -25,7 +25,7 @@ namespace WbTstr.Commands
             try
             {
                 var webElement = webDriver.FindElement(By.CssSelector(_selector));
-                return new Element(webElement, _selector);
+                return new ElementProxy(webElement, _selector);
             }
             catch (NoSuchElementException)
             {

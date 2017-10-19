@@ -209,8 +209,8 @@ namespace WbTstr.UnitTests.Commands
             var webDriver = Substitute.For<IWebDriver, IHasInputDevices>();
             var webElementA = Substitute.For<IWebElement, ILocatable>();
             var webElementB = Substitute.For<IWebElement, ILocatable>();
-            var elementA = new Element(webElementA);
-            var elementB = new Element(webElementB);
+            var elementA = new ElementProxy(webElementA);
+            var elementB = new ElementProxy(webElementB);
             var command = Substitute.ForPartsOf<DragCommand>(elementA, elementB);
 
             // Act
@@ -243,7 +243,7 @@ namespace WbTstr.UnitTests.Commands
             // Arrange
             var webDriver = Substitute.For<IWebDriver, IHasInputDevices>();
             var webElement = Substitute.For<IWebElement, ILocatable>();
-            var element = new Element(webElement);
+            var element = new ElementProxy(webElement);
             var command = Substitute.ForPartsOf<DragCommand>(element, 0, 0);
 
             // Act
@@ -276,7 +276,7 @@ namespace WbTstr.UnitTests.Commands
             // Arrange
             var webDriver = Substitute.For<IWebDriver, IHasInputDevices>();
             var webElement = Substitute.For<IWebElement, ILocatable>();
-            var element = new Element(webElement);
+            var element = new ElementProxy(webElement);
             var command = Substitute.ForPartsOf<DragCommand>(0, 0, element);
 
             // Act

@@ -1,9 +1,10 @@
-﻿using NUnit.Framework;
-using System.Collections;
+﻿using System.Linq;
+using NUnit.Framework;
 using WbTstr.Fixtures.Attributes;
-using WbTstr.Proxies.Interfaces;
 using WbTstr.WebDrivers.Constants;
-using WbTstr.WebDrivers.Interfaces;
+using WbTstr.Utilities;
+using System;
+using WbTstr.Proxies.Interfaces;
 
 namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
 {
@@ -11,18 +12,30 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
     [WebDriverConfig(WebDriverType.Chrome, WebDriverScope.Test)]
     public class DerivedFromSimpleFixture : Fixtures.SimpleWbTstrFixture
     {
+        private ICookie _loginCookie;
+
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            I.CapturePage(out var page);
+            // string domain = "http://github.com";
+            string name = "asdfasdf";
+            // string path = "/";
+            string value = "Hello World!";
 
-            var cookies = page.Cookies;
+            _loginCookie = CookieFactory.Create(name, value);
         }
 
         [TestCase]
         public void TestMethod1()
         {
-            I.Wait(seconds: 1);
+            I.NavigateTo("http://github.com")
+                .SetCookie(_loginCookie)
+                .Wait(seconds: 1)
+                .CapturePage(out var page);
+
+            // Act
+            Assert.IsNotEmpty(page.Cookies);
+
             // Arrange
 
             //// Act

@@ -1,8 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Threading;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Commands.Interfaces;
+using WbTstr.Proxies.Interfaces;
 
 namespace WbTstr.Commands
 {
@@ -13,6 +12,17 @@ namespace WbTstr.Commands
         private readonly string _domain;
         private readonly string _path;
         private readonly DateTime? _expiry;
+
+        public SetCookieCommand(ICookie cookie)
+        {
+            if (cookie == null) throw new ArgumentNullException(nameof(cookie));
+
+            _name = cookie.Name;
+            _value = cookie.Value;
+            _domain = cookie.Domain;
+            _path = cookie.Path;
+            _expiry = cookie.Expiry;
+        }
 
         public SetCookieCommand(string name, string value, string domain, string path, DateTime? expiry)
         {

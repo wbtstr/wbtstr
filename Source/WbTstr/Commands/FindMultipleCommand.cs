@@ -27,7 +27,7 @@ namespace WbTstr.Commands
             try
             {
                 var webElements = webDriver.FindElements(By.CssSelector(_selector));
-                return webElements.Select(x => new Element(x, _selector)).ToArray();
+                return webElements.Select(x => new ElementProxy(x, _selector)).ToArray();
             }
             catch (NoSuchElementException)
             {

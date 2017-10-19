@@ -73,7 +73,8 @@
     <Compile Include="Configuration\WebDrivers\Exceptions\WebDriverConfigException.cs" />
     <Compile Include="Configuration\WebDrivers\WebDriverProxyConfig.cs" />
     <Compile Include="Proxies\Cookie.cs" />
-    <Compile Include="Proxies\Element.cs" />
+    <Compile Include="Proxies\CookieProxy.cs" />
+    <Compile Include="Proxies\ElementProxy.cs" />
     <Compile Include="Proxies\Extensions\ElementExtensions.cs" />
     <Compile Include="Proxies\Interfaces\ICookie.cs" />
     <Compile Include="Proxies\Interfaces\IElement.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Commands\TypeCommand.cs" />
     <Compile Include="Commands\WaitCommand.cs" />
     <Compile Include="Utilities\Constants\MouseClick.cs" />
+    <Compile Include="Utilities\CookieFactory.cs" />
     <Compile Include="Utilities\Extensions\IDictionaryExtensions.cs" />
     <Compile Include="Utilities\MultiPurposeValidator.cs" />
     <Compile Include="Utilities\UriParser.cs" />

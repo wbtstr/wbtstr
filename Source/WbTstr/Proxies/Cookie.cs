@@ -9,27 +9,24 @@ namespace WbTstr.Proxies
 {
     public class Cookie : ICookie
     {
-        private readonly OpenQA.Selenium.Cookie _cookie;
-
-        internal Cookie(OpenQA.Selenium.Cookie cookie)
+        internal Cookie()
         {
-            _cookie = cookie;
         }
 
         /* Properties -------------------------------------------------------*/
 
-        public string Name => _cookie.Name;
+        public string Name { get; set; }
 
-        public string Value => _cookie.Value;
+        public string Value { get; set; }
 
-        public string Domain => _cookie.Domain;
+        public string Domain { get; set; }
 
-        public string Path => _cookie.Path;
+        public string Path { get; set; }
 
-        public bool Secure => _cookie.Secure;
+        public bool Secure { get; set; }
 
-        public bool IsHttpOnly => _cookie.IsHttpOnly;
+        public bool IsHttpOnly { get; set; }
 
-        public DateTime? Expiry => _cookie.Expiry;
+        public DateTime? Expiry { get; set; }
     }
 }

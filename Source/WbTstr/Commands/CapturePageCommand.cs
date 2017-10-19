@@ -5,7 +5,7 @@ using WbTstr.Commands.Abstracts;
 using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Interfaces;
 using WebCookie = OpenQA.Selenium.Cookie;
-using ProxyCookie = WbTstr.Proxies.Cookie;
+using ProxyCookie = WbTstr.Proxies.CookieProxy;
 using WbTstr.Proxies.Interfaces;
 
 namespace WbTstr.Commands

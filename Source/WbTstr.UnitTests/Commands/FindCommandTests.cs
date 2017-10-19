@@ -76,7 +76,7 @@ namespace WbTstr.UnitTests.Commands
             IElement element = _defaultCommand.Execute(webDriver);
 
             // Assert
-            Assert.AreSame(webElement, (element as Element)?.InnerWebElement);
+            Assert.AreSame(webElement, (element as ElementProxy)?.InnerWebElement);
         }
 
         [TestCase]

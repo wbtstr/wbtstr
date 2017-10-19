@@ -4,14 +4,14 @@ using WbTstr.Proxies.Interfaces;
 
 namespace WbTstr.Proxies
 {
-    public class Element : IElement
+    public class ElementProxy : IElement
     {
-        internal Element(IWebElement webElement)
+        internal ElementProxy(IWebElement webElement)
         {
             InnerWebElement = webElement ?? throw new ArgumentNullException(nameof(webElement));
         }
 
-        internal Element(IWebElement webElement, string selector)
+        internal ElementProxy(IWebElement webElement, string selector)
         {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
 
@@ -25,7 +25,7 @@ namespace WbTstr.Proxies
         {
             if (element == null) throw new ArgumentNullException(nameof(element));
 
-            return (element as Element)?.InnerWebElement;
+            return (element as ElementProxy)?.InnerWebElement;
         }
 
         /* Properties -------------------------------------------------------*/

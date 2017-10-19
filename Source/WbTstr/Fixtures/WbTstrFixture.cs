@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using WbTstr.Commands;
 using WbTstr.Configuration.WebDrivers;
 using WbTstr.Configuration.WebDrivers.Exceptions;
 using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.Fixtures.Attributes;
-using WbTstr.Proxies.Interfaces;
 using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Recorders.Interfaces;
 using WbTstr.Session.Trackers.Interfaces;
-using WbTstr.WebDrivers.Interfaces;
 using System.Diagnostics;
 using WbTstr.WebDrivers.Constants;
 using WbTstr.Utilities.Extensions;
@@ -18,9 +15,9 @@ using WbTstr.Utilities.Extensions;
 namespace WbTstr.Fixtures
 {
     public abstract class WbTstrFixture<R, P, T> : IDisposable
-        where R: class, ISessionRecorder, new()
-        where P: class, ISessionPerformer, new()
-        where T: class, ISessionTracker, new()
+        where R : class, ISessionRecorder, new()
+        where P : class, ISessionPerformer, new()
+        where T : class, ISessionTracker, new()
     {
         private readonly IDictionary<string, R> _recorders = new Dictionary<string, R>();
         private readonly IDictionary<string, P> _performers = new Dictionary<string, P>();
@@ -42,7 +39,7 @@ namespace WbTstr.Fixtures
             {
                 throw new MissingWebDriverConfigException("WebDriverConfig attribute is not present.");
             }
-        } 
+        }
 
         /* Properties -------------------------------------------------------*/
 
@@ -57,62 +54,53 @@ namespace WbTstr.Fixtures
                 }
 
                 // Check if scoped recorder already exists.
-                if (_recorders.TryGetValue(scopeName, out R recorder))
+                if (_recorders.TryGetValue(scopeName, out R scopedRecorder))
                 {
-                    return recorder;
+                    return scopedRecorder;
                 }
 
                 // Get rid of any previous recorders.
-                _recorders.RemoveAll();
+                _recorders.Clear();
 
                 var tracker = GetScopedTracker(scopeName);
                 var performer = GetScopedPerformer(scopeName, tracker);
-                return (_recorders[scopeName] = new R().Initialize(performer) as R);
+                var recorder = new R().Initialize(performer) as R;
+
+                return (_recorders[scopeName] = recorder);
             }
         }
+
 
         /* Methods ----------------------------------------------------------*/
 
         private T GetScopedTracker(string scopeName)
         {
             // Check if scoped tracker already exists.
-            if (_trackers.TryGetValue(scopeName, out T tracker))
+            if (_trackers.TryGetValue(scopeName, out T scopedTracker))
             {
-                return tracker;
+                return scopedTracker;
             }
 
             // Get rid of any previous trackers.
-            _trackers.RemoveAll();
+            _trackers.Clear();
 
-            return (_trackers[scopeName] = new T().Initialize() as T);
+            var tracker = new T().Initialize() as T;
+            return (_trackers[scopeName] = tracker);
         }
 
         private P GetScopedPerformer(string scopeName, T tracker)
         {
             // Check if scoped performer already exists.
-            if (_performers.TryGetValue(scopeName, out P performer))
+            if (_performers.TryGetValue(scopeName, out P scopedPerformer))
             {
-                return performer;
+                return scopedPerformer;
             }
 
             // Get rid of any previous performers.
-            _performers.DisposeAndRemoveAll();
+            _performers.DisposeAndClear();
 
-            return (_performers[scopeName] = new P().Initialize(_webDriverConfig, tracker) as P);
-        }
-
-        protected void SetFixtureCookies(IEnumerable<ICookie> cookies)
-        {
-            if (cookies == null) throw new ArgumentNullException(nameof(cookies));
-
-            cookies.ToList().ForEach(SetFixtureCookie);
-        }
-
-        protected void SetFixtureCookie(ICookie cookie)
-        {
-            if (cookie == null) throw new ArgumentNullException(nameof(cookie));
-
-            // TODO
+            var performer = new P().Initialize(_webDriverConfig, tracker) as P;
+            return (_performers[scopeName] = performer);
         }
 
         /* Finalizer --------------------------------------------------------*/

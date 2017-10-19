@@ -80,7 +80,7 @@ namespace WbTstr.UnitTests.Commands
             var elements = _defaultCommand.Execute(webDriver);
 
             // Assert
-            Assert.AreSame(webElement, (elements.First() as Element)?.InnerWebElement);
+            Assert.AreSame(webElement, (elements.First() as ElementProxy)?.InnerWebElement);
         }
 
         [TestCase]

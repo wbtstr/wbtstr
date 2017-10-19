@@ -80,7 +80,7 @@ namespace WbTstr.Commands
         {
             if (jsExecutor.ExecuteScript(_jsExpression) is IWebElement returnValue)
             {
-                IElement element = new Element(returnValue);
+                IElement element = new ElementProxy(returnValue);
                 return (T)element;
             }
 
@@ -91,7 +91,7 @@ namespace WbTstr.Commands
         {
             if (jsExecutor.ExecuteAsyncScript(_jsExpression) is IWebElement returnValue)
             {
-                IElement element = new Element(returnValue);
+                IElement element = new ElementProxy(returnValue);
                 return (T)element;
             }
 
