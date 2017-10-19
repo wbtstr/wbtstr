@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace WbTstr.WebDrivers.Constants
 {
-    public enum PropertyKey
+    public enum WebDriverScope
     {
-        None = 0,
-        Url,
-        Title
+        Fixture = 0,
+        Test
     }
 }

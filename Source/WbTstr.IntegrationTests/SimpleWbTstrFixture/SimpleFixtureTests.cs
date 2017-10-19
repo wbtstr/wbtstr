@@ -1,36 +1,34 @@
 ﻿using NUnit.Framework;
-using System.Collections.Generic;
 using WbTstr.Fixtures.Attributes;
-using WbTstr.Proxies.Interfaces;
-using WbTstr.Utilities.Constants;
 using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
 {
     [TestFixture]
-    [WebDriverConfig(WebDriverType.Chrome)]
+    [WebDriverConfig(WebDriverType.Chrome, WebDriverScope.Test)]
     public class DerivedFromSimpleFixture : Fixtures.SimpleWbTstrFixture
     {
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             var page = CapturePage();
-
-            if (page.Cookies.TryGetValue("loginCookie", out ICookie loginCookie))
-            {
-                AddPreperation(I => I.SetCookie(loginCookie));
-            }
+            var cookies = page.Cookies;
         }
 
         [TestCase]
         public void TestMethod1()
         {
+            I.Wait(seconds: 1);
+            I.MaximizeWindow();
+
             Assert.True(1 == 1);
         }
 
         [TestCase]
         public void TestMethod2()
         {
+            I.Wait(seconds: 3);
+            I.MaximizeWindow();
             Assert.True(1 == 1);
 
             // Arrange

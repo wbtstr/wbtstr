@@ -83,10 +83,10 @@
     <Compile Include="Commands\TypeCommand.cs" />
     <Compile Include="Commands\WaitCommand.cs" />
     <Compile Include="Utilities\Constants\MouseClick.cs" />
+    <Compile Include="Utilities\Extensions\IDictionaryExtensions.cs" />
     <Compile Include="Utilities\MultiPurposeValidator.cs" />
     <Compile Include="Utilities\UriParser.cs" />
     <Compile Include="Utilities\XmlParser.cs" />
-    <Compile Include="WebDrivers\Constants\PropertyKey.cs" />
     <Compile Include="Commands\Interfaces\IActionCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Configuration\WebDrivers\ChromeWebDriverConfig.cs" />
@@ -102,6 +102,7 @@
     <Compile Include="Session\Performers\SequentialSessionPerformer.cs" />
     <Compile Include="Session\Trackers\SimpleSessionTracker.cs" />
     <Compile Include="Session\Trackers\Interfaces\ISessionTracker.cs" />
+    <Compile Include="WebDrivers\Constants\WebDriverScope.cs" />
     <Compile Include="WebDrivers\Constants\WebDriverType.cs" />
     <Compile Include="WebDrivers\Exceptions\ElementNotFoundException.cs" />
     <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverStateException.cs" />

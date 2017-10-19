@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using WbTstr.Commands;
 using WbTstr.Configuration.WebDrivers;
 using WbTstr.Configuration.WebDrivers.Exceptions;
 using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.Fixtures.Attributes;
+using WbTstr.Proxies.Interfaces;
 using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Recorders.Interfaces;
 using WbTstr.Session.Trackers.Interfaces;
 using WbTstr.WebDrivers.Interfaces;
+using System.Diagnostics;
+using WbTstr.WebDrivers.Constants;
+using WbTstr.Utilities.Extensions;
 
 namespace WbTstr.Fixtures
 {
@@ -16,71 +22,111 @@ namespace WbTstr.Fixtures
         where P: class, ISessionPerformer, new()
         where T: class, ISessionTracker, new()
     {
-        private readonly ISessionPerformer _performer;
-        private readonly ISessionTracker _tracker;
-        private IWebDriverConfig _webDriverConfig;
-        private Lazy<IWebDriverConfig> _webDriverConfigPointer;
+        private readonly IWebDriverConfig _webDriverConfig;
+        private readonly WebDriverScope _webDriverScope;
+        private readonly IDictionary<string, R> _recorders = new Dictionary<string, R>();
+        private readonly IDictionary<string, P> _performers = new Dictionary<string, P>();
+        private readonly IDictionary<string, T> _trackers = new Dictionary<string, T>();
 
         protected WbTstrFixture()
         {
-            _tracker = new T().Initialize();
-            _performer = new P().Initialize(WebDriverConfig, _tracker);
+            if (Attribute.GetCustomAttribute(GetType(), typeof(WebDriverConfigAttribute)) is WebDriverConfigAttribute attribute)
+            {
+                _webDriverScope = attribute.Scope;
 
-            I = new R().Initialize(_performer) as R;
+                bool usePreset = !string.IsNullOrEmpty(attribute.Preset);
+                _webDriverConfig = usePreset ? WebDriverConfigs.GetFromPreset(attribute.Type, attribute.Preset)
+                                             : WebDriverConfigs.GetDefault(attribute.Type);
+            }
+            else
+            {
+                throw new MissingWebDriverConfigException("WebDriverConfig attribute is not present.");
+            }
         } 
 
         /* Properties -------------------------------------------------------*/
 
-        protected Lazy<IWebDriverConfig> WebDriverConfig
+        protected R I
         {
             get
             {
-                if (_webDriverConfigPointer == null)
+                var scopeName = "fixture";
+                if (_webDriverScope == WebDriverScope.Test)
                 {
-                    if (_webDriverConfig == null)
-                    {
-                        if (Attribute.GetCustomAttribute(GetType(), typeof(WebDriverConfigAttribute)) is WebDriverConfigAttribute attribute)
-                        {
-                            _webDriverConfig = string.IsNullOrEmpty(attribute.Preset)
-                                ? WebDriverConfigs.GetDefault(attribute.Type)
-                                : WebDriverConfigs.GetFromPreset(attribute.Type, attribute.Preset);
-                        }
-                    }
-
-                    // As long as _webDriverConfig is initialized at the moment we need it, it's all fine.
-                    _webDriverConfigPointer = new Lazy<IWebDriverConfig>(() => 
-                    {
-                        if (_webDriverConfig == null)
-                        {
-                            throw new MissingWebDriverConfigException();
-                        }
-
-                        return _webDriverConfig;
-                    });
+                    scopeName = new StackFrame(1).GetMethod().Name;
                 }
 
-                return _webDriverConfigPointer;
+                // Check if scoped recorder already exists.
+                if (_recorders.TryGetValue(scopeName, out R recorder))
+                {
+                    return recorder;
+                }
+
+                // Get rid of any previous recorders.
+                _recorders.RemoveAll();
+
+                var tracker = GetScopedTracker(scopeName);
+                var performer = GetScopedPerformer(scopeName, tracker);
+                return (_recorders[scopeName] = new R().Initialize(performer) as R);
             }
         }
 
-        protected R I { get; }
-
         /* Methods ----------------------------------------------------------*/
 
-        protected void Use(IWebDriverConfig webDriverConfig)
+        private T GetScopedTracker(string scopeName)
         {
-            if (_webDriverConfig != null)
+            // Check if scoped tracker already exists.
+            if (_trackers.TryGetValue(scopeName, out T tracker))
             {
-                throw new InvalidOperationException("Cannot override already initialized WebDriver configuration.");
+                return tracker;
             }
 
-            _webDriverConfig = webDriverConfig ?? throw new ArgumentNullException(nameof(webDriverConfig));
+            // Get rid of any previous trackers.
+            _trackers.RemoveAll();
+
+            return (_trackers[scopeName] = new T().Initialize() as T);
+        }
+
+        private P GetScopedPerformer(string scopeName, T tracker)
+        {
+            // Check if scoped performer already exists.
+            if (_performers.TryGetValue(scopeName, out P performer))
+            {
+                return performer;
+            }
+
+            // Get rid of any previous performers.
+            _performers.DisposeAndRemoveAll();
+
+            return (_performers[scopeName] = new P().Initialize(_webDriverConfig, tracker) as P);
         }
 
         protected IPage CapturePage()
         {
+            var scopeName = "fixture";
+            if (_webDriverScope == WebDriverScope.Test)
+            {
+                scopeName = new StackFrame(1).GetMethod().Name;
+            }
+
+            var performer = GetScopedPerformer(scopeName, null);
+
             var command = new CapturePageCommand();
-            return _performer.PerformAndReturn(command);
+            return performer.PerformAndReturn(command);
+        }
+
+        protected void SetFixtureCookies(IEnumerable<ICookie> cookies)
+        {
+            if (cookies == null) throw new ArgumentNullException(nameof(cookies));
+
+            cookies.ToList().ForEach(SetFixtureCookie);
+        }
+
+        protected void SetFixtureCookie(ICookie cookie)
+        {
+            if (cookie == null) throw new ArgumentNullException(nameof(cookie));
+
+            // TODO
         }
 
         /* Finalizer --------------------------------------------------------*/
@@ -93,9 +139,9 @@ namespace WbTstr.Fixtures
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposing || _performer == null) return;
+            if (!disposing) return;
 
-            _performer.Dispose();
+            _performers.Values.ToList().ForEach(p => p?.Dispose());
         }
     }
 }

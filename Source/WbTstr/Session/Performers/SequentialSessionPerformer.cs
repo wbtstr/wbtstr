@@ -22,17 +22,16 @@ namespace WbTstr.Session.Performers
             _commands = new Queue<ICommand>();
         }
 
-        public ISessionPerformer Initialize(Lazy<IWebDriverConfig> webDriverConfig, ISessionTracker tracker)
+        public ISessionPerformer Initialize(IWebDriverConfig webDriverConfig, ISessionTracker tracker = null)
         {
             if (webDriverConfig == null) throw new ArgumentNullException(nameof(webDriverConfig));
-            _tracker = tracker ?? throw new ArgumentNullException(nameof(tracker));
 
             if (_initialized)
             {
                 throw new InvalidOperationException($"{nameof(SequentialSessionPerformer)} can be initialized only once.");
             }
 
-            _webDriver = new Lazy<IWebDriver>(() => WebDriverFactory.CreateFromConfig(webDriverConfig.Value));
+            _webDriver = new Lazy<IWebDriver>(() => WebDriverFactory.CreateFromConfig(webDriverConfig));
 
             _initialized = true;
             return this;
@@ -87,11 +86,11 @@ namespace WbTstr.Session.Performers
         {
             try
             {
-                _tracker.MarkExecutionBegin(actionCommand);
+                _tracker?.MarkExecutionBegin(actionCommand);
 
                 actionCommand.Execute(WebDriver);
 
-                _tracker.MarkExecutionEnd(actionCommand);
+                _tracker?.MarkExecutionEnd(actionCommand);
             }
             catch (UnexpectedWebDriverStateException)
             {
@@ -104,11 +103,11 @@ namespace WbTstr.Session.Performers
         {
             try
             {
-                _tracker.MarkExecutionBegin(command);
+                _tracker?.MarkExecutionBegin(command);
 
                 var result = command.Execute(WebDriver);
 
-                _tracker.MarkExecutionEnd(command);
+                _tracker?.MarkExecutionEnd(command);
 
                 return result;
             }
