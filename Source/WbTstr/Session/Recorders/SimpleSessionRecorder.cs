@@ -9,6 +9,7 @@ using WbTstr.WebDrivers.Constants;
 using WbTstr.Utilities.Constants;
 using System.IO;
 using System.Collections.Generic;
+using WbTstr.WebDrivers.Interfaces;
 
 namespace WbTstr.Session.Recorders
 {
@@ -104,12 +105,28 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
+        public SimpleSessionRecorder FindOnPage(string selector, out IElement element)
+        {
+            var command = new FindCommand(selector);
+            element = _performer.PerformAndReturn(command);
+
+            return this;
+        }
+
         public IElement FindOnPage(string selector)
         {
             var command = new FindCommand(selector);
             var element = _performer.PerformAndReturn(command);
 
             return element;
+        }
+
+        public SimpleSessionRecorder FindMultipleOnPage(string selector, out ICollection<IElement> elements)
+        {
+            var command = new FindMultipleCommand(selector);
+            elements = _performer.PerformAndReturn(command);
+
+            return this;
         }
 
         public ICollection<IElement> FindMultipleOnPage(string selector)
@@ -301,6 +318,20 @@ namespace WbTstr.Session.Recorders
             _performer.Perform(command);
 
             return this;
+        }
+
+        public SimpleSessionRecorder CapturePage(out IPage page)
+        {
+            var command = new CapturePageCommand();
+            page = _performer.PerformAndReturn(command);
+
+            return this;
+        }
+
+        public IPage CapturePage()
+        {
+            var command = new CapturePageCommand();
+            return _performer.PerformAndReturn(command);
         }
     }
 }

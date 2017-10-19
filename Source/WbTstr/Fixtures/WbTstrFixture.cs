@@ -22,11 +22,11 @@ namespace WbTstr.Fixtures
         where P: class, ISessionPerformer, new()
         where T: class, ISessionTracker, new()
     {
-        private readonly IWebDriverConfig _webDriverConfig;
-        private readonly WebDriverScope _webDriverScope;
         private readonly IDictionary<string, R> _recorders = new Dictionary<string, R>();
         private readonly IDictionary<string, P> _performers = new Dictionary<string, P>();
         private readonly IDictionary<string, T> _trackers = new Dictionary<string, T>();
+        private readonly IWebDriverConfig _webDriverConfig;
+        private readonly WebDriverScope _webDriverScope;
 
         protected WbTstrFixture()
         {
@@ -99,20 +99,6 @@ namespace WbTstr.Fixtures
             _performers.DisposeAndRemoveAll();
 
             return (_performers[scopeName] = new P().Initialize(_webDriverConfig, tracker) as P);
-        }
-
-        protected IPage CapturePage()
-        {
-            var scopeName = "fixture";
-            if (_webDriverScope == WebDriverScope.Test)
-            {
-                scopeName = new StackFrame(1).GetMethod().Name;
-            }
-
-            var performer = GetScopedPerformer(scopeName, null);
-
-            var command = new CapturePageCommand();
-            return performer.PerformAndReturn(command);
         }
 
         protected void SetFixtureCookies(IEnumerable<ICookie> cookies)

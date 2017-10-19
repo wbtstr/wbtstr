@@ -32,6 +32,7 @@ namespace WbTstr.Session.Performers
             }
 
             _webDriver = new Lazy<IWebDriver>(() => WebDriverFactory.CreateFromConfig(webDriverConfig));
+            _tracker = tracker;
 
             _initialized = true;
             return this;

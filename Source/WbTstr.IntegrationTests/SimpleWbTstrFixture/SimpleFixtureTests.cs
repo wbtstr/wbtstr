@@ -1,6 +1,9 @@
 ﻿using NUnit.Framework;
+using System.Collections;
 using WbTstr.Fixtures.Attributes;
+using WbTstr.Proxies.Interfaces;
 using WbTstr.WebDrivers.Constants;
+using WbTstr.WebDrivers.Interfaces;
 
 namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
 {
@@ -11,7 +14,8 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            var page = CapturePage();
+            I.CapturePage(out var page);
+
             var cookies = page.Cookies;
         }
 
@@ -19,9 +23,20 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
         public void TestMethod1()
         {
             I.Wait(seconds: 1);
-            I.MaximizeWindow();
+            // Arrange
 
-            Assert.True(1 == 1);
+            //// Act
+            //I.NavigateTo("mirabeau.nl")
+            //    .ClickOn("#contact")
+            //    .FindOnPage("#element", out var special)
+            //    .FindMultipleOnPage("#elements", out var elements)
+            //    .CapturePage(out var page1)
+            //    .ClickOn("#more")
+            //    .CapturePage(out var page2);
+
+            //// Assert
+            //Assert.Contains(special, elements as ICollection);
+            //Assert.AreEqual(page1.InitialHTML, page2.InitialHTML);
         }
 
         [TestCase]
