@@ -1,5 +1,4 @@
-# `WbTstr` [![NuGet version](https://img.shields.io/nuget/v/WbTstr.svg?style=flat-square)](https://www.nuget.org/packages/WbTstr) [![NuGet downloads](https://img.shields.io/nuget/dt/WbTstr.svg?style=flat-square)](https://www.nuget.org/packages/WbTstr) 
-
+# WbTstr 
 
 | master | develop |
 | --- | --- |
@@ -22,6 +21,8 @@ __Currently in development:__
 - support for remote drivers (Selenium Hub, Selenoid, BrowserStack).
 
 _See [documentation](https://wbtstr.github.io) for more information._
+
+[![NuGet version](https://img.shields.io/nuget/v/WbTstr.svg?style=flat-square)](https://www.nuget.org/packages/WbTstr) [![NuGet downloads](https://img.shields.io/nuget/dt/WbTstr.svg?style=flat-square)](https://www.nuget.org/packages/WbTstr) 
 
 ## Contributors
 WbTstr is an open-source initaitive from [Mirabeau](https://www.mirabeau.nl/en).
