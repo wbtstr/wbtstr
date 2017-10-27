@@ -5,7 +5,20 @@
 | [![Build status](https://img.shields.io/appveyor/ci/onnovalkering/wbtstr/master.svg?style=flat-square)](https://ci.appveyor.com/project/onnovalkering/wbtstr/branch/master) [![Coveralls develop](https://img.shields.io/coveralls/wbtstr/wbtstr/master.svg?style=flat-square)](https://coveralls.io/github/wbtstr/wbtstr?branch=master) | [![Build status](https://img.shields.io/appveyor/ci/onnovalkering/wbtstr/develop.svg?style=flat-square)](https://ci.appveyor.com/project/onnovalkering/wbtstr/branch/develop) [![Coveralls develop](https://img.shields.io/coveralls/wbtstr/wbtstr/develop.svg?style=flat-square)](https://coveralls.io/github/wbtstr/wbtstr?branch=develop) |
 
 ## Overview
-WbTstr is a test automation framework which makes testing the Web productive and hassle free. All major browsers are support, due to Selenium WebDriver that drives the core of WbTstr. On top of that we provide testers with a intuitive and feature rich API that allows complete automation of browser-based functional testing.
+WbTstr is the successor of [WbTstr.Net](https://github.com/mirabeau-nl/WbTstr.Net), its completely rewritten from scratch using the latest C# 7.1 features and with extensibility in mind. Users of WbTstr are presented with an intuitive API that can be used to completely automate all facets of browser-based functional testing, without having to deal with the nitty-gritty details of Selenium.
+
+__Noteworthy features include:__
+- only uses native commands to control browser instances, doesn't rely on JavaScript;
+- un-opinoinated towards choice of assertion framework, compatible with NUnit, xUnit and others;
+- access to the source of individual elements for direct testing on HTML (e.g with AngleSharp);
+- interact with cookies (read/write) and execute custom JavaScript (return values accessible in C#);
+- experimental support for HTTP Basic authentication through the browser's alert/pop-up window;
+- configurable WebDriver scope (browser instance per fixture, or per test case).
+
+__Currently in development:__
+- logging and benchmarking of performed commands;
+- support for more browsers (Firefox, Internet Explorer);
+- support for remote drivers (Selenium Hub, Selenoid, BrowserStack).
 
 ## Contributors
 WbTstr is an open-source initaitive from [Mirabeau](https://www.mirabeau.nl/en).
