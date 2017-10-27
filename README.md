@@ -18,7 +18,9 @@ __Noteworthy features include:__
 __Currently in development:__
 - logging and benchmarking of performed commands;
 - support for more browsers (Firefox, Internet Explorer);
-- support for remote drivers (Selenium Hub, Selenoid, BrowserStack).
+- support for remote drivers (Selenium Hub, Selenoid, BrowserStack);
+- plugin to allow direct access to Selenium WebDriver;
+- plugin that adds PageObjects to WbTstr.
 
 _See [documentation](https://wbtstr.github.io) for more information._
 
