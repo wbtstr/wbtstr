@@ -1,4 +1,5 @@
-# WbTstr
+# `WbTstr` [![NuGet version](https://img.shields.io/nuget/v/WbTstr.svg?style=flat-square)](https://www.nuget.org/packages/WbTstr) [![NuGet downloads](https://img.shields.io/nuget/dt/WbTstr.svg?style=flat-square)](https://www.nuget.org/packages/WbTstr) 
+
 
 | master | develop |
 | --- | --- |
