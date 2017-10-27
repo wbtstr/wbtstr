@@ -22,7 +22,7 @@ __Currently in development:__
 - plugin to allow direct access to Selenium WebDriver;
 - plugin that adds PageObjects to WbTstr.
 
-_See [documentation](https://wbtstr.github.io) for more information._
+_See the [documentation](https://wbtstr.github.io) for more information._
 
 [![NuGet version](https://img.shields.io/nuget/v/WbTstr.svg?style=flat-square)](https://www.nuget.org/packages/WbTstr) [![NuGet downloads](https://img.shields.io/nuget/dt/WbTstr.svg?style=flat-square)](https://www.nuget.org/packages/WbTstr) 
 
