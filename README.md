@@ -20,6 +20,8 @@ __Currently in development:__
 - support for more browsers (Firefox, Internet Explorer);
 - support for remote drivers (Selenium Hub, Selenoid, BrowserStack).
 
+_See [documentation](https://wbtstr.github.io) for more information._
+
 ## Contributors
 WbTstr is an open-source initaitive from [Mirabeau](https://www.mirabeau.nl/en).
 
