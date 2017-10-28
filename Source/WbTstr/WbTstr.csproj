@@ -78,6 +78,11 @@
     <Compile Include="Proxies\Extensions\ElementExtensions.cs" />
     <Compile Include="Proxies\Interfaces\ICookie.cs" />
     <Compile Include="Proxies\Interfaces\IElement.cs" />
+    <Compile Include="Session\Recorders\Syntax\Constants\Option.cs" />
+    <Compile Include="Session\Recorders\Syntax\FluentAppendSyntax.cs" />
+    <Compile Include="Session\Recorders\Syntax\FluentDragSyntax.cs" />
+    <Compile Include="Session\Recorders\Syntax\FluentEnterSyntax.cs" />
+    <Compile Include="Session\Recorders\Syntax\FluentSelectSyntax.cs" />
     <Compile Include="Utilities\Constants\Keys.cs" />
     <Compile Include="Commands\ClickCommand.cs" />
     <Compile Include="Commands\ScreenshotCommand.cs" />

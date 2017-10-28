@@ -7,6 +7,7 @@ using WbTstr.Utilities.Constants;
 using System.IO;
 using System.Collections.Generic;
 using WbTstr.WebDrivers.Interfaces;
+using WbTstr.Session.Recorders.Syntax;
 
 namespace WbTstr.Session.Recorders
 {
@@ -30,79 +31,78 @@ namespace WbTstr.Session.Recorders
 
         /* Methods ----------------------------------------------------------*/
 
-        public FluentSessionRecorder ClickOn(string selector, MouseClick clickType = MouseClick.Single)
+        public FluentAppendSyntax Append(string text)
         {
-            var command = new ClickCommand(selector, clickType);
+            if (text == null) throw new ArgumentNullException(nameof(text));
+
+            return new FluentAppendSyntax(this, _performer, text);
+        }
+
+        public FluentAppendSyntax Append(int number)
+        {
+            return new FluentAppendSyntax(this, _performer, $"{number}");
+        }
+
+        public FluentSessionRecorder Click(string selector)
+        {
+            var command = new ClickCommand(selector, MouseClick.Single);
             _performer.Perform(command);
 
             return this;
         }
 
-        public FluentSessionRecorder ClickOn(IElement element, MouseClick clickType = MouseClick.Single)
+        public FluentSessionRecorder Click(IElement element)
         {
-            var command = new ClickCommand(element, clickType);
+            var command = new ClickCommand(element, MouseClick.Single);
             _performer.Perform(command);
 
             return this;
         }
 
-        public FluentSessionRecorder Drag(string selectorA, string selectorB)
+        public FluentDragSyntax Drag(string selectorA)
         {
-            var command = new DragCommand(selectorA, selectorB);
+            return new FluentDragSyntax(this, _performer, selectorA);
+        }
+
+        public FluentDragSyntax Drag(IElement elementA)
+        {
+            return new FluentDragSyntax(this, _performer, elementA);
+        }
+
+        public FluentDragSyntax Drag(int xOffsetToA, int yOffsetToA)
+        {
+            return new FluentDragSyntax(this, _performer, xOffsetToA, yOffsetToA);
+        }
+
+        public FluentSessionRecorder DoubleClick(string selector)
+        {
+            var command = new ClickCommand(selector, MouseClick.Double);
             _performer.Perform(command);
 
             return this;
         }
 
-        public FluentSessionRecorder Drag(IElement elementA, IElement elementB)
+        public FluentSessionRecorder DoubleClick(IElement element)
         {
-            var command = new DragCommand(elementA, elementB);
+            var command = new ClickCommand(element, MouseClick.Double);
             _performer.Perform(command);
 
             return this;
         }
 
-        public FluentSessionRecorder Drag(string selectorA, int xOffsetToB, int yOffsetToB)
+        public FluentEnterSyntax Enter(string text)
         {
-            var command = new DragCommand(selectorA, xOffsetToB, yOffsetToB);
-            _performer.Perform(command);
+            if (text == null) throw new ArgumentNullException(nameof(text));
 
-            return this;
+            return new FluentEnterSyntax(this, _performer, text);
         }
 
-        public FluentSessionRecorder Drag(IElement selectorA, int xOffsetToB, int yOffsetToB)
+        public FluentEnterSyntax Enter(int number)
         {
-            var command = new DragCommand(selectorA, xOffsetToB, yOffsetToB);
-            _performer.Perform(command);
-
-            return this;
+            return new FluentEnterSyntax(this, _performer, $"{number}");
         }
 
-        public FluentSessionRecorder Drag(int xOffsetToA, int yOffsetToA, string selectorB)
-        {
-            var command = new DragCommand(xOffsetToA, yOffsetToA, selectorB);
-            _performer.Perform(command);
-
-            return this;
-        }
-
-        public FluentSessionRecorder Drag(int xOffsetToA, int yOffsetToA, IElement elementB)
-        {
-            var command = new DragCommand(xOffsetToA, yOffsetToA, elementB);
-            _performer.Perform(command);
-
-            return this;
-        }
-
-        public FluentSessionRecorder Drag(int xOffsetToA, int yOffsetToA, int xOffsetToB, int yOffsetToB)
-        {
-            var command = new DragCommand(xOffsetToA, yOffsetToA, xOffsetToB, yOffsetToB);
-            _performer.Perform(command);
-
-            return this;
-        }
-
-        public FluentSessionRecorder FindOnPage(string selector, out IElement element)
+        public FluentSessionRecorder Find(string selector, out IElement element)
         {
             var command = new FindCommand(selector);
             element = _performer.PerformAndReturn(command);
@@ -110,7 +110,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public IElement FindOnPage(string selector)
+        public IElement Find(string selector)
         {
             var command = new FindCommand(selector);
             var element = _performer.PerformAndReturn(command);
@@ -118,7 +118,7 @@ namespace WbTstr.Session.Recorders
             return element;
         }
 
-        public FluentSessionRecorder FindMultipleOnPage(string selector, out ICollection<IElement> elements)
+        public FluentSessionRecorder FindMultiple(string selector, out ICollection<IElement> elements)
         {
             var command = new FindMultipleCommand(selector);
             elements = _performer.PerformAndReturn(command);
@@ -126,7 +126,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public ICollection<IElement> FindMultipleOnPage(string selector)
+        public ICollection<IElement> FindMultiple(string selector)
         {
             var command = new FindMultipleCommand(selector);
             var elements = _performer.PerformAndReturn(command);
@@ -166,7 +166,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public FluentSessionRecorder NavigateTo(string url)
+        public FluentSessionRecorder Open(string url)
         {
             var command = new NavigateCommand(url);
             _performer.Perform(command);
@@ -174,7 +174,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public FluentSessionRecorder NavigateTo(Uri uri)
+        public FluentSessionRecorder Open(Uri uri)
         {
             var command = new NavigateCommand(uri);
             _performer.Perform(command);
@@ -185,6 +185,22 @@ namespace WbTstr.Session.Recorders
         public FluentSessionRecorder ResizeWindow(int width, int height)
         {
             var command = new ResizeCommand(width, height);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public FluentSessionRecorder RichtClick(string selector)
+        {
+            var command = new ClickCommand(selector, MouseClick.Context);
+            _performer.Perform(command);
+
+            return this;
+        }
+
+        public FluentSessionRecorder RichtClick(IElement element)
+        {
+            var command = new ClickCommand(element, MouseClick.Context);
             _performer.Perform(command);
 
             return this;
@@ -214,52 +230,16 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public FluentSessionRecorder Type(string text, string selector, bool clearFirst = false)
+        public FluentSelectSyntax Select(string text)
         {
-            var command = new TypeCommand(text, selector, clearFirst);
-            _performer.Perform(command);
+            if (text == null) throw new ArgumentNullException(nameof(text));
 
-            return this;
+            return new FluentSelectSyntax(this, _performer, text);
         }
 
-        public FluentSessionRecorder Type(string text, IElement element, bool clearFirst = false)
+        public FluentSelectSyntax Select(int index)
         {
-            var command = new TypeCommand(text, element, clearFirst);
-            _performer.Perform(command);
-
-            return this;
-        }
-
-        public FluentSessionRecorder Select(string selector, params string[] values)
-        {
-            var command = new SelectCommand(selector, values);
-            _performer.Perform(command);
-
-            return this;
-        }
-
-        public FluentSessionRecorder Select(string selector, params int[] indexes)
-        {
-            var command = new SelectCommand(selector, indexes);
-            _performer.Perform(command);
-
-            return this;
-        }
-
-        public FluentSessionRecorder Select(IElement element, params string[] values)
-        {
-            var command = new SelectCommand(element, values);
-            _performer.Perform(command);
-
-            return this;
-        }
-
-        public FluentSessionRecorder Select(IElement element, params int[] indexes)
-        {
-            var command = new SelectCommand(element, indexes);
-            _performer.Perform(command);
-
-            return this;
+            return new FluentSelectSyntax(this, _performer, index);
         }
 
         public FluentSessionRecorder Wait(int milliseconds = 0, int seconds = 0, int minutes = 0)

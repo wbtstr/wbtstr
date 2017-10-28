@@ -27,7 +27,7 @@ namespace WbTstr.IntegrationTests.Fixtures
         [TestCase]
         public void TestMethod1()
         {
-            I.NavigateTo("http://github.com")
+            I.Open("http://github.com")
                 .SetCookie(_loginCookie)
                 .Wait(seconds: 1)
                 .CapturePage(out var page);
