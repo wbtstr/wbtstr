@@ -6,7 +6,7 @@ using WbTstr.Session.Trackers;
 
 namespace WbTstr.Fixtures
 {
-    public abstract class WbTstrFixture<P> : WbTstrFixtureBase<SimpleSessionRecorder, P, SimpleSessionTracker>
+    public abstract class WbTstrFixture<P> : WbTstrFixtureBase<FluentSessionRecorder, P, ConsoleSessionTracker>
         where P : class, ISessionPerformer, new()
     {
     }

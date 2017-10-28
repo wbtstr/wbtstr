@@ -10,7 +10,7 @@ using WbTstr.WebDrivers.Interfaces;
 
 namespace WbTstr.Session.Recorders
 {
-    public class SimpleSessionRecorder : ISessionRecorder
+    public class FluentSessionRecorder : ISessionRecorder
     {
         private bool _initialized;
         private ISessionPerformer _performer;
@@ -21,7 +21,7 @@ namespace WbTstr.Session.Recorders
 
             if (_initialized)
             {
-                throw new InvalidOperationException($"{nameof(SimpleSessionRecorder)} can be initialized only once.");
+                throw new InvalidOperationException($"{nameof(FluentSessionRecorder)} can be initialized only once.");
             }
 
             _initialized = true;
@@ -30,7 +30,7 @@ namespace WbTstr.Session.Recorders
 
         /* Methods ----------------------------------------------------------*/
 
-        public SimpleSessionRecorder ClickOn(string selector, MouseClick clickType = MouseClick.Single)
+        public FluentSessionRecorder ClickOn(string selector, MouseClick clickType = MouseClick.Single)
         {
             var command = new ClickCommand(selector, clickType);
             _performer.Perform(command);
@@ -38,7 +38,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder ClickOn(IElement element, MouseClick clickType = MouseClick.Single)
+        public FluentSessionRecorder ClickOn(IElement element, MouseClick clickType = MouseClick.Single)
         {
             var command = new ClickCommand(element, clickType);
             _performer.Perform(command);
@@ -46,7 +46,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Drag(string selectorA, string selectorB)
+        public FluentSessionRecorder Drag(string selectorA, string selectorB)
         {
             var command = new DragCommand(selectorA, selectorB);
             _performer.Perform(command);
@@ -54,7 +54,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Drag(IElement elementA, IElement elementB)
+        public FluentSessionRecorder Drag(IElement elementA, IElement elementB)
         {
             var command = new DragCommand(elementA, elementB);
             _performer.Perform(command);
@@ -62,7 +62,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Drag(string selectorA, int xOffsetToB, int yOffsetToB)
+        public FluentSessionRecorder Drag(string selectorA, int xOffsetToB, int yOffsetToB)
         {
             var command = new DragCommand(selectorA, xOffsetToB, yOffsetToB);
             _performer.Perform(command);
@@ -70,7 +70,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Drag(IElement selectorA, int xOffsetToB, int yOffsetToB)
+        public FluentSessionRecorder Drag(IElement selectorA, int xOffsetToB, int yOffsetToB)
         {
             var command = new DragCommand(selectorA, xOffsetToB, yOffsetToB);
             _performer.Perform(command);
@@ -78,7 +78,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Drag(int xOffsetToA, int yOffsetToA, string selectorB)
+        public FluentSessionRecorder Drag(int xOffsetToA, int yOffsetToA, string selectorB)
         {
             var command = new DragCommand(xOffsetToA, yOffsetToA, selectorB);
             _performer.Perform(command);
@@ -86,7 +86,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Drag(int xOffsetToA, int yOffsetToA, IElement elementB)
+        public FluentSessionRecorder Drag(int xOffsetToA, int yOffsetToA, IElement elementB)
         {
             var command = new DragCommand(xOffsetToA, yOffsetToA, elementB);
             _performer.Perform(command);
@@ -94,7 +94,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Drag(int xOffsetToA, int yOffsetToA, int xOffsetToB, int yOffsetToB)
+        public FluentSessionRecorder Drag(int xOffsetToA, int yOffsetToA, int xOffsetToB, int yOffsetToB)
         {
             var command = new DragCommand(xOffsetToA, yOffsetToA, xOffsetToB, yOffsetToB);
             _performer.Perform(command);
@@ -102,7 +102,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder FindOnPage(string selector, out IElement element)
+        public FluentSessionRecorder FindOnPage(string selector, out IElement element)
         {
             var command = new FindCommand(selector);
             element = _performer.PerformAndReturn(command);
@@ -118,7 +118,7 @@ namespace WbTstr.Session.Recorders
             return element;
         }
 
-        public SimpleSessionRecorder FindMultipleOnPage(string selector, out ICollection<IElement> elements)
+        public FluentSessionRecorder FindMultipleOnPage(string selector, out ICollection<IElement> elements)
         {
             var command = new FindMultipleCommand(selector);
             elements = _performer.PerformAndReturn(command);
@@ -134,7 +134,7 @@ namespace WbTstr.Session.Recorders
             return elements;
         }
 
-        public SimpleSessionRecorder Focus(string selector)
+        public FluentSessionRecorder Focus(string selector)
         {
             var command = new FocusCommand(selector);
             _performer.Perform(command);
@@ -142,7 +142,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Focus(IElement element)
+        public FluentSessionRecorder Focus(IElement element)
         {
             var command = new FocusCommand(element);
             _performer.Perform(command);
@@ -150,7 +150,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Hover(string selector)
+        public FluentSessionRecorder Hover(string selector)
         {
             var command = new HoverCommand(selector);
             _performer.Perform(command);
@@ -158,7 +158,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Hover(IElement element)
+        public FluentSessionRecorder Hover(IElement element)
         {
             var command = new HoverCommand(element);
             _performer.Perform(command);
@@ -166,7 +166,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder NavigateTo(string url)
+        public FluentSessionRecorder NavigateTo(string url)
         {
             var command = new NavigateCommand(url);
             _performer.Perform(command);
@@ -174,7 +174,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder NavigateTo(Uri uri)
+        public FluentSessionRecorder NavigateTo(Uri uri)
         {
             var command = new NavigateCommand(uri);
             _performer.Perform(command);
@@ -182,7 +182,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder ResizeWindow(int width, int height)
+        public FluentSessionRecorder ResizeWindow(int width, int height)
         {
             var command = new ResizeCommand(width, height);
             _performer.Perform(command);
@@ -190,7 +190,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder MaximizeWindow()
+        public FluentSessionRecorder MaximizeWindow()
         {
             var command = new MaximizeCommand();
             _performer.Perform(command);
@@ -198,7 +198,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder TakeScreenshot(string fileName = "screenshot.png", string fileDirectory = null)
+        public FluentSessionRecorder TakeScreenshot(string fileName = "screenshot.png", string fileDirectory = null)
         {
             var command = new ScreenshotCommand(fileName, fileDirectory ?? Path.GetTempPath());
             _performer.Perform(command);
@@ -206,7 +206,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Type(string text)
+        public FluentSessionRecorder Type(string text)
         {
             var command = new TypeWindowCommand(text);
             _performer.Perform(command);
@@ -214,7 +214,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Type(string text, string selector, bool clearFirst = false)
+        public FluentSessionRecorder Type(string text, string selector, bool clearFirst = false)
         {
             var command = new TypeCommand(text, selector, clearFirst);
             _performer.Perform(command);
@@ -222,7 +222,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Type(string text, IElement element, bool clearFirst = false)
+        public FluentSessionRecorder Type(string text, IElement element, bool clearFirst = false)
         {
             var command = new TypeCommand(text, element, clearFirst);
             _performer.Perform(command);
@@ -230,7 +230,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Select(string selector, params string[] values)
+        public FluentSessionRecorder Select(string selector, params string[] values)
         {
             var command = new SelectCommand(selector, values);
             _performer.Perform(command);
@@ -238,7 +238,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Select(string selector, params int[] indexes)
+        public FluentSessionRecorder Select(string selector, params int[] indexes)
         {
             var command = new SelectCommand(selector, indexes);
             _performer.Perform(command);
@@ -246,7 +246,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Select(IElement element, params string[] values)
+        public FluentSessionRecorder Select(IElement element, params string[] values)
         {
             var command = new SelectCommand(element, values);
             _performer.Perform(command);
@@ -254,7 +254,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Select(IElement element, params int[] indexes)
+        public FluentSessionRecorder Select(IElement element, params int[] indexes)
         {
             var command = new SelectCommand(element, indexes);
             _performer.Perform(command);
@@ -262,7 +262,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder Wait(int milliseconds = 0, int seconds = 0, int minutes = 0)
+        public FluentSessionRecorder Wait(int milliseconds = 0, int seconds = 0, int minutes = 0)
         {
             var duration = new TimeSpan(0, 0, minutes, seconds, milliseconds);
 
@@ -272,7 +272,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder WaitUntil(Func<bool> predicate, TimeSpan? interval = null, TimeSpan? timeout = null)
+        public FluentSessionRecorder WaitUntil(Func<bool> predicate, TimeSpan? interval = null, TimeSpan? timeout = null)
         {
             var defaultInterval = TimeSpan.FromSeconds(1);
             var defaultTimeout = TimeSpan.FromSeconds(5);
@@ -291,7 +291,7 @@ namespace WbTstr.Session.Recorders
             return returnValue;
         }
 
-        public SimpleSessionRecorder Authenticate(string username, string password, TimeSpan? timeout = null)
+        public FluentSessionRecorder Authenticate(string username, string password, TimeSpan? timeout = null)
         {
             var defaultTimeout = TimeSpan.FromSeconds(5);
 
@@ -301,7 +301,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder SetCookie(ICookie cookie)
+        public FluentSessionRecorder SetCookie(ICookie cookie)
         {
             var command = new SetCookieCommand(cookie);
             _performer.Perform(command);
@@ -309,7 +309,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder SetCookie(string name, string value, string domain = null, string path = null, DateTime? expiry = null)
+        public FluentSessionRecorder SetCookie(string name, string value, string domain = null, string path = null, DateTime? expiry = null)
         {
             var command = new SetCookieCommand(name, value, domain, path, expiry);
             _performer.Perform(command);
@@ -317,7 +317,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder DeleteCookie(string name)
+        public FluentSessionRecorder DeleteCookie(string name)
         {
             var command = new DeleteCookieCommand(name);
             _performer.Perform(command);
@@ -325,7 +325,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public SimpleSessionRecorder CapturePage(out IPage page)
+        public FluentSessionRecorder CapturePage(out IPage page)
         {
             var command = new CapturePageCommand();
             page = _performer.PerformAndReturn(command);

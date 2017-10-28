@@ -99,10 +99,10 @@
     <Compile Include="Fixtures\WbTstrFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\Recorders\Interfaces\ISessionRecorder.cs" />
-    <Compile Include="Session\Recorders\SimpleSessionRecorder.cs" />
+    <Compile Include="Session\Recorders\FluentSessionRecorder.cs" />
     <Compile Include="Session\Performers\Interfaces\ISessionPerformer.cs" />
     <Compile Include="Session\Performers\SequentialSessionPerformer.cs" />
-    <Compile Include="Session\Trackers\SimpleSessionTracker.cs" />
+    <Compile Include="Session\Trackers\ConsoleSessionTracker.cs" />
     <Compile Include="Session\Trackers\Interfaces\ISessionTracker.cs" />
     <Compile Include="WebDrivers\Constants\WebDriverScope.cs" />
     <Compile Include="WebDrivers\Constants\WebDriverType.cs" />

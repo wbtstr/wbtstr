@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NSubstitute;
 using NUnit.Framework.Internal;
 using NUnit.Framework;
@@ -12,14 +8,14 @@ using WbTstr.Session.Recorders;
 namespace WbTstr.UnitTests.Session.Recorders
 {
     [TestFixture]
-    public class SimpleSessionRecorderTests
+    public class FluentSessionRecorderTests
     {
-        private SimpleSessionRecorder _defaultRecorder;
+        private FluentSessionRecorder _defaultRecorder;
 
         [SetUp]
         public void SetUp()
         {
-            _defaultRecorder = new SimpleSessionRecorder();
+            _defaultRecorder = new FluentSessionRecorder();
         }
 
         /*-------------------------------------------------------------------*/
