@@ -42,18 +42,5 @@ namespace WbTstr.UnitTests.Commands
             // Assert
             Assert.Throws<ArgumentNullException>(action);
         }
-
-        [TestCase]
-        public void Constructor_InvalidText_ThrowsArgumentException()
-        {
-            // Arrange
-            string text = "";
-
-            // Act
-            TestDelegate action = () => new TypeWindowCommand(text);
-
-            // Assert
-            Assert.Throws<ArgumentException>(action);
-        }
     }
 }

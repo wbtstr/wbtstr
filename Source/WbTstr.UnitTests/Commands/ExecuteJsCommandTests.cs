@@ -35,22 +35,6 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Constructor_InvalidJsExpression_ThrowsArgumentException()
-        {
-            // Arrange
-
-            // Act
-            TestDelegate[] actions = 
-            {
-                () => new ExecuteJsCommand<string>(""),
-                () => new ExecuteJsCommand<string>(" "),
-            };
-
-            // Assert
-            AssertMultiple.Throws<ArgumentException>(actions);
-        }
-
-        [TestCase]
         public void Constructor_InvalidReturnType_ThrowsArgumentException()
         {
             // Arrange

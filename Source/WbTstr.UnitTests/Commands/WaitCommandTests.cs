@@ -29,25 +29,5 @@ namespace WbTstr.UnitTests.Commands
             // Assert
             AssertString.NotNullOrWhiteSpace(stringRepresentation);
         }
-
-        [TestCase]
-        public void Constructor_InvalidParams_ThrowsArgumentException()
-        {
-            // Arrange 
-            int valid = 0;
-            int invalid = -1;
-
-            // Act
-            TestDelegate[] actions =
-            {
-                () => new WaitCommand(new TimeSpan(0, 0, invalid, invalid, invalid)), 
-                () => new WaitCommand(new TimeSpan(0, 0, invalid, valid, valid)),
-                () => new WaitCommand(new TimeSpan(0, 0, valid, invalid, valid)),
-                () => new WaitCommand(new TimeSpan(0, 0, valid, valid, invalid)),
-            };
-
-            // Assert
-            AssertMultiple.Throws<ArgumentException>(actions);
-        }
     }
 }

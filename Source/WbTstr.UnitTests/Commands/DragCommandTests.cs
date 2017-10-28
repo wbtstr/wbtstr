@@ -89,26 +89,6 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Constructor_InvalidSelector_ThrowsArgumentException()
-        {
-            // Arrange
-            string selector = DefaultSelector;
-            string empty = "";
-            string whitespace = " ";
-
-            // Act
-            TestDelegate[] actions = {
-                () => new DragCommand(selector, empty),
-                () => new DragCommand(selector, whitespace),
-                () => new DragCommand(empty, selector),
-                () => new DragCommand(whitespace, selector),
-            };
-
-            // Assert
-            AssertMultiple.Throws<ArgumentException>(actions);
-        }
-
-        [TestCase]
         public void Constructor_InvalidOffsetSelector_ThrowsArgumentException()
         {
             // Arrange

@@ -55,22 +55,6 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Constructor_SelectorInvalid_ThrowsArgumentException()
-        {
-            // Arrange
-
-            // Act
-            TestDelegate[] actions =
-            {
-                () => new FocusCommand(""),
-                () => new FocusCommand(" "),
-            };
-
-            // Asset
-            AssertMultiple.Throws<ArgumentException>(actions);
-        }
-
-        [TestCase]
         public void ToString_NoArgs_ReturnsString()
         {
             // Arrange

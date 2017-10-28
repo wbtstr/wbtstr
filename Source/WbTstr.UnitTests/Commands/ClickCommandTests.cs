@@ -37,20 +37,6 @@ namespace WbTstr.UnitTests.Commands
             Assert.Throws<ArgumentNullException>(action);
         }
 
-        [TestCase("", MouseClick.Single)]
-        [TestCase(" ", MouseClick.Single)]
-        [TestCase(DefaultSelector, MouseClick.None)]
-        public void Constructor_InvalidInput_ThrowsArgumentException(string selector, MouseClick mouseClick)
-        {
-            // Arrange
-
-            // Act
-            TestDelegate action = () => new ClickCommand(selector, mouseClick);
-
-            // Assert
-            Assert.Throws<ArgumentException>(action);
-        }
-
         [TestCase(DefaultSelector, MouseClick.Single)]
         [TestCase(DefaultSelector, MouseClick.Double)]
         [TestCase(DefaultSelector, MouseClick.Context)]

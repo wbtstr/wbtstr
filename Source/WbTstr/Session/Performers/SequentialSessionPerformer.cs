@@ -22,7 +22,7 @@ namespace WbTstr.Session.Performers
             _commands = new Queue<ICommand>();
         }
 
-        public ISessionPerformer Initialize(IWebDriverConfig webDriverConfig, ISessionTracker tracker = null)
+        public ISessionPerformer Initialize(IWebDriverConfig webDriverConfig, ISessionTracker tracker)
         {
             if (webDriverConfig == null) throw new ArgumentNullException(nameof(webDriverConfig));
 
@@ -32,7 +32,7 @@ namespace WbTstr.Session.Performers
             }
 
             _webDriver = new Lazy<IWebDriver>(() => WebDriverFactory.CreateFromConfig(webDriverConfig));
-            _tracker = tracker;
+            _tracker = tracker ?? throw new ArgumentNullException(nameof(tracker));
 
             _initialized = true;
             return this;

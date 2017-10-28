@@ -17,11 +17,11 @@ namespace WbTstr.Commands
             _fileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
             _directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
 
-            if (MultiPurposeValidator.IsValidFileName(fileName))
+            if (!MultiPurposeValidator.IsValidFileName(fileName))
             {
                 throw new ArgumentException($"Invalid file name: {fileName}");
             }
-            if (MultiPurposeValidator.IsValidDirectoryPath(directoryPath))
+            if (!MultiPurposeValidator.IsValidDirectoryPath(directoryPath))
             {
                 throw new ArgumentException($"Invalid directory: {directoryPath}");
             }

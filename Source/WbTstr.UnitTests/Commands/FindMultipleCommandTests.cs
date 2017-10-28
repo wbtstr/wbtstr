@@ -3,10 +3,10 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using WbTstr.Commands;
 using WbTstr.Proxies;
-using WbTstr.Proxies.Interfaces;
 using WbTstr.UnitTests._Auxiliaries;
 using WbTstr.WebDrivers.Exceptions;
 
@@ -38,22 +38,6 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Constructor_SelectorInvalid_ThrowsArgumentException()
-        {
-            // Arrange
-
-            // Act
-            TestDelegate[] actions =
-            {
-                () => new FindMultipleCommand(""),
-                () => new FindMultipleCommand(" "),
-            };
-
-            // Assert
-            AssertMultiple.Throws<ArgumentException>(actions);
-        }
-
-        [TestCase]
         public void ToString_NoArgs_ReturnsString()
         {
             // Arrange
@@ -71,10 +55,9 @@ namespace WbTstr.UnitTests.Commands
             // Arrange
             var webDriver = Substitute.For<IWebDriver>();
             var webElement = Substitute.For<IWebElement>();
-            var webElements = Substitute.For<ICollection<IWebElement>>();
+            var webElements = new List<IWebElement> { webElement };
 
-            webElements.Add(webElement);
-            webDriver.FindElements(null).ReturnsForAnyArgs(webElements as IReadOnlyCollection<IWebElement>);
+            webDriver.FindElements(null).ReturnsForAnyArgs(webElements.AsReadOnly());
 
             // Act
             var elements = _defaultCommand.Execute(webDriver);
@@ -89,7 +72,7 @@ namespace WbTstr.UnitTests.Commands
             // Arrange
             var webDriver = Substitute.For<IWebDriver>();
 
-            webDriver.FindElement(null).ReturnsForAnyArgs(x => throw new NoSuchElementException());
+            webDriver.FindElements(null).ReturnsForAnyArgs(x => throw new NoSuchElementException());
 
             // Act
             TestDelegate action = () => _defaultCommand.Execute(webDriver);
