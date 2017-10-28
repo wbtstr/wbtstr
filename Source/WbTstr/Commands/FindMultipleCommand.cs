@@ -15,9 +15,7 @@ namespace WbTstr.Commands
 
         public FindMultipleCommand(string selector)
         {
-            if (selector == null) throw new ArgumentNullException();
-
-            _selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
+            _selector =  selector ?? throw new ArgumentNullException(nameof(selector));
         }
 
         /*-------------------------------------------------------------------*/

@@ -16,13 +16,11 @@ namespace WbTstr.Commands
 
         public TypeWindowCommand(string text, bool clear)
         {
-            if (text == null) throw new ArgumentNullException(nameof(text));
-
-            _text = !string.IsNullOrEmpty(text) ? text : throw new ArgumentException(nameof(text));
+            _text = text ?? throw new ArgumentNullException(nameof(text));
             _clear = clear;
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

@@ -18,7 +18,7 @@ namespace WbTstr.Commands
             _timeout = timeout;
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

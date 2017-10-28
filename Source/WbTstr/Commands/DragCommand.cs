@@ -21,26 +21,19 @@ namespace WbTstr.Commands
 
         public DragCommand(string selectorA, string selectorB)
         {
-            if (selectorA == null) throw new ArgumentNullException(nameof(selectorA));
-            if (selectorB == null) throw new ArgumentNullException(nameof(selectorB));
-
-            _selectorA = !string.IsNullOrWhiteSpace(selectorA) ? selectorA : throw new ArgumentException(nameof(selectorA));
-            _selectorB = !string.IsNullOrWhiteSpace(selectorB) ? selectorB : throw new ArgumentException(nameof(selectorB));
+            _selectorA = selectorA ?? throw new ArgumentNullException(nameof(selectorA));
+            _selectorB = selectorB ?? throw new ArgumentNullException(nameof(selectorB));
         }
 
         public DragCommand(string selectorA, IElement elementB)
         {
-            if (selectorA == null) throw new ArgumentNullException(nameof(selectorA));
-
-            _selectorA = !string.IsNullOrWhiteSpace(selectorA) ? selectorA : throw new ArgumentException(nameof(selectorA));
+            _selectorA = selectorA ?? throw new ArgumentNullException(nameof(selectorA));
             _elementB = elementB ?? throw new ArgumentNullException(nameof(elementB));
         }
 
         public DragCommand(string selectorA, int xOffsetToB, int yOffsetToB)
         {
-            if (selectorA == null) throw new ArgumentNullException(nameof(selectorA));
-
-            _selectorA = !string.IsNullOrWhiteSpace(selectorA) ? selectorA : throw new ArgumentException(nameof(selectorA));
+            _selectorA = selectorA ?? throw new ArgumentNullException(nameof(selectorA));
             _xOffsetToB = xOffsetToB >= 0 ? xOffsetToB : throw new ArgumentException(nameof(xOffsetToB));
             _yOffsetToB = yOffsetToB >= 0 ? yOffsetToB : throw new ArgumentException(nameof(xOffsetToB));
         }
@@ -53,10 +46,8 @@ namespace WbTstr.Commands
 
         public DragCommand(IElement elementA, string selectorB)
         {
-            if (selectorB == null) throw new ArgumentNullException(nameof(selectorB));
-
-            _selectorB = !string.IsNullOrWhiteSpace(_selectorB) ? selectorB : throw new ArgumentException(nameof(selectorB));
             _elementA = elementA ?? throw new ArgumentNullException(nameof(elementA));
+            _selectorB = selectorB ?? throw new ArgumentNullException(nameof(selectorB));
         }
 
         public DragCommand(IElement elementA, int xOffsetToB, int yOffsetToB)
@@ -68,11 +59,9 @@ namespace WbTstr.Commands
 
         public DragCommand(int xOffsetToA, int yOffsetToA, string selectorB)
         {
-            if (selectorB == null) throw new ArgumentNullException(nameof(selectorB));
-
             _xOffsetToA = xOffsetToA >= 0 ? xOffsetToA : throw new ArgumentException(nameof(xOffsetToA));
             _yOffsetToA = yOffsetToA >= 0 ? yOffsetToA : throw new ArgumentException(nameof(yOffsetToA));
-            _selectorB = !string.IsNullOrWhiteSpace(selectorB) ? selectorB : throw new ArgumentException(nameof(selectorB));
+            _selectorB = selectorB ?? throw new ArgumentNullException(nameof(selectorB));
         }
 
         public DragCommand(int xOffsetToA, int yOffsetToA, IElement elementB)

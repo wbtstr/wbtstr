@@ -12,7 +12,7 @@ namespace WbTstr.Proxies
             _cookie = cookie;
         }
 
-        /* Properties -------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         public string Name => _cookie.Name;
 

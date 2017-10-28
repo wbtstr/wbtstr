@@ -15,6 +15,8 @@ namespace WbTstr.Fixtures.Attributes
             Preset = preset;
         }
 
+        /*-------------------------------------------------------------------*/
+
         public WebDriverType Type { get; }
 
         public WebDriverScope Scope { get; }

@@ -14,19 +14,12 @@ namespace WbTstr.Commands
         private readonly bool _async;
 
         private static ReadOnlyCollection<Type> SupportedReturnTypes { get; } = new ReadOnlyCollection<Type>(
-          new Type[] {
-              typeof(string),
-              typeof(long),
-              typeof(bool),
-              typeof(IElement),
-          }
+          new Type[] { typeof(string), typeof(long), typeof(bool), typeof(IElement) }
         );
 
         public ExecuteJsCommand(string jsExpression, bool async = false)
         {
-            if (jsExpression == null) throw new ArgumentNullException(nameof(jsExpression));
-
-            _jsExpression = !string.IsNullOrWhiteSpace(jsExpression) ? jsExpression : throw new ArgumentException(nameof(jsExpression));
+            _jsExpression = jsExpression ?? throw new ArgumentNullException(nameof(jsExpression));
             _async = async;
 
             if (!SupportedReturnTypes.Contains(typeof(T)))

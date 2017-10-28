@@ -14,7 +14,7 @@ namespace WbTstr.Commands
             _duration = duration;
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

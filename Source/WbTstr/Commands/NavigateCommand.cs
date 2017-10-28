@@ -16,12 +16,10 @@ namespace WbTstr.Commands
 
         public NavigateCommand(string url)
         {
-            if (url == null) throw new ArgumentNullException();
-
-            _uri = UriParser.ParseWebUrl(url);
+            _uri = UriParser.ParseWebUrl(url ?? throw new ArgumentNullException(nameof(url)));
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

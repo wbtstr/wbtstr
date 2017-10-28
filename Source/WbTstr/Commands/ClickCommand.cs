@@ -19,11 +19,6 @@ namespace WbTstr.Commands
         {
             _selector = selector ?? throw new ArgumentNullException(nameof(selector));
             _clickType = clickType != MouseClick.None ? clickType : throw new ArgumentException(nameof(clickType));
-
-            if (string.IsNullOrWhiteSpace(selector))
-            {
-                throw new ArgumentException(nameof(selector));
-            }
         }
 
         public ClickCommand(IElement element, MouseClick clickType)

@@ -33,7 +33,7 @@ namespace WbTstr.Commands
             _expiry = expiry;
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

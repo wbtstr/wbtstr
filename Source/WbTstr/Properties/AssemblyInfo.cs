@@ -6,8 +6,6 @@ using System.Runtime.InteropServices;
 [assembly: InternalsVisibleTo("WbTstr.IntegrationTests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
-[assembly: InternalsVisibleTo("WbTstr.Fluent")]
-
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.

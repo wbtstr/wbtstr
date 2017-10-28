@@ -13,7 +13,7 @@ namespace WbTstr.Commands
             _name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

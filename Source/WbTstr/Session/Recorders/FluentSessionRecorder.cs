@@ -29,7 +29,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         public FluentAppendSyntax Append(string text)
         {

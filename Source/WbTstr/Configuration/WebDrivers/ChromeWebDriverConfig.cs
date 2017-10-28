@@ -22,6 +22,8 @@ namespace WbTstr.Configuration.WebDrivers
             Proxy = proxy;
         }
 
+        /*-------------------------------------------------------------------*/
+
         public WebDriverType Type { get; } = WebDriverType.Chrome;
 
         public WebDriverProxyConfig Proxy { get; set; }

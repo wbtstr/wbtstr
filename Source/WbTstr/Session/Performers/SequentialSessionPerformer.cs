@@ -38,13 +38,11 @@ namespace WbTstr.Session.Performers
             return this;
         }
 
-        /* Properties -------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         public bool DirectPlay { get; set; } = true;
 
         protected IWebDriver WebDriver => _webDriver?.Value;
-
-        /* Methods ----------------------------------------------------------*/
 
         public void Perform(IActionCommand actionCommand)
         {
@@ -119,7 +117,7 @@ namespace WbTstr.Session.Performers
             }
         }
 
-        /* Finalizer --------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         public void Dispose()
         {

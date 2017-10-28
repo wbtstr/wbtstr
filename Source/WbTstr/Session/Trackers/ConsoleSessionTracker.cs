@@ -11,6 +11,8 @@ namespace WbTstr.Session.Trackers
             return this;
         }
 
+        /*-------------------------------------------------------------------*/
+
         public void MarkExecutionBegin(IActionCommand actionCommand)
         {
             if (actionCommand == null) throw new ArgumentNullException(nameof(actionCommand));

@@ -41,7 +41,7 @@ namespace WbTstr.Fixtures
             }
         }
 
-        /* Properties -------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected R I
         {
@@ -69,9 +69,6 @@ namespace WbTstr.Fixtures
                 return (_recorders[scopeName] = recorder);
             }
         }
-
-
-        /* Methods ----------------------------------------------------------*/
 
         private T GetScopedTracker(string scopeName)
         {
@@ -103,7 +100,7 @@ namespace WbTstr.Fixtures
             return (_performers[scopeName] = performer);
         }
 
-        /* Finalizer --------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         public void Dispose()
         {

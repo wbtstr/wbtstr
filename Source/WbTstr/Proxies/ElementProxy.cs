@@ -19,16 +19,7 @@ namespace WbTstr.Proxies
             Selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
         }
 
-        /* Methods ----------------------------------------------------------*/
-
-        internal static IWebElement AsWebElement(IElement element)
-        {
-            if (element == null) throw new ArgumentNullException(nameof(element));
-
-            return (element as ElementProxy)?.InnerWebElement;
-        }
-
-        /* Properties -------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         internal IWebElement InnerWebElement { get; }
 
@@ -57,5 +48,12 @@ namespace WbTstr.Proxies
         public int UpperLeftCornerY => InnerWebElement.Location.Y;
 
         public string HTML => InnerWebElement.GetAttribute("outerHTML");
+
+        internal static IWebElement AsWebElement(IElement element)
+        {
+            if (element == null) throw new ArgumentNullException(nameof(element));
+
+            return (element as ElementProxy)?.InnerWebElement;
+        }
     }
 }
