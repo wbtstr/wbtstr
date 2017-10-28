@@ -1,5 +1,4 @@
-﻿using System;
-using WbTstr.Session.Performers;
+﻿using WbTstr.Session.Performers;
 using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Recorders;
 using WbTstr.Session.Trackers;

@@ -1,12 +1,12 @@
 ﻿using OpenQA.Selenium;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using WbTstr.Commands.Abstracts;
+using WbTstr.Proxies;
+using WbTstr.Proxies.Interfaces;
 using WbTstr.WebDrivers;
 using WbTstr.WebDrivers.Interfaces;
-using WebCookie = OpenQA.Selenium.Cookie;
-using ProxyCookie = WbTstr.Proxies.CookieProxy;
-using WbTstr.Proxies.Interfaces;
+using Cookie = OpenQA.Selenium.Cookie;
 
 namespace WbTstr.Commands
 {
@@ -32,8 +32,8 @@ namespace WbTstr.Commands
                 Size = window.Size,
             };
 
-            page.Cookies = new List<WebCookie>(cookies.AllCookies)
-                .Select(x => new ProxyCookie(x)).ToDictionary(x => x.Name, x => (ICookie)x);
+            page.Cookies = new List<Cookie>(cookies.AllCookies)
+                .Select(x => new CookieProxy(x)).ToDictionary(x => x.Name, x => (ICookie)x);
 
             page.Console = new List<LogEntry>(logs.GetLog("browser"))
                 .OrderBy(x => x.Timestamp).Select(x => x.Message).ToList();

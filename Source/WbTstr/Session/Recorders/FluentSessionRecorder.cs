@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using WbTstr.Commands;
 using WbTstr.Proxies.Interfaces;
 using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Recorders.Interfaces;
-using WbTstr.Utilities.Constants;
-using System.IO;
-using System.Collections.Generic;
-using WbTstr.WebDrivers.Interfaces;
 using WbTstr.Session.Recorders.Syntax;
+using WbTstr.Utilities.Constants;
+using WbTstr.WebDrivers.Interfaces;
 
 namespace WbTstr.Session.Recorders
 {

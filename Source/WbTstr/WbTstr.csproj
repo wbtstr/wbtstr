@@ -83,7 +83,6 @@
     <Compile Include="Session\Recorders\Syntax\FluentDragSyntax.cs" />
     <Compile Include="Session\Recorders\Syntax\FluentEnterSyntax.cs" />
     <Compile Include="Session\Recorders\Syntax\FluentSelectSyntax.cs" />
-    <Compile Include="Utilities\Constants\Keys.cs" />
     <Compile Include="Commands\ClickCommand.cs" />
     <Compile Include="Commands\ScreenshotCommand.cs" />
     <Compile Include="Commands\TypeCommand.cs" />
@@ -121,7 +120,7 @@
     <Compile Include="WebDrivers\WebDriverUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="Packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

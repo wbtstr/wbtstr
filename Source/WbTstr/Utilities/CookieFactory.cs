@@ -1,5 +1,4 @@
-﻿using System;
-using WbTstr.Proxies;
+﻿using WbTstr.Proxies;
 using WbTstr.Proxies.Interfaces;
 
 namespace WbTstr.Utilities

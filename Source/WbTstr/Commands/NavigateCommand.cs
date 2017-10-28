@@ -1,8 +1,6 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
+using System;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Commands.Interfaces;
-using WbTstr.WebDrivers;
 using UriParser = WbTstr.Utilities.UriParser;
 
 namespace WbTstr.Commands

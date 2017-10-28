@@ -1,9 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Threading;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {

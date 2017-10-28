@@ -1,6 +1,6 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
-using OpenQA.Selenium;
 using WbTstr.Commands.Interfaces;
 using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.Session.Performers.Interfaces;

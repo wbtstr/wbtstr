@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using WbTstr.Commands.Interfaces;
-using WbTstr.Proxies.Interfaces;
-using WbTstr.Proxies.Extensions;
-using WbTstr.WebDrivers.Extensions;
+﻿using OpenQA.Selenium;
+using System;
 using WbTstr.Commands.Abstracts;
+using WbTstr.Proxies.Extensions;
+using WbTstr.Proxies.Interfaces;
+using WbTstr.WebDrivers.Extensions;
 
 namespace WbTstr.Commands
 {

@@ -1,8 +1,7 @@
-﻿using System;
-using WbTstr.WebDrivers.Interfaces;
-using System.Collections.Generic;
-using WbTstr.Proxies.Interfaces;
+﻿using System.Collections.Generic;
 using System.Drawing;
+using WbTstr.Proxies.Interfaces;
+using WbTstr.WebDrivers.Interfaces;
 
 namespace WbTstr.WebDrivers
 {

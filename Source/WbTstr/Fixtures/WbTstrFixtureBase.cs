@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using WbTstr.Configuration.WebDrivers;
 using WbTstr.Configuration.WebDrivers.Exceptions;
 using WbTstr.Configuration.WebDrivers.Interfaces;
@@ -8,9 +9,8 @@ using WbTstr.Fixtures.Attributes;
 using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Recorders.Interfaces;
 using WbTstr.Session.Trackers.Interfaces;
-using System.Diagnostics;
-using WbTstr.WebDrivers.Constants;
 using WbTstr.Utilities.Extensions;
+using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.Fixtures
 {
