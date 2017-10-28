@@ -61,7 +61,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="SimpleWbTstrFixture\SimpleFixtureTests.cs" />
+    <Compile Include="Fixtures\WbTstrFixtureTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,15 +6,12 @@ namespace WbTstr.Utilities
 {
     public static class CookieFactory
     {
-        public static ICookie Create(string name, string value, string domain = null, string path = null, DateTime? expiry = null)
+        public static ICookie Create(string name, string value)
         {
             return new Cookie
             {
                 Name = name,
-                Value = value,
-                Domain = domain,
-                Path = path,
-                Expiry = expiry,
+                Value = value
             };
         }
     }

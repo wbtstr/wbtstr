@@ -1,16 +1,15 @@
-﻿using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using WbTstr.Fixtures.Attributes;
 using WbTstr.WebDrivers.Constants;
 using WbTstr.Utilities;
-using System;
 using WbTstr.Proxies.Interfaces;
+using WbTstr.Fixtures;
 
-namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
+namespace WbTstr.IntegrationTests.Fixtures
 {
     [TestFixture]
     [WebDriverConfig(WebDriverType.Chrome, WebDriverScope.Test)]
-    public class DerivedFromSimpleFixture : Fixtures.SimpleWbTstrFixture
+    public class WbTstrFixtureTests : WbTstrFixture
     {
         private ICookie _loginCookie;
 
