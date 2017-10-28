@@ -1,8 +1,8 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using WbTstr.Configuration.WebDrivers.Interfaces;
+using System;
 using WbTstr.Configuration.WebDrivers;
+using WbTstr.Configuration.WebDrivers.Interfaces;
 
 namespace WbTstr.WebDrivers
 {

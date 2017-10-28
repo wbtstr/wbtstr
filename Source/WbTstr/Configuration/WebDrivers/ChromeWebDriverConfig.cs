@@ -1,8 +1,7 @@
-﻿using WbTstr.Configuration.WebDrivers.Interfaces;
-using WbTstr.WebDrivers.Constants;
-using System;
+﻿using OpenQA.Selenium.Chrome;
 using System.Collections.Generic;
-using OpenQA.Selenium.Chrome;
+using WbTstr.Configuration.WebDrivers.Interfaces;
+using WbTstr.WebDrivers.Constants;
 
 namespace WbTstr.Configuration.WebDrivers
 {
@@ -22,6 +21,8 @@ namespace WbTstr.Configuration.WebDrivers
             Extensions = extensions ?? new Dictionary<string, bool>();
             Proxy = proxy;
         }
+
+        /*-------------------------------------------------------------------*/
 
         public WebDriverType Type { get; } = WebDriverType.Chrome;
 

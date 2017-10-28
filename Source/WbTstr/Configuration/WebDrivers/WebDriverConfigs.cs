@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Xml;
 using WbTstr.Configuration.WebDrivers.Exceptions;
 using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.Utilities;

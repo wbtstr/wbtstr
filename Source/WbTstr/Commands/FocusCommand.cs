@@ -15,9 +15,7 @@ namespace WbTstr.Commands
 
         public FocusCommand(string selector)
         {
-            if (selector == null) throw new ArgumentNullException();
-
-            _selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
+            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
         }
 
         public FocusCommand(IElement element)
@@ -25,7 +23,7 @@ namespace WbTstr.Commands
             _element = element ?? throw new ArgumentNullException(nameof(element));
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

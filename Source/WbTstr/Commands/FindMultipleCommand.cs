@@ -15,9 +15,7 @@ namespace WbTstr.Commands
 
         public FindMultipleCommand(string selector)
         {
-            if (selector == null) throw new ArgumentNullException();
-
-            _selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
+            _selector =  selector ?? throw new ArgumentNullException(nameof(selector));
         }
 
         /*-------------------------------------------------------------------*/
@@ -27,7 +25,7 @@ namespace WbTstr.Commands
             try
             {
                 var webElements = webDriver.FindElements(By.CssSelector(_selector));
-                return webElements.Select(x => new Element(x, _selector)).ToArray();
+                return webElements.Select(x => new ElementProxy(x, _selector)).ToArray();
             }
             catch (NoSuchElementException)
             {

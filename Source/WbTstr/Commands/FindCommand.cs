@@ -13,9 +13,7 @@ namespace WbTstr.Commands
 
         public FindCommand(string selector)
         {
-            if (selector == null) throw new ArgumentNullException();
-
-            _selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
+            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
         }
 
         /*-------------------------------------------------------------------*/
@@ -25,7 +23,7 @@ namespace WbTstr.Commands
             try
             {
                 var webElement = webDriver.FindElement(By.CssSelector(_selector));
-                return new Element(webElement, _selector);
+                return new ElementProxy(webElement, _selector);
             }
             catch (NoSuchElementException)
             {

@@ -1,8 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Threading;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {
@@ -15,7 +13,7 @@ namespace WbTstr.Commands
             _name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

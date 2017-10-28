@@ -23,7 +23,7 @@ namespace WbTstr.UnitTests.Proxies
             IWebElement webElement = null;
 
             // Act
-            TestDelegate action = () => new Element(webElement);
+            TestDelegate action = () => new ElementProxy(webElement);
 
             // Assert
             Assert.Throws<ArgumentNullException>(action);
@@ -37,7 +37,7 @@ namespace WbTstr.UnitTests.Proxies
             string selector = null;
 
             // Act
-            TestDelegate action = () => new Element(webElement, selector);
+            TestDelegate action = () => new ElementProxy(webElement, selector);
 
             // Assert
             Assert.Throws<ArgumentNullException>(action);
@@ -48,7 +48,7 @@ namespace WbTstr.UnitTests.Proxies
         {
             // Arrange
             IWebElement webElement = Substitute.For<IWebElement>();
-            IElement element = new Element(webElement);
+            IElement element = new ElementProxy(webElement);
 
             // Act
             bool displayed = element.Displayed;

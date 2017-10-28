@@ -30,7 +30,7 @@ namespace WbTstr.UnitTests.Session.Performers
         public void Initialize_NullWebDriverConfig_ThrowsArgumentNullException()
         {
             // Arrange
-            Lazy<IWebDriverConfig> webDriverConfig = null;
+            IWebDriverConfig webDriverConfig = null;
             var tracker = Substitute.For<ISessionTracker>();
 
             // Act
@@ -44,7 +44,7 @@ namespace WbTstr.UnitTests.Session.Performers
         public void Initialize_NullSessionTracker_ThrowsArgumentNullExpection()
         {
             // Arrange
-            var webDriverConfig = Substitute.For<Lazy<IWebDriverConfig>>();
+            var webDriverConfig = Substitute.For<IWebDriverConfig>();
             ISessionTracker tracker = null;
 
             // Act
@@ -58,7 +58,7 @@ namespace WbTstr.UnitTests.Session.Performers
         public void Initialize_CalledTwice_ThrowsInvalidOperationException()
         {
             // Arrange
-            var webDriverConfig = Substitute.For<Lazy<IWebDriverConfig>>();
+            var webDriverConfig = Substitute.For<IWebDriverConfig>();
             var tracker = Substitute.For<ISessionTracker>();
 
             // Act

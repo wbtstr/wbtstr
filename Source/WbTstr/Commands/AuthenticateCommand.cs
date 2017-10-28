@@ -1,9 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Threading;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {
@@ -15,12 +13,12 @@ namespace WbTstr.Commands
 
         public AuthenticateCommand(string username, string password, TimeSpan timeout)
         {
-            _username = username;
-            _password = password;
+            _username = username ?? throw new ArgumentNullException(nameof(username));
+            _password = password ?? throw new ArgumentNullException(nameof(password));
             _timeout = timeout;
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

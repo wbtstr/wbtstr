@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using WbTstr.Commands.Interfaces;
-using WbTstr.Proxies.Extensions;
-using WbTstr.WebDrivers.Extensions;
-using WbTstr.WebDrivers;
+using System;
 using WbTstr.Commands.Abstracts;
 
 namespace WbTstr.Commands
@@ -24,13 +16,11 @@ namespace WbTstr.Commands
 
         public TypeWindowCommand(string text, bool clear)
         {
-            if (text == null) throw new ArgumentNullException(nameof(text));
-
-            _text = !string.IsNullOrEmpty(text) ? text : throw new ArgumentException(nameof(text));
+            _text = text ?? throw new ArgumentNullException(nameof(text));
             _clear = clear;
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

@@ -14,17 +14,20 @@ namespace WbTstr.Commands
 
         public ScreenshotCommand(string fileName, string directoryPath)
         {
-            if (fileName == null) throw new ArgumentNullException(nameof(fileName));
-            if (directoryPath == null) throw new ArgumentNullException(nameof(directoryPath));
+            _fileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
+            _directoryPath = directoryPath ?? throw new ArgumentNullException(nameof(directoryPath));
 
-            bool isValidFileName = MultiPurposeValidator.IsValidFileName(fileName);
-            bool isValidDirectoryPath = MultiPurposeValidator.IsValidDirectoryPath(directoryPath);
-
-            _fileName = isValidFileName  ? fileName : throw new ArgumentException(nameof(fileName));
-            _directoryPath = isValidDirectoryPath ? directoryPath : throw new ArgumentException(nameof(directoryPath));
+            if (!MultiPurposeValidator.IsValidFileName(fileName))
+            {
+                throw new ArgumentException($"Invalid file name: {fileName}");
+            }
+            if (!MultiPurposeValidator.IsValidDirectoryPath(directoryPath))
+            {
+                throw new ArgumentException($"Invalid directory: {directoryPath}");
+            }
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {
@@ -33,6 +36,7 @@ namespace WbTstr.Commands
 
             var filePath = Path.Combine(_directoryPath, _fileName);
             var imageFormat = DetermineImageFormat(filePath);
+
             screenshot.SaveAsFile(filePath, imageFormat);
         }
 

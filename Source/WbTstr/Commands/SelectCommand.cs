@@ -17,17 +17,13 @@ namespace WbTstr.Commands
 
         public SelectCommand(string selector, params string[] texts)
         {
-            if (selector == null) throw new ArgumentNullException();
-
-            _selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
+            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
             _texts = texts;
         }
 
         public SelectCommand(string selector, params int[] indexes)
         {
-            if (selector == null) throw new ArgumentNullException();
-
-            _selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
+            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
             _indexes = indexes;
         }
 
@@ -43,7 +39,7 @@ namespace WbTstr.Commands
             _indexes = indexes;
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

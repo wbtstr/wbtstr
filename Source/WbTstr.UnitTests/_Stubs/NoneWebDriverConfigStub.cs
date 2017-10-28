@@ -6,7 +6,7 @@ namespace WbTstr.UnitTests._Stubs
 {
     public class NoneWebDriverConfigStub : IWebDriverConfig
     {
-        WebDriverType IWebDriverConfig.Type => WebDriverType.None;
+        WebDriverType IWebDriverConfig.Type => WebDriverType.Undefined;
 
         public IDictionary<string, string> Capabilities => new Dictionary<string, string>();
 

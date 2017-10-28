@@ -2,7 +2,7 @@
 {
     public enum WebDriverType
     {
-        None = 0,
+        Undefined = 0,
         Chrome
     }
 }

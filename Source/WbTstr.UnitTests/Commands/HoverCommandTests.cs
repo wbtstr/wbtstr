@@ -50,22 +50,6 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Constructor_SelectorInvalid_ThrowsArgumentException()
-        {
-            // Arrange
-
-            // Act
-            TestDelegate[] actions =
-            {
-                () => new HoverCommand(""),
-                () => new HoverCommand(" "),
-            };
-
-            // Asset
-            AssertMultiple.Throws<ArgumentException>(actions);
-        }
-
-        [TestCase]
         public void ToString_NoArgs_ReturnsString()
         {
             // Arrange
@@ -111,7 +95,7 @@ namespace WbTstr.UnitTests.Commands
             // Arrange
             var webDriver = Substitute.For<IWebDriver>();
             var webElement = Substitute.For<IWebElement>();
-            var element = new Element(webElement);
+            var element = new ElementProxy(webElement);
             var command = Substitute.ForPartsOf<HoverCommand>(element);
 
             // Act

@@ -2,8 +2,6 @@
 using System;
 using System.Drawing;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Commands.Interfaces;
-using WbTstr.WebDrivers;
 
 namespace WbTstr.Commands
 {

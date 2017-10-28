@@ -1,8 +1,7 @@
-﻿using System;
-using WbTstr.WebDrivers.Interfaces;
-using System.Collections.Generic;
-using WbTstr.Proxies.Interfaces;
+﻿using System.Collections.Generic;
 using System.Drawing;
+using WbTstr.Proxies.Interfaces;
+using WbTstr.WebDrivers.Interfaces;
 
 namespace WbTstr.WebDrivers
 {
@@ -12,7 +11,7 @@ namespace WbTstr.WebDrivers
         {
         }
 
-        /* Properties -------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         public string Url { get; internal set; }
 
@@ -26,6 +25,6 @@ namespace WbTstr.WebDrivers
 
         public IReadOnlyList<string> Console { get; internal set; }
 
-        public IReadOnlyCollection<ICookie> Cookies { get; internal set; }
+        public IReadOnlyDictionary<string, ICookie> Cookies { get; internal set; }
     }
 }

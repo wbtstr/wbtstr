@@ -2,7 +2,6 @@
 using System;
 using System.Threading;
 using WbTstr.Commands.Abstracts;
-using WbTstr.Commands.Interfaces;
 
 namespace WbTstr.Commands
 {
@@ -15,7 +14,7 @@ namespace WbTstr.Commands
             _duration = duration;
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {

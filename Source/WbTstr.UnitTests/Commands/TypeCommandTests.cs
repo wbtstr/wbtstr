@@ -81,35 +81,6 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
-        public void Constructor_InvalidText_ThrowsArgumentException()
-        {
-            // Arrange
-            string text = "";
-
-            // Act
-            TestDelegate action = () => new TypeCommand(text, DefaultSelector, DefaultClear);
-
-            // Assert
-            Assert.Throws<ArgumentException>(action);
-        }
-
-        [TestCase]
-        public void Constructor_InvalidSelector_ThrowsArgumentException()
-        {
-            // Arrange
-
-            // Act
-            TestDelegate[] actions =
-            {
-                () => new TypeCommand(DefaultText, "", DefaultClear), 
-                () => new TypeCommand(DefaultText, " ", DefaultClear),
-            };
-
-            // Assert
-            AssertMultiple.Throws<ArgumentException>(actions);
-        }
-
-        [TestCase]
         public void Execute_NoClearRequested_ClearNotCalled()
         {
             // Arrange

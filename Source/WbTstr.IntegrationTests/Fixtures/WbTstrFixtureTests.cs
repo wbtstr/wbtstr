@@ -1,45 +1,44 @@
 ﻿using NUnit.Framework;
-using System.Linq;
-using System.Collections.Generic;
 using WbTstr.Fixtures.Attributes;
-using WbTstr.Proxies.Interfaces;
-using WbTstr.Utilities.Constants;
 using WbTstr.WebDrivers.Constants;
+using WbTstr.Proxies.Interfaces;
+using WbTstr.Fixtures;
+using OpenQA.Selenium;
 
-namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
+namespace WbTstr.IntegrationTests.Fixtures
 {
     [TestFixture]
     [WebDriverConfig(WebDriverType.Chrome)]
-    public class DerivedFromSimpleFixture : Fixtures.SimpleWbTstrFixture
+    public class WbTstrFixtureTests : WbTstrFixture
     {
         [TestCase]
-        public void TestMethod()
+        public void TestMethod2()
         {
-            // Arrange
+            //Arrange
             const string mirabeauUrl = "https://github.com/wbtstr/wbtstr";
             const string mirabeauTitle = "GitHub - wbtstr/wbtstr: The uncomplicated test automation framework.";
 
             // Act
-            I.NavigateTo("https://github.com/")
+            I.Open("https://github.com/")
                 .Type("username??")
                 .ResizeWindow(1600, 1050)
-                .WaitUntil(() => I.FindOnPage(".header-search-input").Displayed)
+                .WaitUntil(() => I.Find(".header-search-input").Displayed)
                 .Focus(".header-search-input")
                 .Wait(seconds: 3)
-                .Type("wbtstr.net", ".header-search-input")
+                .Enter("wbtstr.net").In(".header-search-input")
                 .Wait(seconds: 3)
                 .MaximizeWindow()
-                .Type("wbtstr" + Keys.Enter, ".header-search-input", true)
+                .Enter("wbtstr" + Keys.Enter).In(".header-search-input")
                 .Wait(seconds: 3)
                 .Hover(".repo-list a:first-child")
                 .Wait(seconds: 3)
-                .ClickOn(".repo-list a:first-child")
+                .Click(".repo-list a:first-child")
                 .TakeScreenshot();
 
-            IElement md = I.FindOnPage(".markdown-body");
+            IElement md = I.Find(".markdown-body");
             string mdTagName = md.TagName;
 
-            ICollection<IElement> h1 = I.FindMultipleOnPage("h1");
+            var h1 = I.FindMultiple("h1");
             Assert.True(h1.Count >= 0);
 
             IElement b = I.ExecuteJs<IElement>("return window.document.body");
@@ -48,7 +47,7 @@ namespace WbTstr.IntegrationTests.SimpleWbTstrFixture
             bool bHasAttributes = I.ExecuteJs<bool>("return window.document.body.hasAttributes()");
 
             // Assert
-            var page = CapturePage();
+            var page = I.CapturePage();
             Assert.AreEqual(mirabeauTitle, page.Title);
             Assert.AreEqual(mirabeauUrl, page.Url);
             Assert.AreEqual(b.TagName.ToUpper(), bTagName.ToUpper());

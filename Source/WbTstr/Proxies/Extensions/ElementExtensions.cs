@@ -7,7 +7,7 @@ namespace WbTstr.Proxies.Extensions
     {
         internal static IWebElement AsWebElement(this IElement element)
         {
-            return Element.AsWebElement(element);
+            return ElementProxy.AsWebElement(element);
         }
     }
 }

@@ -11,14 +11,14 @@ using WbTstr.Session.Trackers;
 namespace WbTstr.UnitTests.Session.Trackers
 {
     [TestFixture]
-    public class SimpleSessionTrackerTests
+    public class ConsoleSessionTrackerTests
     {
-        private SimpleSessionTracker _defaultTracker;
+        private ConsoleSessionTracker _defaultTracker;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _defaultTracker = new SimpleSessionTracker();
+            _defaultTracker = new ConsoleSessionTracker();
         }
 
         [TestCase]

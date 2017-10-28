@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using WbTstr.Commands.Interfaces;
-using WbTstr.Proxies.Interfaces;
-using WbTstr.Proxies.Extensions;
-using WbTstr.WebDrivers.Extensions;
+﻿using OpenQA.Selenium;
+using System;
 using WbTstr.Commands.Abstracts;
+using WbTstr.Proxies.Extensions;
+using WbTstr.Proxies.Interfaces;
+using WbTstr.WebDrivers.Extensions;
 
 namespace WbTstr.Commands
 {
@@ -27,25 +21,19 @@ namespace WbTstr.Commands
 
         public TypeCommand(string text, string selector, bool clear)
         {
-            if (text == null) throw new ArgumentNullException(nameof(text));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            _text = !string.IsNullOrEmpty(text) ? text : throw new ArgumentException(nameof(text));
-            _selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
+            _text = text ?? throw new ArgumentNullException(nameof(text));
+            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
             _clear = clear;
         }
 
         public TypeCommand(string text, IElement element, bool clear)
         {
-            if (text == null) throw new ArgumentNullException(nameof(text));
-            if (element == null) throw new ArgumentNullException(nameof(element));
-
-            _text = !string.IsNullOrEmpty(text) ? text : throw new ArgumentException(nameof(text));
-            _element = element;
+            _text = text ?? throw new ArgumentNullException(nameof(text));
+            _element = element ?? throw new ArgumentNullException(nameof(element));
             _clear = clear;
         }
 
-        /* Methods ----------------------------------------------------------*/
+        /*-------------------------------------------------------------------*/
 
         protected override void Execute(IWebDriver webDriver)
         {
