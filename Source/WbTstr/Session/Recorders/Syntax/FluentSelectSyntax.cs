@@ -29,16 +29,11 @@ namespace WbTstr.Session.Recorders.Syntax
 
         public FluentSessionRecorder From(string selector)
         {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            if (string.IsNullOrWhiteSpace(selector)) throw new ArgumentException(nameof(selector));
-
             throw new NotImplementedException();
         }
 
         public FluentSessionRecorder From(IElement element)
         {
-            if (element == null) throw new ArgumentNullException(nameof(element));
-
             throw new NotImplementedException();
         }
     }

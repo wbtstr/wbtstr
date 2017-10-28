@@ -22,9 +22,6 @@ namespace WbTstr.Session.Recorders.Syntax
 
         public FluentSessionRecorder In(string selector)
         {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            if (string.IsNullOrWhiteSpace(selector)) throw new ArgumentException(nameof(selector));
-
             var command = new TypeCommand(_text, selector, false);
             _performer.Perform(command);
 
@@ -33,8 +30,6 @@ namespace WbTstr.Session.Recorders.Syntax
 
         public FluentSessionRecorder In(IElement element)
         {
-            if (element == null) throw new ArgumentNullException(nameof(element));
-
             var command = new TypeCommand(_text, element, false);
             _performer.Perform(command);
 

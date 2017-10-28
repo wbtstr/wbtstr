@@ -13,10 +13,8 @@ namespace WbTstr.Proxies
 
         internal ElementProxy(IWebElement webElement, string selector)
         {
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
             InnerWebElement = webElement ?? throw new ArgumentNullException(nameof(webElement));
-            Selector = !string.IsNullOrWhiteSpace(selector) ? selector : throw new ArgumentException(nameof(selector));
+            Selector = selector ?? throw new ArgumentNullException(nameof(selector));
         }
 
         /*-------------------------------------------------------------------*/

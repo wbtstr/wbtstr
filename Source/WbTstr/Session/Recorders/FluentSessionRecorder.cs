@@ -33,8 +33,6 @@ namespace WbTstr.Session.Recorders
 
         public FluentAppendSyntax Append(string text)
         {
-            if (text == null) throw new ArgumentNullException(nameof(text));
-
             return new FluentAppendSyntax(this, _performer, text);
         }
 
@@ -92,8 +90,6 @@ namespace WbTstr.Session.Recorders
 
         public FluentEnterSyntax Enter(string text)
         {
-            if (text == null) throw new ArgumentNullException(nameof(text));
-
             return new FluentEnterSyntax(this, _performer, text);
         }
 
@@ -232,8 +228,6 @@ namespace WbTstr.Session.Recorders
 
         public FluentSelectSyntax Select(string text)
         {
-            if (text == null) throw new ArgumentNullException(nameof(text));
-
             return new FluentSelectSyntax(this, _performer, text);
         }
 

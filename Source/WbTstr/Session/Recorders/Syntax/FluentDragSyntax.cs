@@ -24,8 +24,6 @@ namespace WbTstr.Session.Recorders.Syntax
             _performer = performer ?? throw new ArgumentNullException(nameof(performer));
             _selectorA = selectorA ?? throw new ArgumentNullException(nameof(selectorA));
             _refToPointA = RefToPointA.Selector;
-
-            if (string.IsNullOrWhiteSpace(selectorA)) throw new ArgumentException(nameof(selectorA));
         }
 
         public FluentDragSyntax(FluentSessionRecorder recorder, ISessionPerformer performer, IElement elementA)
@@ -52,8 +50,6 @@ namespace WbTstr.Session.Recorders.Syntax
 
         public FluentSessionRecorder To(string selectorB)
         {
-            if (selectorB == null) throw new ArgumentNullException(nameof(selectorB));
-
             IActionCommand command = null;
             switch (_refToPointA)
             {
@@ -74,8 +70,6 @@ namespace WbTstr.Session.Recorders.Syntax
 
         public FluentSessionRecorder To(IElement elementB)
         {
-            if (elementB == null) throw new ArgumentNullException(nameof(elementB));
-
             IActionCommand command = null;
             switch (_refToPointA)
             {
