@@ -246,6 +246,11 @@ namespace WbTstr.Session.Recorders
         {
             var duration = new TimeSpan(0, 0, minutes, seconds, milliseconds);
 
+            return Wait(duration);
+        }
+
+        public FluentSessionRecorder Wait(TimeSpan duration)
+        {
             var command = new WaitCommand(duration);
             _performer.Perform(command);
 
