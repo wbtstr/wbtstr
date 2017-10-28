@@ -6,8 +6,6 @@ using WbTstr.Configuration.WebDrivers;
 using WbTstr.Configuration.WebDrivers.Interfaces;
 using WbTstr.UnitTests._Auxiliaries;
 using WbTstr.WebDrivers.Constants;
-using System.Configuration;
-using WbTstr.Configuration.WebDrivers.Exceptions;
 
 namespace WbTstr.UnitTests.Configuration.WebDrivers
 {
@@ -157,34 +155,6 @@ namespace WbTstr.UnitTests.Configuration.WebDrivers
 
             // Assert
             AssertMultiple.Throws<ArgumentException>(actions);
-        }
-
-        [TestCase]
-        public void GetFromPreset_FilledPreset_NotNull()
-        {
-            // Arrange
-            WebDriverType type = WebDriverType.Chrome;
-            string preset = "chrome";
-
-            // Act
-            var actual = WebDriverConfigs.GetFromPreset(type, preset) as ChromeWebDriverConfig;
-
-            //Assert
-            Assert.NotNull(actual);
-        }
-
-        [TestCase]
-        public void GetFromPreset_FilledWrongPresetName_ThrowsException()
-        {
-            // Arrange
-            WebDriverType type = WebDriverType.Chrome;
-            string preset = "wrongPreset";
-
-            // Act
-            TestDelegate action = () => WebDriverConfigs.GetFromPreset(type, preset);
-
-            // Assert
-            Assert.Throws<MissingWebDriverConfigSectionException>(action);
         }
     }
 }
