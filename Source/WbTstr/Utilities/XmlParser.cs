@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.IO;
+using System.Reflection;
 using System.Xml;
 using WbTstr.Configuration.WebDrivers;
 
@@ -10,9 +11,11 @@ namespace WbTstr.Utilities
     {
         public static XmlNode GetSectionByName(string tagName, string presetName)
         {
-            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).FilePath;
+            string dllLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string filePath = Path.Combine(dllLocation, "WbTstr.config");
+
             var configDoc = new XmlDocument();
-            configDoc.Load(configFile);
+            configDoc.Load(filePath);
 
             return configDoc.SelectSingleNode($"//{tagName}[@name='{presetName}']");
         }
