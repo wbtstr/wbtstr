@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Commands\Abstracts\WbTstrActionCommandTests.cs" />
     <Compile Include="Commands\Abstracts\WbTstrReturnCommandTests.cs" />
+    <Compile Include="Commands\AuthenticateCommandTests.cs" />
     <Compile Include="Commands\ClickCommandTests.cs" />
     <Compile Include="Commands\DragCommandTests.cs" />
     <Compile Include="Commands\ExecuteJsCommandTests.cs" />
@@ -90,12 +91,14 @@
     <Compile Include="Session\Performers\SequentialSessionPerformerTests.cs" />
     <Compile Include="Session\Recorders\FluentSessionRecorderTests.cs" />
     <Compile Include="Session\Trackers\ConsoleSessionTrackerTests.cs" />
+    <Compile Include="Utilities\CookieFactoryTests.cs" />
     <Compile Include="Utilities\MultiPursposeValidatorTests.cs" />
     <Compile Include="Utilities\UriParserTests.cs" />
     <Compile Include="Utilities\XmlParserTests.cs" />
     <Compile Include="WebDrivers\Exceptions\ElementNotFoundExceptionTests.cs" />
     <Compile Include="WebDrivers\Exceptions\UnexpectedWebDriverStateExceptionTests.cs" />
     <Compile Include="WebDrivers\Exceptions\WebDriverExceptionTests.cs" />
+    <Compile Include="WebDrivers\Extensions\WebDriverExtensionsTests.cs" />
     <Compile Include="WebDrivers\WebDriverFactoryTests.cs" />
     <Compile Include="WebDrivers\WebDriverUtilitiesTests.cs" />
     <Compile Include="_Auxiliaries\AssertMultiple.cs" />
