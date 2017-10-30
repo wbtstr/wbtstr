@@ -42,6 +42,19 @@ namespace WbTstr.UnitTests.Commands
         }
 
         [TestCase]
+        public void Constructor_NullTextOnly_ThrowsArgumentNulLException()
+        {
+            // Arrange
+            string text = null;
+
+            // Act
+            TestDelegate action = () => new TypeCommand(text);
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(action);
+        }
+
+        [TestCase]
         public void Constructor_NullText_ThrowsArgumentNullException()
         {
             // Arrange
@@ -87,8 +100,6 @@ namespace WbTstr.UnitTests.Commands
             var command = new TypeCommand(DefaultText, DefaultSelector, false);
             var webDriver = Substitute.For<IWebDriver>();
             var webElement = Substitute.For<IWebElement>();
-
-            webDriver.FindElementBySelector(DefaultSelector).Returns(webElement);
 
             // Act
             IgnoreExceptions.Run(() => command.Execute(webDriver));

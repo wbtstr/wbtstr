@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NSubstitute;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium;
+using System;
 using WbTstr.WebDrivers;
 
 namespace WbTstr.UnitTests.WebDrivers
@@ -24,6 +21,19 @@ namespace WbTstr.UnitTests.WebDrivers
 
             // Assert  
             Assert.Throws<ArgumentNullException>(action);
+        }
+
+        [TestCase]
+        public void WebDriverToObject_WebDriverInstance_ReturnsAsObject()
+        {
+            // Arrange 
+            IWebDriver webDriver = Substitute.For<IWebDriver>();
+
+            // Act
+            object instance = WebDriverUtilities.WebDriverToObject(webDriver);
+
+            // Assert
+            Assert.IsInstanceOf<object>(instance);
         }
 
         [TestCase]

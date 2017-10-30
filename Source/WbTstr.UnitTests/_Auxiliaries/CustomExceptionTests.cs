@@ -16,6 +16,18 @@ namespace WbTstr.UnitTests._Auxiliaries
         }
 
         [TestCase]
+        public void Constructor_Parameterless_DoesNotThrow()
+        {
+            // Arrange
+
+            // Act
+            TestDelegate action = () => Activator.CreateInstance(typeof(T));
+
+            // Assert
+            Assert.DoesNotThrow(action);
+        }
+
+        [TestCase]
         public void Constructor_NullMessage_ThrowsArgumentNullException()
         {
             // Arrange

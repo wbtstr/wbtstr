@@ -6,6 +6,7 @@ using WbTstr.Proxies.Interfaces;
 using WbTstr.Session.Performers.Interfaces;
 using WbTstr.Session.Recorders.Interfaces;
 using WbTstr.Session.Recorders.Syntax;
+using WbTstr.Utilities;
 using WbTstr.Utilities.Constants;
 using WbTstr.WebDrivers.Interfaces;
 
@@ -186,7 +187,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public FluentSessionRecorder RichtClick(string selector)
+        public FluentSessionRecorder RightClick(string selector)
         {
             var command = new ClickCommand(selector, MouseClick.Context);
             _performer.Perform(command);
@@ -194,7 +195,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public FluentSessionRecorder RichtClick(IElement element)
+        public FluentSessionRecorder RightClick(IElement element)
         {
             var command = new ClickCommand(element, MouseClick.Context);
             _performer.Perform(command);
@@ -280,17 +281,16 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
+        public FluentSessionRecorder SetCookie(string name, string value, string domain = null, string path = null, DateTime? expiry = null)
+        {
+            var cookie = CookieFactory.Create(name, value, domain, path, expiry);
+
+            return SetCookie(cookie);
+        }
+
         public FluentSessionRecorder SetCookie(ICookie cookie)
         {
             var command = new SetCookieCommand(cookie);
-            _performer.Perform(command);
-
-            return this;
-        }
-
-        public FluentSessionRecorder SetCookie(string name, string value, string domain = null, string path = null, DateTime? expiry = null)
-        {
-            var command = new SetCookieCommand(name, value, domain, path, expiry);
             _performer.Perform(command);
 
             return this;

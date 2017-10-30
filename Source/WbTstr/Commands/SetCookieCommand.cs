@@ -7,30 +7,11 @@ namespace WbTstr.Commands
 {
     internal class SetCookieCommand : WbTstrActionCommand
     {
-        private readonly string _name;
-        private readonly string _value;
-        private readonly string _domain;
-        private readonly string _path;
-        private readonly DateTime? _expiry;
+        private readonly ICookie _cookie;
 
         public SetCookieCommand(ICookie cookie)
         {
-            if (cookie == null) throw new ArgumentNullException(nameof(cookie));
-
-            _name = cookie.Name;
-            _value = cookie.Value;
-            _domain = cookie.Domain;
-            _path = cookie.Path;
-            _expiry = cookie.Expiry;
-        }
-
-        public SetCookieCommand(string name, string value, string domain, string path, DateTime? expiry)
-        {
-            _name = name ?? throw new ArgumentNullException(nameof(name));
-            _value = value ?? throw new ArgumentNullException(nameof(name));
-            _domain = domain;
-            _path = path;
-            _expiry = expiry;
+            _cookie = cookie ?? throw new ArgumentNullException(nameof(cookie));
         }
 
         /*-------------------------------------------------------------------*/
@@ -39,22 +20,22 @@ namespace WbTstr.Commands
         {
             var cookies = webDriver.Manage().Cookies;
 
-            var cookie = cookies.GetCookieNamed(_name);
+            var cookie = cookies.GetCookieNamed(_cookie.Name);
             if (cookie != null)
             {
                 cookies.DeleteCookie(cookie);
             }
 
-            if (_path == null)
+            if (_cookie.Path == null)
             {
-                cookie = new Cookie(_name, _value);
+                cookie = new Cookie(_cookie.Name, _cookie.Value);
             }
-            else if (_domain == null)
+            else if (_cookie.Domain == null)
             {
-                cookie = new Cookie(_name, _value, _path, _expiry);
+                cookie = new Cookie(_cookie.Name, _cookie.Value, _cookie.Path, _cookie.Expiry);
             } else
             {
-                cookie = new Cookie(_name, _value, _domain, _path, _expiry);
+                cookie = new Cookie(_cookie.Name, _cookie.Value, _cookie.Domain, _cookie.Path, _cookie.Expiry);
             }
 
             cookies.AddCookie(cookie);
@@ -62,7 +43,7 @@ namespace WbTstr.Commands
 
         public override string ToString()
         {
-            return $"Setting cookie '${_name}' to '${_value}.";
+            return $"Setting cookie '${_cookie.Name}' to '${_cookie.Value}.";
         }
     }
 }
