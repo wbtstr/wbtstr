@@ -44,7 +44,6 @@ namespace WbTstr.UnitTests.Commands
             // Act
             TestDelegate[] actions =
             {
-                () => new ResizeCommand(invalid, invalid),
                 () => new ResizeCommand(invalid, valid),
                 () => new ResizeCommand(valid, invalid),
             };

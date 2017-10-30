@@ -45,13 +45,26 @@ namespace WbTstr.UnitTests.Commands
         public void Constructor_ElementNull_ThrowsArgumentNullException()
         {
             // Arrange
-            IElement selector = null;
+            IElement element = null;
 
             // Act
-            TestDelegate action = () => new FocusCommand(selector);
+            TestDelegate action = () => new FocusCommand(element);
 
             // Assert
             Assert.Throws<ArgumentNullException>(action);
+        }
+
+        [TestCase]
+        public void Constructor_ElementInstance_DoesNotThrow()
+        {
+            // Arrange
+            IElement element = Substitute.For<IElement>();
+
+            // Act
+            TestDelegate action = () => new FocusCommand(element);
+
+            // Assert
+            Assert.DoesNotThrow(action);
         }
 
         [TestCase]

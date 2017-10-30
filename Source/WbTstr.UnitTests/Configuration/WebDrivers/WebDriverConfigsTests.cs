@@ -13,6 +13,31 @@ namespace WbTstr.UnitTests.Configuration.WebDrivers
     public class WebDriverConfigsTests
     {
         [TestCase]
+        public void GetDefault_NoArgument_ReturnsNotNull()
+        {
+            // Arrange
+
+            // Act
+            var config = WebDriverConfigs.GetDefault();
+
+            // Assert
+            Assert.NotNull(config);
+        }
+
+        [TestCase]
+        public void GetDefault_StringType_ReturnsNotNull()
+        {
+            // Arrange
+            string type = "Chrome";
+
+            // Act
+            var config = WebDriverConfigs.GetDefault(type);
+
+            // Assert
+            Assert.NotNull("Chrome");
+        }
+
+        [TestCase]
         public void GetDefault_NullType_ThrowsArgumentNullException()
         {
             // Arrange
