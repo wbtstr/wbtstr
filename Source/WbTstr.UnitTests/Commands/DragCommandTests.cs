@@ -25,12 +25,15 @@ namespace WbTstr.UnitTests.Commands
         {
             // Arrange
             string selector = null;
+            IElement element = Substitute.For<IElement>();
 
             // Act
             TestDelegate[] actions = {
                 () => new DragCommand(selector, selector),
                 () => new DragCommand(selector, DefaultSelector),
                 () => new DragCommand(DefaultSelector, selector),
+                () => new DragCommand(selector, element),
+                () => new DragCommand(element, selector)
             };
 
             // Assert
@@ -50,6 +53,8 @@ namespace WbTstr.UnitTests.Commands
                 () => new DragCommand(elementA, elementB),
                 () => new DragCommand(elementC, elementB),
                 () => new DragCommand(elementA, elementC),
+                () => new DragCommand(elementA, DefaultSelector),
+                () => new DragCommand(DefaultSelector, elementB),
             };
 
             // Assert

@@ -25,5 +25,7 @@
         int UpperLeftCornerX { get; }
 
         int UpperLeftCornerY { get; }
+
+        string HTML { get; }
     }
 }
