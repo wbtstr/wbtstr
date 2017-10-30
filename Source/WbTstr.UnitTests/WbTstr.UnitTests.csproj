@@ -66,6 +66,7 @@
     <Compile Include="Commands\Abstracts\WbTstrReturnCommandTests.cs" />
     <Compile Include="Commands\AuthenticateCommandTests.cs" />
     <Compile Include="Commands\ClickCommandTests.cs" />
+    <Compile Include="Commands\DeleteCookieCommandTests.cs" />
     <Compile Include="Commands\DragCommandTests.cs" />
     <Compile Include="Commands\ExecuteJsCommandTests.cs" />
     <Compile Include="Commands\FindCommandTests.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Commands\NavigateCommandTests.cs" />
     <Compile Include="Commands\ResizeCommandTests.cs" />
     <Compile Include="Commands\ScreenshotCommandTests.cs" />
+    <Compile Include="Commands\SetCookieCommandTests.cs" />
     <Compile Include="Commands\TypeCommandTests.cs" />
     <Compile Include="Commands\TypeWindowCommandTests.cs" />
     <Compile Include="Commands\WaitCommandTests.cs" />
