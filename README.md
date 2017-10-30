@@ -15,7 +15,7 @@ __Noteworthy features include:__
 - experimental support for HTTP Basic authentication through the browser's alert/pop-up window;
 - configurable WebDriver scope (browser instance per fixture, or per test case).
 
-__Currently in development:__
+__Planned:__
 - extensive logging and benchmarking capabilities;
 - support for more drivers (Selenium Hub, BrowserStack, Firefox, ...);
 - plugin that adds PageObjects to WbTstr.
