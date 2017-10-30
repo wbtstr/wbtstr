@@ -5,6 +5,7 @@ using WbTstr.Proxies.Interfaces;
 using WbTstr.Fixtures;
 using OpenQA.Selenium;
 using System.Linq;
+using WbTstr.Utilities;
 
 namespace WbTstr.IntegrationTests.Fixtures
 {
@@ -21,21 +22,37 @@ namespace WbTstr.IntegrationTests.Fixtures
 
             // Act
             I.Open("https://github.com/")
+                .Open(UriParser.ParseWebUrl("https://github.com/"))
                 .Type("username??")
                 .ResizeWindow(1600, 1050)
+                .CapturePage(out var snapshot1)
+                .SetCookie(CookieFactory.Create(snapshot1.Cookies.Keys.First(), "Hello World!"))
+                .SetCookie(snapshot1.Cookies.Keys.First(), "Hello World!")
                 .WaitUntil(() => I.Find(".header-search-input").Displayed)
                 .Focus(".header-search-input")
-                .Wait(seconds: 3)
+                .Find(".header-search-input", out var input)
+                .Focus(input)
+                .Wait(seconds: 1)
+                .DeleteCookie(snapshot1.Cookies.Keys.First())
                 .Enter("wbtstr.net").In(".header-search-input")
-                .Wait(seconds: 3)
+                .Append("!!!").In(".header-search-input")
+                .DoubleClick(".header-search-input")
+                .DoubleClick(input)
+                .Wait(seconds: 1)
                 .MaximizeWindow()
                 .Find(".header-search-input", out var header)
-                .Enter("wbtstr" + Keys.Enter).In(header)
-                .Wait(seconds: 3)
+                .Enter("wbtstr").In(header)
+                .Append(Keys.Enter).In(header)
+                .Wait(seconds: 1)
                 .Hover(".repo-list a:first-child")
-                .Wait(seconds: 3)
+                .Find(".repo-list a:first-child", out var firstChild)
+                .Hover(firstChild)
+                .Wait(seconds: 1)
                 .Click(".repo-list a:first-child")
-                .TakeScreenshot();
+                .TakeScreenshot()
+                .RightClick("body")
+                .Find("body", out var body)
+                .RightClick(body);
 
             IElement md = I.Find(".markdown-body");
             string mdTagName = md.TagName;

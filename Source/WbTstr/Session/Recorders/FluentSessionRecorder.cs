@@ -187,7 +187,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public FluentSessionRecorder RichtClick(string selector)
+        public FluentSessionRecorder RightClick(string selector)
         {
             var command = new ClickCommand(selector, MouseClick.Context);
             _performer.Perform(command);
@@ -195,7 +195,7 @@ namespace WbTstr.Session.Recorders
             return this;
         }
 
-        public FluentSessionRecorder RichtClick(IElement element)
+        public FluentSessionRecorder RightClick(IElement element)
         {
             var command = new ClickCommand(element, MouseClick.Context);
             _performer.Perform(command);
