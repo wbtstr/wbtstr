@@ -1,10 +1,4 @@
 # WbTstr 
-
-| master | develop |
-| --- | --- |
-| [![Build status](https://img.shields.io/appveyor/ci/onnovalkering/wbtstr/master.svg?style=flat-square)](https://ci.appveyor.com/project/onnovalkering/wbtstr/branch/master) [![Coveralls develop](https://img.shields.io/coveralls/wbtstr/wbtstr/master.svg?style=flat-square)](https://coveralls.io/github/wbtstr/wbtstr?branch=master) | [![Build status](https://img.shields.io/appveyor/ci/onnovalkering/wbtstr/develop.svg?style=flat-square)](https://ci.appveyor.com/project/onnovalkering/wbtstr/branch/develop) [![Coveralls develop](https://img.shields.io/coveralls/wbtstr/wbtstr/develop.svg?style=flat-square)](https://coveralls.io/github/wbtstr/wbtstr?branch=develop) |
-
-## Overview
 WbTstr is the successor of [WbTstr.Net](https://github.com/mirabeau-nl/WbTstr.Net), it's completely rewritten from scratch with extensibility in mind and by using the latest C# 7.1 features. Users of WbTstr are provided with an intuitive API that can be used to completely automate all facets of automated browser-based functional testing, without having to deal with the nitty-gritty details of Selenium.
 
 __Noteworthy features include:__
